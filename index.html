@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checklist Vídeo Comercial</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: #0F0F0F;
+  color: #FFFFFF;
+}
+
+.container {
+  max-width: 640px;
+  margin: auto;
+  padding: 24px;
+}
+
+h1 {
+  font-size: 30px;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.sub {
+  color: #BFBFBF;
+  text-align: center;
+  margin-top: 16px;
+}
+
+.highlight {
+  color: #D4AF37;
+}
+
+.card {
+  background: #1A1A1A;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 32px;
+}
+
+.benefit {
+  margin-bottom: 14px;
+}
+
+.quote {
+  font-style: italic;
+  color: #EAEAEA;
+}
+
+.author {
+  margin-top: 10px;
+  color: #999;
+  font-size: 14px;
+}
+
+input {
+  width: 100%;
+  padding: 14px;
+  margin-top: 12px;
+  border-radius: 6px;
+  border: none;
+  background: #262626;
+  color: white;
+}
+
+button {
+  width: 100%;
+  margin-top: 16px;
+  padding: 16px;
+  border: none;
+  border-radius: 6px;
+  background: #D4AF37;
+  color: #1A1A1A;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #C9A84C;
+}
+
+.footer {
+  text-align: center;
+  font-size: 12px;
+  color: #8A8A8A;
+  margin-top: 40px;
+}
+
+.badge {
+  text-align: center;
+  margin-bottom: 12px;
+  font-size: 12px;
+  color: #D4AF37;
+}
+
+.success {
+  display: none;
+  text-align: center;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="badge">CHECKLIST GRATUITO</div>
+
+<h1>
+Descubra os <span class="highlight">7 Elementos</span><br>
+que Todo Vídeo Comercial Precisa Ter
+</h1>
+
+<p class="sub">
+Se você tem um produto ou serviço bom, mas ninguém sabe que existe — ou pior, sabe mas não compra — este checklist vai mudar tudo.
+</p>
+
+<div class="card">
+
+<h3>Você vai descobrir:</h3>
+
+<p class="benefit">✓ Os 7 elementos específicos que fazem um vídeo converter</p>
+<p class="benefit">✓ Um checklist prático para usar antes de gravar</p>
+<p class="benefit">✓ Por que alguns vídeos vendem e outros não</p>
+<p class="benefit">✓ Como melhorar vídeos antigos sem refazer tudo</p>
+<p class="benefit">✓ Uma estrutura replicável para qualquer projeto</p>
+
+</div>
+
+<div class="card">
+
+<p class="quote">
+“Depois que aprendi os 7 elementos, meu próximo vídeo comercial gerou 3x mais leads que o anterior.”
+</p>
+
+<p class="author">
+— João Silva, Diretor de Marketing
+</p>
+
+</div>
+
+<div class="card" id="formBox">
+
+<form id="form">
+
+<label>Qual é seu nome?</label>
+<input type="text" id="name" required>
+
+<label>Seu WhatsApp</label>
+<input type="tel" id="whatsapp" required>
+
+<button type="submit">
+Enviar Checklist para Meu WhatsApp
+</button>
+
+</form>
+
+</div>
+
+<div class="card success" id="successBox">
+
+<h2>Perfeito! 🎬</h2>
+
+<p>
+Você será redirecionado para o WhatsApp agora.
+</p>
+
+</div>
+
+<div class="footer">
+@dantednz<br>
+https://instagram.com/dantednz<br>
+https://wa.me/5548998050267
+</div>
+
+</div>
+
+<script>
+document.getElementById("form").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  document.getElementById("formBox").style.display = "none";
+  document.getElementById("successBox").style.display = "block";
+
+  setTimeout(() => {
+    window.location.href = "https://wa.me/5548998050267?text=Quero%20receber%20o%20checklist";
+  }, 1500);
+});
+</script>
+
+</body>
+</html>
