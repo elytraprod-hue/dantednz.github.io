@@ -1,201 +1,979 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Checklist Vídeo Comercial</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dante - Vídeos Comerciais Premium</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #050B1B;
+            --surface: #111827;
+            --accent: #FB8500;
+            --accent-glow: rgba(251, 133, 0, 0.3);
+            --text-main: #F5F0E8;
+            --text-dim: #94A3B8;
+            --white: #FFFFFF;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<style>
-body {
-  margin: 0;
-  font-family: 'Inter', sans-serif;
-  background: #0F0F0F;
-  color: #FFFFFF;
-}
+        html {
+            scroll-behavior: smooth;
+        }
 
-.container {
-  max-width: 640px;
-  margin: auto;
-  padding: 24px;
-}
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-h1 {
-  font-size: 30px;
-  line-height: 1.2;
-  text-align: center;
-}
+        h1, h2, h3, .display-font {
+            font-family: 'Playfair Display', serif;
+        }
 
-.sub {
-  color: #BFBFBF;
-  text-align: center;
-  margin-top: 16px;
-}
+        /* HEADER */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            z-index: 2000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: transparent;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            border-bottom: 1px solid transparent;
+        }
 
-.highlight {
-  color: #D4AF37;
-}
+        header.scrolled {
+            background: rgba(5, 11, 27, 0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 1rem 5%;
+            border-bottom: 1px solid rgba(251, 133, 0, 0.1);
+        }
 
-.card {
-  background: #1A1A1A;
-  border-radius: 10px;
-  padding: 20px;
-  margin-top: 32px;
-}
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: var(--accent);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-.benefit {
-  margin-bottom: 14px;
-}
+        .logo span {
+            font-family: 'Playfair Display', serif;
+        }
 
-.quote {
-  font-style: italic;
-  color: #EAEAEA;
-}
+        .nav-cta {
+            background: var(--accent);
+            color: var(--bg);
+            padding: 0.6rem 1.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
 
-.author {
-  margin-top: 10px;
-  color: #999;
-  font-size: 14px;
-}
+        .nav-cta:hover {
+            background: var(--white);
+            transform: translateY(-2px);
+        }
 
-input {
-  width: 100%;
-  padding: 14px;
-  margin-top: 12px;
-  border-radius: 6px;
-  border: none;
-  background: #262626;
-  color: white;
-}
+        /* HERO SECTION */
+        .hero {
+            padding: 200px 5% 100px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: radial-gradient(circle at top right, #1a1a2e 0%, var(--bg) 60%);
+        }
 
-button {
-  width: 100%;
-  margin-top: 16px;
-  padding: 16px;
-  border: none;
-  border-radius: 6px;
-  background: #D4AF37;
-  color: #1A1A1A;
-  font-weight: bold;
-  font-size: 16px;
-  cursor: pointer;
-  transition: 0.2s;
-}
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 55fr 45fr;
+            gap: 4rem;
+            align-items: center;
+        }
 
-button:hover {
-  background: #C9A84C;
-}
+        .hero-tag {
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
 
-.footer {
-  text-align: center;
-  font-size: 12px;
-  color: #8A8A8A;
-  margin-top: 40px;
-}
+        h1 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            line-height: 1.05;
+            margin-bottom: 2rem;
+            font-weight: 900;
+        }
 
-.badge {
-  text-align: center;
-  margin-bottom: 12px;
-  font-size: 12px;
-  color: #D4AF37;
-}
+        .hero-subtitle {
+            font-size: 1.15rem;
+            color: var(--text-dim);
+            max-width: 550px;
+            margin-bottom: 3rem;
+        }
 
-.success {
-  display: none;
-  text-align: center;
-}
+        .hero-btns {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
 
-</style>
+        .btn {
+            padding: 1.2rem 2.8rem;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            font-size: 0.9rem;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--bg);
+        }
+
+        .btn-primary:hover {
+            background: var(--white);
+            transform: scale(1.05);
+        }
+
+        .btn-secondary {
+            border: 1px solid rgba(200, 169, 110, 0.4);
+            color: var(--accent);
+            background: transparent;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            background: rgba(200, 169, 110, 0.05);
+        }
+
+        /* HERO VISUALS */
+        .hero-visuals {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .featured-video {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: var(--surface);
+            overflow: hidden;
+            border: 1px solid rgba(200, 169, 110, 0.2);
+            cursor: pointer;
+        }
+
+        .featured-video img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.8s;
+            filter: grayscale(0.5);
+        }
+
+        .featured-video:hover img {
+            transform: scale(1.05);
+            filter: grayscale(0);
+        }
+
+        .play-btn-huge {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+            box-shadow: 0 0 30px rgba(200, 169, 110, 0.3);
+        }
+
+        .play-btn-huge svg {
+            width: 30px;
+            height: 30px;
+            fill: var(--bg);
+            margin-left: 5px;
+        }
+
+        .featured-video:hover .play-btn-huge {
+            transform: translate(-50%, -50%) scale(1.1);
+            background: var(--white);
+        }
+
+        .hero-mini-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .mini-thumb {
+            aspect-ratio: 1/1;
+            background: var(--surface);
+            border: 1px solid rgba(200, 169, 110, 0.1);
+            overflow: hidden;
+        }
+
+        .mini-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.6;
+            transition: 0.5s;
+        }
+
+        .mini-thumb:hover img {
+            opacity: 1;
+        }
+
+        /* SOCIAL PROOF MARQUEE */
+        .marquee-strip {
+            background: var(--surface);
+            border-top: 1px solid rgba(200, 169, 110, 0.1);
+            border-bottom: 1px solid rgba(200, 169, 110, 0.1);
+            padding: 2rem 0;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 30s linear infinite;
+        }
+
+        .marquee-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            margin-right: 4rem;
+            color: var(--accent);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .marquee-item span {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-dim);
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* WHY IT WORKS SECTION */
+        .benefits {
+            padding: 120px 5%;
+            background: var(--bg);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 5rem;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            margin-bottom: 1.5rem;
+        }
+
+        .section-header p {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+        }
+
+        .benefits-grid {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .benefit-card {
+            background: var(--surface);
+            padding: 3rem;
+            border: 1px solid rgba(200, 169, 110, 0.05);
+            transition: 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .benefit-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .benefit-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-10px);
+        }
+
+        .benefit-card .icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .benefit-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .benefit-card p {
+            color: var(--text-dim);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* PORTFOLIO MASONRY */
+        .portfolio {
+            padding: 120px 5%;
+            background: #000;
+        }
+
+        .portfolio-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 1.5rem;
+        }
+
+        .portfolio-item {
+            position: relative;
+            background: var(--surface);
+            overflow: hidden;
+            grid-column: span 4;
+            aspect-ratio: 16/10;
+            cursor: pointer;
+        }
+
+        .portfolio-item.wide { grid-column: span 8; }
+        .portfolio-item.tall { aspect-ratio: 10/16; grid-row: span 2; }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+            filter: grayscale(1);
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.1);
+            filter: grayscale(0);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(10, 10, 15, 0.9), transparent);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2.5rem;
+            opacity: 0;
+            transition: 0.4s;
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .portfolio-overlay h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+
+        .portfolio-overlay p {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-dim);
+        }
+
+        /* LIGHTBOX */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(10, 10, 15, 0.95);
+            z-index: 3000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .lightbox.active { display: flex; }
+
+        .lightbox-content {
+            width: 100%;
+            max-width: 1000px;
+            aspect-ratio: 16/9;
+            background: #000;
+            position: relative;
+        }
+
+        .close-lightbox {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: var(--white);
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* TESTIMONIAL CAROUSEL */
+        .testimonial {
+            padding: 120px 5%;
+            background: var(--surface);
+            text-align: center;
+        }
+
+        .carousel-container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .testimonial-slide {
+            min-width: 100%;
+            padding: 0 2rem;
+        }
+
+        .testimonial-text {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            line-height: 1.4;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* FORM SECTION */
+        .form-section {
+            padding: 120px 5%;
+            background: var(--bg);
+        }
+
+        .form-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--surface);
+            padding: 4rem;
+            border: 1px solid rgba(200, 169, 110, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.8rem;
+            color: var(--accent);
+        }
+
+        .form-group input, 
+        .form-group select, 
+        .form-group textarea {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(245, 240, 232, 0.2);
+            padding: 1rem 0;
+            color: var(--text-main);
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: 0.3s;
+        }
+
+        .form-group input:focus, 
+        .form-group select:focus, 
+        .form-group textarea:focus {
+            outline: none;
+            border-bottom-color: var(--accent);
+        }
+
+        .form-submit {
+            width: 100%;
+            margin-top: 2rem;
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 80px 5%;
+            background: #050508;
+            border-top: 1px solid rgba(200, 169, 110, 0.1);
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            display: block;
+        }
+
+        .footer-socials {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-link {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.3s;
+        }
+
+        .footer-link:hover { color: var(--accent); }
+
+        .footer-copy {
+            font-size: 0.8rem;
+            color: rgba(245, 240, 232, 0.3);
+        }
+
+        /* RESPONSIVE CSS */
+        @media (max-width: 968px) {
+            .hero-container { grid-template-columns: 1fr; text-align: center; }
+            .hero-subtitle { margin: 0 auto 3rem; }
+            .hero-btns { justify-content: center; }
+            .portfolio-grid { grid-template-columns: repeat(6, 1fr); }
+            .portfolio-item { grid-column: span 6; }
+            .portfolio-item.wide { grid-column: span 6; }
+        }
+
+        @media (max-width: 600px) {
+            .form-container { padding: 2rem; }
+            .portfolio-grid { grid-template-columns: 1fr; }
+            .portfolio-item, .portfolio-item.wide { grid-column: span 1; }
+        }
+
+        /* ABOUT SECTION */
+        .about-section {
+            padding: 120px 5%;
+            background: radial-gradient(circle at bottom left, #1E1B4B 0%, var(--bg) 70%);
+        }
+
+        .about-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+            border: 1px solid rgba(251, 133, 0, 0.2);
+            padding: 20px;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: contrast(1.1) brightness(0.9);
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            inset: -10px;
+            border: 1px solid var(--accent);
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .about-content h2 {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            margin-bottom: 2rem;
+            line-height: 1.1;
+        }
+
+        .about-content p {
+            font-size: 1.15rem;
+            color: var(--text-dim);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            max-width: 600px;
+        }
+
+        .about-tags {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .about-tag {
+            background: rgba(251, 133, 0, 0.1);
+            color: var(--accent);
+            padding: 0.5rem 1.2rem;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        @media (max-width: 968px) {
+            .about-container { grid-template-columns: 1fr; }
+            .about-image { order: 2; }
+            .about-content { order: 1; text-align: center; }
+            .about-content p { margin: 0 auto 2rem; }
+            .about-tags { justify-content: center; }
+        }
+    </style>
+    </style>
 </head>
-
 <body>
+    <!-- HEADER -->
+    <header id="mainHeader">
+        <a href="#" class="logo">
+            <span>DANTE</span>
+        </a>
+        <a href="https://wa.me/5548998050267" class="nav-cta">Falar no WhatsApp</a>
+    </header>
 
-<div class="container">
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <span class="hero-tag">Produção de Vídeo Premium</span>
+                <h1>Transforme Visão em <span style="color:var(--accent)">Impacto</span> Comercial</h1>
+                <p class="hero-subtitle">Criamos experiências cinematográficas projetadas especificamente para converter espectadores em clientes fiéis. Onde a arte encontra a estratégia.</p>
+                <div class="hero-btns">
+                    <button class="btn btn-primary" onclick="document.querySelector('.form-section').scrollIntoView({behavior: 'smooth'})">Baixar Checklist</button>
+                    <button class="btn btn-secondary" onclick="document.querySelector('.portfolio').scrollIntoView({behavior: 'smooth'})">Ver Portfólio</button>
+                </div>
+            </div>
+            <div class="hero-visuals">
+                <div class="featured-video" onclick="openLightbox('featured')">
+                    <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&q=80" alt="Video Principal">
+                    <div class="play-btn-huge">
+                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                </div>
+                <div class="hero-mini-grid">
+                    <div class="mini-thumb"><img src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=200&q=80" alt="Work 1"></div>
+                    <div class="mini-thumb"><img src="https://images.unsplash.com/photo-1516321318423-f06f70504c8a?w=200&q=80" alt="Work 2"></div>
+                    <div class="mini-thumb"><img src="https://images.unsplash.com/photo-1611339555312-e607c90352fd?w=200&q=80" alt="Work 3"></div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<div class="badge">CHECKLIST GRATUITO</div>
+    <!-- SOCIAL PROOF MARQUEE -->
+    <div class="marquee-strip">
+        <div class="marquee-content">
+            <div class="marquee-item">1M+ <span>Visualizações</span></div>
+            <div class="marquee-item">50+ <span>Projetos Premium</span></div>
+            <div class="marquee-item">12 <span>Países Alcançados</span></div>
+            <div class="marquee-item">100% <span>Satisfação</span></div>
+            <!-- Duplicate for infinite effect -->
+            <div class="marquee-item">1M+ <span>Visualizações</span></div>
+            <div class="marquee-item">50+ <span>Projetos Premium</span></div>
+            <div class="marquee-item">12 <span>Países Alcançados</span></div>
+            <div class="marquee-item">100% <span>Satisfação</span></div>
+        </div>
+    </div>
 
-<h1>
-Descubra os <span class="highlight">7 Elementos</span><br>
-que Todo Vídeo Comercial Precisa Ter
-</h1>
+    <!-- WHY IT WORKS -->
+    <section class="benefits">
+        <div class="section-header">
+            <span class="hero-tag">Metodologia</span>
+            <h2>Por que nossos vídeos <span style="color:var(--accent); text-shadow: 0 0 20px var(--accent-glow)">convertem</span> 3x mais</h2>
+            <p>Combinamos estética cinematográfica com gatilhos psicológicos de venda comprovados.</p>
+        </div>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <span class="icon" style="color:var(--accent)">01</span>
+                <h3>Gancho Imediato</h3>
+                <p>Capturamos a atenção nos primeiros 3 segundos, garantindo que sua mensagem seja ouvida.</p>
+            </div>
+            <div class="benefit-card">
+                <span class="icon" style="color:var(--accent)">02</span>
+                <h3>Storytelling Estratégico</h3>
+                <p>Conectamos emocionalmente seu público através de narrativas imersivas e autênticas.</p>
+            </div>
+            <div class="benefit-card">
+                <span class="icon" style="color:var(--accent)">03</span>
+                <h3>Chamada Irresistível</h3>
+                <p>Transformamos interesse em ação com CTAs claros e visualmente impactantes.</p>
+            </div>
+        </div>
+    </section>
 
-<p class="sub">
-Se você tem um produto ou serviço bom, mas ninguém sabe que existe — ou pior, sabe mas não compra — este checklist vai mudar tudo.
-</p>
+    <!-- SOBRE MIM -->
+    <section class="about-section">
+        <div class="about-container">
+            <div class="about-image">
+                <img src="https://antigravity-attachments.s3.us-west-2.amazonaws.com/6b8b0c7d-ee73-4c31-ac60-f5f8e00e469f/user_uploaded_image_2.png" alt="Dante - Diretor Criativo">
+            </div>
+            <div class="about-content">
+                <span class="hero-tag">Creative Vision</span>
+                <h2>Eu sou o <span style="color:var(--accent)">Dante</span></h2>
+                <p>Meu foco é a intersecção entre a estética visual de alto impacto e a narrativa que gera resultados. Cada frame é pensado para transmitir a essência da sua marca e converter cada espectador.</p>
+                <div class="about-tags">
+                    <div class="about-tag">Diretor Criativo</div>
+                    <div class="about-tag">Filmmaker</div>
+                    <div class="about-tag">Editor</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<div class="card">
+    <!-- PORTFOLIO -->
+    <section class="portfolio">
+        <div class="section-header">
+            <span class="hero-tag">Portfólio</span>
+            <h2>Obras <span style="color:var(--accent)">Recentes</span></h2>
+        </div>
+        <div class="portfolio-grid" id="portfolioGrid">
+            <!-- Items injected via JS for easy maintenance -->
+        </div>
+    </section>
 
-<h3>Você vai descobrir:</h3>
+    <!-- LIGHTBOX -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="close-lightbox">&times;</span>
+        <div class="lightbox-content" onclick="event.stopPropagation()">
+            <div class="video-container" id="lightboxVideo">
+                <!-- Iframe injected here -->
+            </div>
+        </div>
+    </div>
 
-<p class="benefit">✓ Os 7 elementos específicos que fazem um vídeo converter</p>
-<p class="benefit">✓ Um checklist prático para usar antes de gravar</p>
-<p class="benefit">✓ Por que alguns vídeos vendem e outros não</p>
-<p class="benefit">✓ Como melhorar vídeos antigos sem refazer tudo</p>
-<p class="benefit">✓ Uma estrutura replicável para qualquer projeto</p>
+    <!-- DEPOIMENTO -->
+    <section class="testimonial">
+        <div class="carousel-container">
+            <div class="carousel-track" id="testimonialTrack">
+                <div class="testimonial-slide">
+                    <p class="testimonial-text">"O Dante capturou a essência da nossa marca de uma forma que nunca tínhamos visto. O ROI foi imediato."</p>
+                    <p class="testimonial-author">Ricardo M. — CEO TechFlow</p>
+                </div>
+                <div class="testimonial-slide">
+                    <p class="testimonial-text">"Profissionalismo impecável. O checklist dos 7 elementos abriu meus olhos para o que faltava nos meus vídeos."</p>
+                    <p class="testimonial-author">Ana Beatriz — Marketing Solar</p>
+                </div>
+                <div class="testimonial-slide">
+                    <p class="testimonial-text">"Se você quer um vídeo que não apenas pareça bonito, mas que venda, o Dante é a escolha certa."</p>
+                    <p class="testimonial-author">Lucas P. — Fundador E-Shop</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-</div>
+    <!-- FORMULÁRIO -->
+    <section class="form-section">
+        <div class="form-container">
+            <div class="section-header">
+                <span class="hero-tag">Contato</span>
+                <h2>Inicie seu <span style="color:var(--accent)">Projeto</span></h2>
+            </div>
+            <form id="leadForm">
+                <div class="form-group">
+                    <label>Seu Nome</label>
+                    <input type="text" id="name" placeholder="Como podemos te chamar?" required>
+                </div>
+                <div class="form-group">
+                    <label>WhatsApp</label>
+                    <input type="tel" id="whatsapp" placeholder="(00) 00000-0000" required>
+                </div>
+                <div class="form-group">
+                    <label>Objetivo do Vídeo</label>
+                    <select id="goal" required>
+                        <option value="" disabled selected>Selecione um objetivo</option>
+                        <option value="Vendas Diretas">Vendas Diretas / Lançamento</option>
+                        <option value="Branding / Autoridade">Branding / Autoridade</option>
+                        <option value="Treinamento / Educacional">Treinamento / Educacional</option>
+                        <option value="Outro">Outro</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Sobre o Projeto</label>
+                    <textarea id="message" placeholder="Conte-nos brevemente sobre sua ideia..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary form-submit">Enviar para o WhatsApp</button>
+            </form>
+        </div>
+    </section>
 
-<div class="card">
+    <!-- FOOTER -->
+    <footer>
+        <a href="#" class="footer-logo">DANTE</a>
+        <div class="footer-socials">
+            <a href="https://instagram.com/dantednz" class="footer-link">Instagram</a>
+            <a href="https://wa.me/5548998050267" class="footer-link">WhatsApp</a>
+            <a href="#" class="footer-link">Vimeo</a>
+        </div>
+        <p class="footer-copy">© <span id="year"></span> DANTE. Todos os direitos reservados.</p>
+    </footer>
 
-<p class="quote">
-“Depois que aprendi os 7 elementos, meu próximo vídeo comercial gerou 3x mais leads que o anterior.”
-</p>
+    <script>
+        // --- PORTFOLIO DATA ---
+        // Dante: Basta trocar os youtubeId aqui para atualizar o portfólio
+        const portfolioData = [
+            { title: "Futuristic Drive", category: "Commercial", youtubeId: "dQw4w9WgXcQ", thumb: "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=800", class: "wide" },
+            { title: "Urban Fashion", category: "Lifestyle", youtubeId: "dQw4w9WgXcQ", thumb: "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600" },
+            { title: "Tech Unleashed", category: "Corporate", youtubeId: "dQw4w9WgXcQ", thumb: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600" },
+            { title: "Nature's Rhythm", category: "Documentary", youtubeId: "dQw4w9WgXcQ", thumb: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600", class: "tall" },
+            { title: "Coffee Art", category: "Slow Motion", youtubeId: "dQw4w9WgXcQ", thumb: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600" },
+            { title: "Night City", category: "Cinematic", youtubeId: "dQw4w9WgXcQ", thumb: "https://images.unsplash.com/photo-1514565131-fce0801e5785?w=800", class: "wide" }
+        ];
 
-<p class="author">
-— João Silva, Diretor de Marketing
-</p>
+        // Render Portfolio
+        const grid = document.getElementById('portfolioGrid');
+        portfolioData.forEach(item => {
+            const div = document.createElement('div');
+            div.className = `portfolio-item ${item.class || ''}`;
+            div.innerHTML = `
+                <img src="${item.thumb}" alt="${item.title}">
+                <div class="portfolio-overlay">
+                    <p>${item.category}</p>
+                    <h3>${item.title}</h3>
+                </div>
+            `;
+            div.onclick = () => openLightbox(item.youtubeId);
+            grid.appendChild(div);
+        });
 
-</div>
+        // --- LIGHTBOX LOGIC ---
+        const lightbox = document.getElementById('lightbox');
+        const lightboxVideo = document.getElementById('lightboxVideo');
 
-<div class="card" id="formBox">
+        function openLightbox(id) {
+            const videoId = id === 'featured' ? 'dQw4w9WgXcQ' : id; // featured link original
+            lightboxVideo.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
 
-<form id="form">
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            lightboxVideo.innerHTML = '';
+            document.body.style.overflow = 'auto';
+        }
 
-<label>Qual é seu nome?</label>
-<input type="text" id="name" required>
+        // --- HEADER SCROLL ---
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('mainHeader');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
 
-<label>Seu WhatsApp</label>
-<input type="tel" id="whatsapp" required>
+        // --- INTERSECTION OBSERVER ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
 
-<button type="submit">
-Enviar Checklist para Meu WhatsApp
-</button>
+        document.querySelectorAll('.benefit-card').forEach(card => observer.observe(card));
 
-</form>
+        // --- CAROUSEL ---
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.testimonial-slide');
+        const track = document.getElementById('testimonialTrack');
 
-</div>
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % slides.length;
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }, 5000);
 
-<div class="card success" id="successBox">
+        // --- FORM ---
+        document.getElementById('leadForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const whatsapp = document.getElementById('whatsapp').value;
+            const goal = document.getElementById('goal').value;
+            const message = document.getElementById('message').value;
 
-<h2>Perfeito! 🎬</h2>
+            const text = `Olá Dante! Me chamo ${name}. Estou interessado em um vídeo para ${goal}. ${message ? `Mais detalhes: ${message}` : ''} Gostaria de receber o checklist e conversar sobre meu projeto.`;
+            const url = `https://wa.me/5548998050267?text=${encodeURIComponent(text)}`;
+            
+            window.open(url, '_blank');
+        });
 
-<p>
-Você será redirecionado para o WhatsApp agora.
-</p>
-
-</div>
-
-<div class="footer">
-@dantednz<br>
-https://instagram.com/dantednz<br>
-https://wa.me/5548998050267
-</div>
-
-</div>
-
-<script>
-document.getElementById("form").addEventListener("submit", function(e){
-  e.preventDefault();
-
-  document.getElementById("formBox").style.display = "none";
-  document.getElementById("successBox").style.display = "block";
-
-  setTimeout(() => {
-    window.location.href = "https://wa.me/5548998050267?text=Quero%20receber%20o%20checklist";
-  }, 1500);
-});
-</script>
-
+        // --- MISC ---
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>
