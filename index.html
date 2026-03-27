@@ -99,32 +99,38 @@
             align-items: center;
             border-radius: 40px;
             transition: all 0.5s var(--ease);
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
         }
 
         header.scrolled {
             top: 12px;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.85);
             padding: 8px 24px;
+            width: 95%;
         }
 
         .logo {
-            font-size: 1.2rem;
-            font-weight: 700;
-            letter-spacing: 4px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            letter-spacing: 6px;
             color: var(--accent);
             text-decoration: none;
             transition: var(--ease);
         }
 
         .nav-cta {
-            background: var(--accent);
+            background: #fff;
             color: #000;
             padding: 10px 24px;
             text-decoration: none;
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             border-radius: 20px;
-            transition: all 0.3s var(--ease);
+            transition: all 0.3s var(--ease-out);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .nav-cta:hover {
@@ -165,17 +171,18 @@
         }
 
         h1 {
-            font-size: clamp(3.5rem, 8vw, 6rem);
+            font-size: clamp(3.2rem, 8vw, 5.5rem);
             line-height: 1;
             margin-bottom: 32px;
         }
 
         .hero-subtitle {
-            font-size: 1.4rem;
+            font-size: 1.25rem;
             color: var(--text-dim);
             max-width: 500px;
             margin-bottom: 48px;
             font-weight: 300;
+            line-height: 1.6;
         }
 
         .hero-btns {
@@ -272,26 +279,52 @@
 
         .featured-video:hover .play-btn-huge svg { fill: #000; }
 
-        /* MARQUEE */
-        .marquee-strip {
-            padding: 60px 0;
-            border-top: 1px solid rgba(255,255,255,0.05);
+        /* METRICS (IMPACT) */
+        .metrics-section {
+            padding: 100px 5%;
             background: #000;
         }
 
-        .marquee-item {
-            color: var(--accent);
-            font-size: clamp(2rem, 5vw, 4rem);
-            font-family: 'Playfair Display', serif;
-            margin-right: 6rem;
-            letter-spacing: -0.05em;
+        .metrics-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
         }
 
-        .marquee-item span {
-            font-size: 1rem;
-            font-weight: 300;
+        .metric-card {
+            padding: 60px 40px;
+            border-radius: 32px;
+            text-align: center;
+            transition: all 0.5s var(--ease-out);
+            border: 1px solid rgba(255,255,255,0.03);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .metric-card:hover {
+            border-color: rgba(255,255,255,0.1);
+            transform: translateY(-8px);
+        }
+
+        .metric-number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            font-family: 'Playfair Display', serif;
+            display: block;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #fff 0%, #888 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
             color: var(--text-dim);
+            text-transform: uppercase;
             letter-spacing: 2px;
+            font-weight: 500;
         }
 
         /* ABOUT SECTION (BENTO/APPLE STYLE) */
@@ -436,13 +469,75 @@
             transform: translateY(0);
         }
 
+        /* FOOTER (FIXED) */
+        footer {
+            padding: 120px 5% 60px;
+            background: #000;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.03);
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: 8px;
+            margin-bottom: 40px;
+            display: inline-block;
+        }
+
+        .footer-socials {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-link {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            transition: 0.4s var(--ease);
+            position: relative;
+        }
+
+        .footer-link:after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #fff;
+            transition: 0.4s var(--ease);
+        }
+
+        .footer-link:hover {
+            color: #fff;
+        }
+
+        .footer-link:hover:after {
+            width: 100%;
+        }
+
+        .footer-copy {
+            color: rgba(255,255,255,0.2);
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
         @media (max-width: 968px) {
             .hero-container { grid-template-columns: 1fr; text-align: center; }
             .hero-btns { justify-content: center; }
             .about-card { grid-template-columns: 1fr; }
             .about-content { padding: 60px 40px; }
             .about-content h2 { font-size: 3rem; }
-            header { padding: 12px 24px; }
+            .metrics-grid { grid-template-columns: 1fr 1fr; }
+            header { padding: 12px 24px; top: 12px; }
         }
     </style>
     </style>
@@ -461,12 +556,12 @@
         <div class="hero-bg"></div>
         <div class="hero-container">
             <div class="hero-content reveal">
-                <span class="hero-tag">Visionary Video Production</span>
-                <h1>Crafting <br><span style="color:var(--accent)">Digital Legacy</span></h1>
-                <p class="hero-subtitle">We merge cinematic aesthetics with strategic storytelling to build brands that don't just exist, but lead. The intersection of art and conversion.</p>
+                <span class="hero-tag">Produção de Vídeo Visionária</span>
+                <h1>Criando seu <br><span style="color:var(--accent)">Legado Digital</span></h1>
+                <p class="hero-subtitle">Fundimos estética cinematográfica com narrativas estratégicas para marcas que não querem apenas existir, mas liderar.</p>
                 <div class="hero-btns">
-                    <button class="btn btn-primary" onclick="document.querySelector('.form-section').scrollIntoView({behavior: 'smooth'})">Get the Blueprint</button>
-                    <button class="btn btn-secondary" onclick="document.querySelector('.portfolio').scrollIntoView({behavior: 'smooth'})">View Portfolio</button>
+                    <button class="btn btn-primary" onclick="document.querySelector('.form-section').scrollIntoView({behavior: 'smooth'})">Baixar o Blueprint</button>
+                    <button class="btn btn-secondary" onclick="document.querySelector('.portfolio').scrollIntoView({behavior: 'smooth'})">Ver Portfólio</button>
                 </div>
             </div>
             <div class="hero-visuals reveal">
@@ -497,28 +592,50 @@
         </div>
     </div>
 
+    <!-- IMPACT METRICS -->
+    <section class="metrics-section">
+        <div class="metrics-grid">
+            <div class="metric-card glass reveal">
+                <span class="metric-number" data-target="300">0</span>
+                <span class="metric-label">Mil Visualizações</span>
+            </div>
+            <div class="metric-card glass reveal">
+                <span class="metric-number" data-target="20">0</span>
+                <span class="metric-label">Projetos Premium</span>
+            </div>
+            <div class="metric-card glass reveal">
+                <span class="metric-number" data-target="2">0</span>
+                <span class="metric-label">Países Alcançados</span>
+            </div>
+            <div class="metric-card glass reveal">
+                <span class="metric-number" data-target="100">0</span>
+                <span class="metric-label">% de Satisfação</span>
+            </div>
+        </div>
+    </section>
+
     <!-- WHY IT WORKS -->
     <section class="benefits">
         <div class="section-header reveal">
-            <span class="hero-tag">The Architecture</span>
-            <h2>Why our videos <span style="color:var(--accent); border-bottom: 2px solid var(--accent)">outperform</span></h2>
-            <p>A calculated blend of elite cinematography and psychological triggers.</p>
+            <span class="hero-tag">A Arquitetura</span>
+            <h2>Por que nossos vídeos <span style="color:var(--accent); border-bottom: 2px solid var(--accent)">dominam</span> o mercado</h2>
+            <p>Uma mistura calculada de cinematografia de elite e gatilhos psicológicos.</p>
         </div>
         <div class="benefits-grid">
-            <div class="benefit-card glass reveal">
-                <span class="icon">01</span>
-                <h3>Instant Hook</h3>
-                <p>We capture the narrative in the first 2.5 seconds. Silence is not an option.</p>
+            <div class="metric-card glass reveal" style="text-align: left; padding: 40px;">
+                <span class="icon" style="opacity: 0.05; font-size: 4rem; position: absolute; top: 20px; right: 20px;">01</span>
+                <h3 style="font-family: 'Playfair Display'; font-size: 1.8rem; margin-bottom: 15px;">Gancho Imediato</h3>
+                <p style="color: var(--text-dim); line-height: 1.6;">Capturamos a narrativa nos primeiros 2.5 segundos. O silêncio não é uma opção.</p>
             </div>
-            <div class="benefit-card glass reveal">
-                <span class="icon">02</span>
-                <h3>Cinematic DNA</h3>
-                <p>High-end color grading and sound design that elevates your brand to luxury status.</p>
+            <div class="metric-card glass reveal" style="text-align: left; padding: 40px;">
+                <span class="icon" style="opacity: 0.05; font-size: 4rem; position: absolute; top: 20px; right: 20px;">02</span>
+                <h3 style="font-family: 'Playfair Display'; font-size: 1.8rem; margin-bottom: 15px;">DNA Cinematográfico</h3>
+                <p style="color: var(--text-dim); line-height: 1.6;">Cores e sound design de alta fidelidade que elevam sua marca ao status de luxo.</p>
             </div>
-            <div class="benefit-card glass reveal">
-                <span class="icon">03</span>
-                <h3>Strategic CTA</h3>
-                <p>Converting attention into action with subtle yet powerful psychological cues.</p>
+            <div class="metric-card glass reveal" style="text-align: left; padding: 40px;">
+                <span class="icon" style="opacity: 0.05; font-size: 4rem; position: absolute; top: 20px; right: 20px;">03</span>
+                <h3 style="font-family: 'Playfair Display'; font-size: 1.8rem; margin-bottom: 15px;">CTA Estratégico</h3>
+                <p style="color: var(--text-dim); line-height: 1.6;">Convertendo atenção em ação com gatilhos psicológicos sutis, mas poderosos.</p>
             </div>
         </div>
     </section>
@@ -527,14 +644,14 @@
     <section class="about-section">
         <div class="about-card glass reveal">
             <div class="about-image">
-                <img src="assets/dante.PNG" alt="Dante - Creative Director">
+                <img src="assets/dante.PNG" alt="Dante - Diretor Criativo">
             </div>
             <div class="about-content">
                 <span class="hero-tag">Editorial DNA</span>
-                <h2>The Man Behind <br>the Lens</h2>
-                <p>I specialize in the intersection of high-impact visual aesthetics and conversion-driven storytelling. Every frame is engineered to pulsate with your brand's essence.</p>
+                <h2>O Homem por trás <br>da Lente</h2>
+                <p>Especialista na intersecção entre estética visual de alto impacto e narrativas focadas em conversão. Cada frame é projetado para pulsar a essência da sua marca.</p>
                 <div class="about-tags">
-                    <div class="about-tag">Creative Director</div>
+                    <div class="about-tag">Diretor Criativo</div>
                     <div class="about-tag">Filmmaker</div>
                     <div class="about-tag">Editor</div>
                 </div>
@@ -689,11 +806,42 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
+                    
+                    // Counter Animation Trigger
+                    if (entry.target.querySelector('.metric-number')) {
+                        animateCounters(entry.target);
+                    }
                 }
             });
         }, { threshold: 0.15 });
 
         document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        // --- COUNTER ANIMATION ---
+        function animateCounters(parent) {
+            const counter = parent.querySelector('.metric-number');
+            if (counter.dataset.animated) return;
+            
+            const target = parseInt(counter.dataset.target);
+            const duration = 2000;
+            const startTime = performance.now();
+            
+            function update(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const currentCount = Math.floor(progress * target);
+                
+                counter.textContent = currentCount + (target >= 100 && target < 1000 ? 'K+' : target === 100 ? '' : '');
+                
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                } else {
+                    counter.textContent = (target === 100 ? '100%' : target === 300 ? '300K+' : target === 20 ? '20+' : target);
+                    counter.dataset.animated = "true";
+                }
+            }
+            requestAnimationFrame(update);
+        }
 
         // --- CAROUSEL ---
         let currentSlide = 0;
