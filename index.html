@@ -145,7 +145,6 @@
         .logo strong {
             font-size: 0.9rem;
             letter-spacing: 3px;
-            font-weight: 700;
         }
 
         .logo span {
@@ -192,11 +191,11 @@
         }
 
         .hero-container {
-            max-width: 1400px;
+            max-width: 1300px;
             width: 100%;
             display: grid;
-            grid-template-columns: 0.9fr 1.1fr;
-            gap: 60px;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
             align-items: center;
         }
 
@@ -452,6 +451,115 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 24px;
+        }
+
+        /* VERTICAL VIDEO SECTION */
+        .vertical-video-section {
+            padding: 120px 5%;
+            background: linear-gradient(180deg, #000 0%, #1D1D1F 100%);
+        }
+
+        .vertical-video-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 80px;
+        }
+
+        .vertical-video-content {
+            flex: 1;
+            z-index: 10;
+        }
+
+        .vertical-video-content h2 {
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            line-height: 1.1;
+            margin-bottom: 24px;
+        }
+
+        .vertical-video-content p {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 32px;
+            font-weight: 300;
+        }
+
+        .vertical-video-player {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .vertical-video-frame {
+            position: relative;
+            width: 280px;
+            height: 560px;
+            background: #111;
+            border-radius: 32px;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+            transition: all 0.6s var(--ease-out);
+        }
+
+        .vertical-video-frame:hover {
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-8px);
+            box-shadow: 0 50px 120px rgba(0, 0, 0, 0.8);
+        }
+
+        .vertical-video-frame iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .vertical-play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.4s var(--ease);
+            z-index: 10;
+        }
+
+        .vertical-play-btn:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: translate(-50%, -50%) scale(1.15);
+        }
+
+        .vertical-play-btn svg {
+            width: 28px;
+            fill: #fff;
+            margin-left: 4px;
+        }
+
+        @media (max-width: 968px) {
+            .vertical-video-container {
+                flex-direction: column;
+                gap: 40px;
+                text-align: center;
+            }
+            .vertical-video-content {
+                order: 2;
+            }
+            .vertical-video-player {
+                order: 1;
+            }
         }
 
         /* PORTFOLIO */
@@ -820,8 +928,8 @@
         <div class="hero-bg"></div>
         <div class="hero-container">
             <div class="hero-content reveal">
-                <h1>Criando seu <br><span style="color:var(--accent)">Legado Digital</span></h1>
-                <p class="hero-subtitle">Fundimos estética cinematográfica com narrativas estratégicas para marcas que não querem apenas existir, mas liderar.</p>
+                <h1>Transformando <br><span style="color:var(--accent)">Movimento em Arte</span></h1>
+                <p class="hero-subtitle">Adrenalina, técnica de cinema e narrativas de impacto. Cada frame conta a história que sua marca merece.</p>
                 <div class="hero-btns">
                     <button class="btn btn-primary" onclick="document.querySelector('.form-section').scrollIntoView({behavior: 'smooth'})">Baixar o Blueprint</button>
                 </div>
@@ -864,25 +972,25 @@
     <!-- WHY IT WORKS -->
     <section class="benefits">
         <div class="section-header reveal">
-            <span class="hero-tag">A Arquitetura</span>
-            <h2>Por que nossos vídeos <span style="color:var(--accent); border-bottom: 2px solid var(--accent)">dominam</span> o mercado</h2>
-            <p>Uma mistura calculada de cinematografia de elite e gatilhos psicológicos.</p>
+            <span class="hero-tag">A Fórmula</span>
+            <h2>Por que nossos vídeos <span style="color:var(--accent); border-bottom: 2px solid var(--accent)">vendem</span></h2>
+            <p>Movimento, luz e emoção. Cada segundo é calculado para converter.</p>
         </div>
         <div class="benefits-grid">
             <div class="metric-card glass reveal" style="text-align: left; padding: 40px; transition-delay: 0.1s;">
                 <span class="icon" style="opacity: 0.08; font-size: 4.5rem; position: absolute; top: -10px; right: 20px;">01</span>
-                <h3 style="font-family: 'Playfair Display'; font-size: 1.8rem; margin-bottom: 15px;">Gancho Imediato</h3>
-                <p style="color: var(--text-dim); line-height: 1.7; font-size: 1rem;">Capturamos a narrativa nos primeiros 2.5 segundos. O silêncio não é uma opção, a atenção é tudo.</p>
+                <h3 style="font-family: 'Playfair Display'; font-size: 1.8rem; margin-bottom: 15px;">Impacto Visceral</h3>
+                <p style="color: var(--text-dim); line-height: 1.7; font-size: 1rem;">Os primeiros 3 segundos definem tudo. Movimento, luz e som trabalham juntos para prender a atenção.</p>
             </div>
             <div class="metric-card glass reveal" style="text-align: left; padding: 40px; transition-delay: 0.3s;">
                 <span class="icon" style="opacity: 0.08; font-size: 4.5rem; position: absolute; top: -10px; right: 20px;">02</span>
-                <h3 style="font-family: 'Playfair Display'; font-size: 1.8rem; margin-bottom: 15px;">DNA Cinematográfico</h3>
-                <p style="color: var(--text-dim); line-height: 1.7; font-size: 1rem;">Cores e sound design de alta fidelidade que elevam sua marca ao status de luxo visual absoluto.</p>
+                <h3 style="font-family: 'Playfair Display'; font-size: 1.8rem; margin-bottom: 15px;">Técnica de Cinema</h3>
+                <p style="color: var(--text-dim); line-height: 1.7; font-size: 1rem;">Cada frame é pensado como uma obra de arte. Cores, composição e ritmo elevam sua marca ao patamar de luxo.</p>
             </div>
             <div class="metric-card glass reveal" style="text-align: left; padding: 40px; transition-delay: 0.5s;">
                 <span class="icon" style="opacity: 0.08; font-size: 4.5rem; position: absolute; top: -10px; right: 20px;">03</span>
-                <h3 style="font-family: 'Playfair Display'; font-size: 1.8rem; margin-bottom: 15px;">CTA Estratégico</h3>
-                <p style="color: var(--text-dim); line-height: 1.7; font-size: 1rem;">Convertendo atenção em ação com gatilhos psicológicos que geram desejo imediato pelo produto.</p>
+                <h3 style="font-family: 'Playfair Display'; font-size: 1.8rem; margin-bottom: 15px;">Conversão Garantida</h3>
+                <p style="color: var(--text-dim); line-height: 1.7; font-size: 1rem;">Psicologia visual + storytelling = venda. Cada vídeo é uma máquina de converter espectadores em clientes.</p>
             </div>
         </div>
     </section>
@@ -893,10 +1001,10 @@
             <div class="about-image">
                 <img src="assets/dante.PNG" alt="Dante - Diretor Criativo">
             </div>
-            <div class="about-content">
-                <span class="hero-tag">Editorial DNA</span>
-                <h2>O Homem por trás <br>da Lente</h2>
-                <p>Especialista na intersecção entre estética visual de alto impacto e narrativas focadas em conversão. Cada frame é projetado para pulsar a essência da sua marca.</p>
+             <div class="about-content">
+                <span class="hero-tag">Cineasta de Adrenalina</span>
+                <h2>Quem Cria <br>Esses Vídeos</h2>
+                <p>Especialista em transformar momentos de pura energia em narrativas cinematográficas que vendem. Surf, festas, esportes, lifestyle — cada projeto é uma oportunidade de criar arte que converte.</p>
                 <div class="about-tags">
                     <div class="about-tag">Diretor Criativo</div>
                     <div class="about-tag">Filmmaker</div>
@@ -914,6 +1022,22 @@
         </div>
         <div class="portfolio-grid" id="portfolioGrid">
             <!-- Items injetados via JS -->
+        </div>
+    </section>
+
+    <!-- VERTICAL VIDEO SECTION -->
+    <section class="vertical-video-section">
+        <div class="vertical-video-container">
+            <div class="vertical-video-content reveal">
+                <span class="hero-tag">Social Impact</span>
+                <h2>Energia de <span style="color:var(--accent)">Festa</span></h2>
+                <p>Quando o vídeo é vertical, a energia é horizontal. Veja como transformamos momentos de pura adrenalina em conteúdo que domina as redes sociais e converte em vendas.</p>
+            </div>
+            <div class="vertical-video-player reveal">
+                <div class="vertical-video-frame" id="verticalVideoFrame">
+                    <!-- Iframe injetado via JS -->
+                </div>
+            </div>
         </div>
     </section>
 
@@ -974,7 +1098,7 @@
         <div class="footer-socials">
             <a href="https://instagram.com/dantednz" class="footer-link">Instagram</a>
             <a href="https://wa.me/5548998050267" class="footer-link">WhatsApp</a>
-            <a href="https://vimeo.com/user256544771" class="footer-link">Vimeo</a>
+            <a href="https://vimeo.com/dantednz" class="footer-link">Vimeo</a>
         </div>
         <p class="footer-copy">© <span id="year"></span> DANTE. Todos os direitos reservados.</p>
     </footer>
@@ -989,34 +1113,43 @@
         // =============================================
         const portfolioData = [
             {
-                title: "IN GOD’S HANDS (1998)",
-                category: "Cinematic",
-                vimeoId: "1177771656",
-                thumb: "assets/1177771656.png",
-                class: "wide"
-            },
-            {
-                title: "JOTAPÊ - SURFBOARDS",
-                category: "Manuscrafting",
-                vimeoId: "1177774829",
-                thumb: "assets/1177774829.png",
-                class: ""
-            },
-            {
                 title: "Black Venom - HD Inline",
                 category: "Esportes",
                 vimeoId: "1177779611",
                 thumb: "assets/1177779611.png",
-                class: ""
+                class: "wide"
             },
             {
                 title: "But Definitely (teaser)",
-                category: "Esportes/ Surf film",
+                category: "Esportes / Surf film",
                 vimeoId: "1177775878",
                 thumb: "assets/1177775878.png",
-                class: "wide"
-            }
+                class: ""
+            },
+            {
+                title: "JOTAPÊ - SURFBOARDS",
+                category: "Manuscraftig",
+                vimeoId: "1177774829",
+                thumb: "assets/1177774829.png",
+                class: ""
+            },
+
         ];
+
+        // =============================================
+        // VERTICAL VIDEO (FESTA)
+        // Altere o vimeoId abaixo para o ID do seu vídeo de festa
+        // =============================================
+        const verticalVideoId = '1177798436'; // Video de Festa - Social Impact
+
+        if (verticalVideoId) {
+            const verticalFrame = document.getElementById('verticalVideoFrame');
+            const embedUrl = 'https://player.vimeo.com/video/' + verticalVideoId
+                + '?autoplay=0&autopause=0&title=0&byline=0&portrait=0&dnt=1';
+            verticalFrame.innerHTML = '<iframe src="' + embedUrl + '" '
+                + 'allow="autoplay; fullscreen; picture-in-picture" '
+                + 'allowfullscreen frameborder="0"></iframe>';
+        }
 
         // =============================================
         // RENDER PORTFOLIO
