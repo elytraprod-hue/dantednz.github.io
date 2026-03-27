@@ -84,41 +84,58 @@
             display: inline-block;
         }
 
-        /* HEADER */
-        header {
+        /* HEADER */        header {
             position: fixed;
-            top: 24px;
+            top: 32px;
             left: 50%;
             transform: translateX(-50%);
             width: 90%;
             max-width: 1200px;
-            padding: 12px 32px;
+            padding: 14px 32px;
             z-index: 5000;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-radius: 40px;
-            transition: all 0.5s var(--ease);
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
+            border-radius: 100px;
+            transition: all 0.6s var(--ease);
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
         }
 
         header.scrolled {
-            top: 12px;
-            background: rgba(0, 0, 0, 0.85);
-            padding: 8px 24px;
-            width: 95%;
+            top: 16px;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 10px 24px;
+            width: 93%;
+            border-color: rgba(255,255,255,0.12);
         }
 
         .logo {
-            font-size: 1.1rem;
+            font-size: 0.75rem;
             font-weight: 800;
-            letter-spacing: 6px;
+            letter-spacing: 5px;
             color: var(--accent);
             text-decoration: none;
             transition: var(--ease);
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
         }
+
+        .logo strong {
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+        }
+
+        .logo span {
+            font-size: 0.6rem;
+            letter-spacing: 7px;
+            color: var(--accent-dim);
+            font-weight: 300;
+        }
+
 
         .nav-cta {
             background: #fff;
@@ -295,16 +312,20 @@
             padding: 60px 20px;
             border-radius: 40px;
             text-align: center;
-            transition: all 0.6s var(--ease-out);
-            border: 1px solid rgba(255,255,255,0.02);
+            transition: all 0.8s var(--ease-out);
+            border: 1px solid rgba(255,255,255,0.05);
             position: relative;
-            background: rgba(255,255,255,0.01);
-            backdrop-filter: blur(10px);
+            background: rgba(255,255,255,0.02);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            box-shadow: inset 0 0 20px rgba(255,255,255,0.01);
         }
 
         .metric-card:hover {
-            border-color: rgba(255,255,255,0.1);
-            transform: translateY(-8px);
+            border-color: rgba(255,255,255,0.15);
+            transform: translateY(-12px);
+            background: rgba(255,255,255,0.04);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5), inset 0 0 30px rgba(255,255,255,0.02);
         }
 
         .metric-number {
@@ -521,13 +542,24 @@
 
         .footer-logo {
             font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
+            font-size: 1.2rem;
             font-weight: 900;
             color: #fff;
             text-decoration: none;
-            letter-spacing: 8px;
+            letter-spacing: 4px;
             margin-bottom: 40px;
             display: inline-block;
+            text-transform: uppercase;
+        }
+
+        .footer-logo span {
+            display: block;
+            font-size: 0.65rem;
+            font-family: 'Outfit';
+            letter-spacing: 8px;
+            color: var(--accent-dim);
+            margin-top: 8px;
+            font-weight: 300;
         }
 
         .footer-socials {
@@ -588,9 +620,10 @@
     <!-- HEADER -->
     <header id="mainHeader">
         <a href="#" class="logo">
-            <span>DANTE</span>
+            <strong>GABRIEL D. PIMENTEL</strong>
+            <span>DANTE FILMS</span>
         </a>
-        <a href="https://wa.me/5548998050267" class="nav-cta">Falar no WhatsApp</a>
+        <a href="https://wa.me/5548998050267" class="nav-cta">WhatsApp</a>
     </header>
     <!-- HERO SECTION -->
     <section class="hero">
@@ -621,14 +654,14 @@
         <div class="metrics-grid">
             <div class="metric-card glass reveal">
                 <span class="metric-number" data-target="1000">0</span>
-                <span class="metric-label">K Visualizações</span>
+                <span class="metric-label">M Visualizações</span>
             </div>
             <div class="metric-card glass reveal">
                 <span class="metric-number" data-target="50">0</span>
                 <span class="metric-label">Projetos Premium</span>
             </div>
             <div class="metric-card glass reveal">
-                <span class="metric-number" data-target="4">0</span>
+                <span class="metric-number" data-target="12">0</span>
                 <span class="metric-label">Países Alcançados</span>
             </div>
             <div class="metric-card glass reveal">
@@ -648,20 +681,20 @@
             <p>Uma mistura calculada de cinematografia de elite e gatilhos psicológicos.</p>
         </div>
         <div class="benefits-grid">
-            <div class="metric-card glass reveal" style="text-align: left; padding: 40px;">
-                <span class="icon" style="opacity: 0.05; font-size: 4rem; position: absolute; top: 20px; right: 20px;">01</span>
+            <div class="metric-card glass reveal" style="text-align: left; padding: 40px; transition-delay: 0.1s;">
+                <span class="icon" style="opacity: 0.08; font-size: 4.5rem; position: absolute; top: -10px; right: 20px;">01</span>
                 <h3 style="font-family: 'Playfair Display'; font-size: 1.8rem; margin-bottom: 15px;">Gancho Imediato</h3>
-                <p style="color: var(--text-dim); line-height: 1.6;">Capturamos a narrativa nos primeiros 2.5 segundos. O silêncio não é uma opção.</p>
+                <p style="color: var(--text-dim); line-height: 1.7; font-size: 1rem;">Capturamos a narrativa nos primeiros 2.5 segundos. O silêncio não é uma opção, a atenção é tudo.</p>
             </div>
-            <div class="metric-card glass reveal" style="text-align: left; padding: 40px;">
-                <span class="icon" style="opacity: 0.05; font-size: 4rem; position: absolute; top: 20px; right: 20px;">02</span>
+            <div class="metric-card glass reveal" style="text-align: left; padding: 40px; transition-delay: 0.3s;">
+                <span class="icon" style="opacity: 0.08; font-size: 4.5rem; position: absolute; top: -10px; right: 20px;">02</span>
                 <h3 style="font-family: 'Playfair Display'; font-size: 1.8rem; margin-bottom: 15px;">DNA Cinematográfico</h3>
-                <p style="color: var(--text-dim); line-height: 1.6;">Cores e sound design de alta fidelidade que elevam sua marca ao status de luxo.</p>
+                <p style="color: var(--text-dim); line-height: 1.7; font-size: 1rem;">Cores e sound design de alta fidelidade que elevam sua marca ao status de luxo visual absoluto.</p>
             </div>
-            <div class="metric-card glass reveal" style="text-align: left; padding: 40px;">
-                <span class="icon" style="opacity: 0.05; font-size: 4rem; position: absolute; top: 20px; right: 20px;">03</span>
+            <div class="metric-card glass reveal" style="text-align: left; padding: 40px; transition-delay: 0.5s;">
+                <span class="icon" style="opacity: 0.08; font-size: 4.5rem; position: absolute; top: -10px; right: 20px;">03</span>
                 <h3 style="font-family: 'Playfair Display'; font-size: 1.8rem; margin-bottom: 15px;">CTA Estratégico</h3>
-                <p style="color: var(--text-dim); line-height: 1.6;">Convertendo atenção em ação com gatilhos psicológicos sutis, mas poderosos.</p>
+                <p style="color: var(--text-dim); line-height: 1.7; font-size: 1rem;">Convertendo atenção em ação com gatilhos psicológicos que geram desejo imediato pelo produto.</p>
             </div>
         </div>
     </section>
@@ -744,7 +777,10 @@
 
     <!-- FOOTER -->
     <footer>
-        <a href="#" class="footer-logo">DANTE</a>
+        <a href="#" class="footer-logo">
+            GABRIEL D. PIMENTEL
+            <span>DANTE FILMS</span>
+        </a>
         <div class="footer-socials">
             <a href="https://instagram.com/dantednz" class="footer-link">Instagram</a>
             <a href="https://wa.me/5548998050267" class="footer-link">WhatsApp</a>
