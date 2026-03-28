@@ -912,22 +912,24 @@
         /* Glassmorphism Apple Next-Gen (iPhone 16 / MacBook M5) */
         .glass, .metric-card, .hero-card {
             background: rgba(29, 29, 31, 0.65) !important;
-            backdrop-filter: blur(40px) saturate(180%) !important;
-            -webkit-backdrop-filter: blur(40px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.1) !important;
-            border-top: 1px solid rgba(255, 255, 255, 0.25) !important; /* Brilho especular no topo */
+            backdrop-filter: blur(40px) saturate(150%) !important;
+            -webkit-backdrop-filter: blur(40px) saturate(150%);
+            border: 1px solid rgba(255, 255, 255, 0.05) !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.12) !important; /* Brilho reduzido no topo */
             box-shadow: 
                 0 20px 40px rgba(0, 0, 0, 0.4), 
-                inset 0 1px 1px rgba(255, 255, 255, 0.1) !important; /* Profundidade interna */
+                inset 0 1px 1px rgba(255, 255, 255, 0.05) !important; /* Profundidade contida */
             border-radius: 24px;
+            overflow: hidden !important; /* Corta vazamento do blur */
+            transform: translateZ(0); /* Trava as bordas do blur no macOS/iOS */
             transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
         
         /* Efeito de Hover estilo MacBook */
         .metric-card:hover, .hero-card:hover {
             background: rgba(44, 44, 46, 0.8) !important;
-            border-color: rgba(255, 255, 255, 0.3) !important;
-            transform: translateY(-8px) scale(1.01);
+            border-color: rgba(255, 255, 255, 0.15) !important;
+            transform: translateY(-8px) scale(1.01) translateZ(0);
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
         }
         
