@@ -98,7 +98,7 @@
             justify-content: space-between;
             align-items: center;
             border-radius: 100px;
-            transition: all 0.6s var(--ease);
+            transition: all var(--adren-duration, 0.6s) var(--ease);
             background: rgba(0, 0, 0, 0.3);
             border: 1px solid rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(30px);
@@ -503,7 +503,7 @@
             overflow: hidden;
             border: 2px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
-            transition: all 0.6s var(--ease-out);
+            transition: all var(--adren-duration, 0.6s) var(--ease-out);
         }
 
         .vertical-video-frame:hover {
@@ -582,7 +582,7 @@
             border-radius: 24px;
             overflow: hidden;
             cursor: pointer;
-            transition: transform 0.6s var(--ease-out);
+            transition: transform var(--adren-duration, 0.6s) var(--ease-out);
         }
 
         .portfolio-item.wide {
@@ -910,19 +910,19 @@
         }
 
         /* Glassmorphism Apple Next-Gen (iPhone 16 / MacBook M5) */
-        .glass, .metric-card, .hero-card {
+        .glass, .metric-card, .hero-card, .vertical-video-frame, .portfolio-item {
             background: rgba(29, 29, 31, 0.65) !important;
-            backdrop-filter: blur(40px) saturate(150%) !important;
-            -webkit-backdrop-filter: blur(40px) saturate(150%);
+            backdrop-filter: blur(40px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(40px) saturate(180%);
             border: 1px solid rgba(255, 255, 255, 0.05) !important;
-            border-top: 1px solid rgba(255, 255, 255, 0.12) !important; /* Brilho reduzido no topo */
+            border-top: 1px solid rgba(255, 255, 255, 0.25) !important;
             box-shadow: 
                 0 20px 40px rgba(0, 0, 0, 0.4), 
-                inset 0 1px 1px rgba(255, 255, 255, 0.05) !important; /* Profundidade contida */
+                inset 0 1px 1px rgba(255, 255, 255, 0.1) !important;
             border-radius: 24px;
-            overflow: hidden !important; /* Corta vazamento do blur */
-            transform: translateZ(0); /* Trava as bordas do blur no macOS/iOS */
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden !important; 
+            transform: translateZ(0);
+            transition: all var(--adren-duration, 0.6s) cubic-bezier(0.16, 1, 0.3, 1);
         }
         
         /* Efeito de Hover estilo MacBook */
@@ -971,13 +971,70 @@
                 cursor: none !important;
             }
         }
+
+        /* Consciência Temporal (Modos Dia/Noite) */
+        .mode-noir {
+            --bg: #050505;
+            --surface: #0a0a0c;
+            --glass-bg: rgba(15, 15, 15, 0.8);
+        }
+        .mode-golden {
+            --bg: #0A0908;
+            --surface: #2b2520;
+            --glass-bg: rgba(30, 20, 10, 0.7);
+        }
+        
+        /* Botões do Mockup Mac */
+        .mac-btn {
+            width: 12px; height: 12px; border-radius: 50%; opacity: 0.8; transition: all 0.3s ease; box-shadow: transparent;
+        }
+        .mac-btn:hover {
+            opacity: 1; filter: brightness(1.2); box-shadow: 0 0 8px currentColor;
+        }
+        
+        /* Parallax Container */
+        .browser-mockup-wrapper {
+            perspective: 1200px;
+            transform-style: preserve-3d;
+        }
+        
+        .browser-mockup {
+            transition: transform 0.1s ease-out;
+            transform-style: preserve-3d;
+        }
+
+        /* Scroll Infinito e Conteúdo do Mockup */
+        .mockup-content {
+            width: 100%; height: 300%; 
+            background: url('assets/mockup_apple_pro_dante.PNG') top center/cover no-repeat;
+            animation: scrollMockup 20s linear infinite alternate;
+            will-change: transform;
+        }
+
+        @keyframes scrollMockup {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-66.6%); }
+        }
+        
+        /* Ghost Cursor melhorado simulando cliques físicos */
+        @keyframes ghostMove {
+            0% { transform: translate(0, 0) scale(1); opacity: 0.8; }
+            20% { transform: translate(-80px, -120px) scale(1); opacity: 1; }
+            22% { transform: translate(-80px, -120px) scale(0.7); opacity: 1; /* Simula Click */ }
+            24% { transform: translate(-80px, -120px) scale(1); opacity: 1; }
+            50% { transform: translate(120px, -60px) scale(1); opacity: 0.9; }
+            52% { transform: translate(120px, -60px) scale(0.7); opacity: 1; /* Simula Click */ }
+            54% { transform: translate(120px, -60px) scale(1); opacity: 0.9; }
+            80% { transform: translate(30px, 80px) scale(1); opacity: 0.9; }
+            100% { transform: translate(0, 0) scale(1); opacity: 0.8; }
+        }
     </style>
 </head>
 <body>
     <!-- HEADER -->
     <header id="mainHeader">
         <a href="#" class="logo">
-            <img src="assets/logo.png" alt="Dante Films Logo" class="logo-img">
+            <img loading="lazy" src="assets/logo.png" alt="Dante Films Logo" class="logo-img">
             <div class="logo-text">
                 <strong>GABRIEL D. PIMENTEL</strong>
                 <span>DANTE FILMS</span>
@@ -1000,7 +1057,7 @@
             <div class="hero-visuals reveal">
                 <div class="hero-card">
                     <div class="featured-video" onclick="openLightbox('1177771656')">
-                        <img src="assets/1177771656.png" alt="Black Venom Showcase">
+                        <img loading="lazy" src="assets/1177771656.png" alt="Black Venom Showcase">
                         <div class="play-btn-huge">
                             <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                         </div>
@@ -1062,16 +1119,17 @@
     <section class="about-section">
         <div class="about-card glass reveal">
             <div class="about-image">
-                <img src="assets/dante.PNG" alt="Dante - Diretor Criativo">
+                <img loading="lazy" src="assets/dante.PNG" alt="Dante - Diretor Criativo">
             </div>
              <div class="about-content">
                 <span class="hero-tag">Cineasta de Adrenalina</span>
                 <h2>Quem Cria <br>Esses Vídeos</h2>
                 <p>Especialista em transformar momentos de pura energia em narrativas cinematográficas que vendem. Surf, festas, esportes, lifestyle — cada projeto é uma oportunidade de criar arte que converte.</p>
-                <div class="about-tags">
+                <div class="about-tags" style="display: flex; gap: 8px; flex-wrap: wrap;">
                     <div class="about-tag">Diretor Criativo</div>
                     <div class="about-tag">Filmmaker</div>
                     <div class="about-tag">Editor</div>
+                    <div class="about-tag">Web Designer</div>
                 </div>
             </div>
         </div>
@@ -1104,6 +1162,33 @@
         </div>
     </section>
 
+    <!-- NOVA SEÇÃO: ARQUITETURA DIGITAL (Mockup Navegador) -->
+    <section class="arquitetura-digital" style="padding: 120px 5%; background: var(--bg); position: relative; z-index: 10;">
+        <div class="section-header">
+            <span class="hero-tag animate-on-scroll" style="display:inline-block">Arquitetura Digital</span>
+            <h2 class="animate-on-scroll">O Padrão <span style="color:var(--accent)">Premium</span></h2>
+            <p class="animate-on-scroll">Construímos ecossistemas da web com o mesmo rigor cinematográfico.</p>
+        </div>
+        <div class="browser-mockup-wrapper animate-on-scroll" style="max-width: 1000px; margin: 0 auto; height: 550px;">
+            <div id="tiltMockup" class="browser-mockup glass" style="width: 100%; height: 100%; position: relative; border-radius: 24px; box-shadow: 0 40px 100px rgba(0,0,0,0.8); overflow: hidden;">
+                <div class="browser-header" style="height: 48px; background: rgba(255,255,255,0.05); display: flex; align-items: center; padding: 0 20px; border-bottom: 1px solid rgba(255,255,255,0.05); transform: translateZ(30px);">
+                    <div style="display: flex; gap: 8px;">
+                        <div class="mac-btn" style="background: #FF5F56; color: #FF5F56;"></div>
+                        <div class="mac-btn" style="background: #FFBD2E; color: #FFBD2E;"></div>
+                        <div class="mac-btn" style="background: #27C93F; color: #27C93F;"></div>
+                    </div>
+                    <div style="flex: 1; text-align: center; color: var(--text-dim); font-size: 0.8rem; letter-spacing: 1px; font-family: 'Outfit', sans-serif;">www.dantednz.com.br</div>
+                </div>
+                <div class="browser-body" style="padding: 0; height: calc(100% - 48px); position: relative; transform: translateZ(10px); overflow: hidden;">
+                    <!-- Scroll Animado -->
+                    <div class="mockup-content" loading="lazy"></div>
+                    <!-- Cursor Animado Fantasma simulando cliques reais -->
+                    <div class="ghost-cursor" style="position: absolute; bottom: 150px; right: 200px; width: 32px; height: 32px; background: rgba(255,255,255,0.25); border: 2px solid rgba(255,255,255,0.6); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-radius: 50%; pointer-events: none; animation: ghostMove 8s infinite ease-in-out; box-shadow: 0 0 15px rgba(255,255,255,0.3); z-index: 10;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- LIGHTBOX -->
     <div id="lightbox" class="lightbox" onclick="closeLightbox()">
         <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
@@ -1114,24 +1199,18 @@
         </div>
     </div>
 
-    <!-- NOVA SEÇÃO: DIGITAL EXPERIENCE -->
-    <section class="web-dev-section" id="web-design" style="padding: 120px 5%; background: var(--bg);">
-        <div class="section-header">
-            <span class="hero-tag">Digital Experience</span>
-            <h2>ALÉM DAS LENTES: ARQUITETURA DIGITAL</h2>
-            <p>Desenvolvemos ecossistemas de alta performance com a mesma técnica e impacto visual do cinema.</p>
-        </div>
-    
-        <div class="metrics-grid">
-            <div class="metric-card" style="transition-delay: 0.1s;">
+    <!-- MTÉTRICAS DE ARQUITETURA DIGITAL -->
+    <section class="web-dev-section" id="web-design" style="padding: 0 5% 120px; background: var(--bg);">
+        <div class="metrics-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+            <div class="metric-card animate-on-scroll" style="transition-delay: 0.1s;">
                 <h3 class="display-font" style="font-size: 1.5rem; margin-bottom: 15px;">Velocidade Brutal</h3>
                 <p style="color: var(--text-dim); font-size: 0.9rem;">Otimização extrema para que sua marca nunca perca o ritmo digital.</p>
             </div>
-            <div class="metric-card" style="transition-delay: 0.2s;">
+            <div class="metric-card animate-on-scroll" style="transition-delay: 0.2s;">
                 <h3 class="display-font" style="font-size: 1.5rem; margin-bottom: 15px;">UI/UX Premium</h3>
                 <p style="color: var(--text-dim); font-size: 0.9rem;">Interfaces imersivas que guiam o usuário através de uma jornada visual única.</p>
             </div>
-            <div class="metric-card" style="transition-delay: 0.3s;">
+            <div class="metric-card animate-on-scroll" style="transition-delay: 0.3s;">
                 <h3 class="display-font" style="font-size: 1.5rem; margin-bottom: 15px;">Foco em Conversão</h3>
                 <p style="color: var(--text-dim); font-size: 0.9rem;">Estratégia digital focada em transformar visitantes em clientes de alto valor.</p>
             </div>
@@ -1155,12 +1234,14 @@
                     <input type="tel" id="whatsapp" placeholder="(00) 00000-0000" required>
                 </div>
                 <div class="form-group">
-                    <label>Objetivo do Vídeo</label>
+                    <label>Objetivo do Projeto</label>
                     <select id="goal" required>
                         <option value="" disabled selected>Selecione um objetivo</option>
-                        <option value="Vendas Diretas">Vendas Diretas / Lançamento</option>
-                        <option value="Branding / Autoridade">Branding / Autoridade</option>
-                        <option value="Treinamento / Educacional">Treinamento / Educacional</option>
+                        <option value="Comercial (Atrair Clientes)">Comercial (Atrair Clientes)</option>
+                        <option value="Institucional (Autoridade da Marca)">Institucional (Autoridade da Marca)</option>
+                        <option value="Cobertura de Evento (Energia & Impacto)">Cobertura de Evento (Energia & Impacto)</option>
+                        <option value="Conteúdo para Redes Sociais">Conteúdo para Redes Sociais</option>
+                        <option value="Desenvolvimento Web / Landing Page">Desenvolvimento Web / Landing Page</option>
                         <option value="Outro">Outro</option>
                     </select>
                 </div>
@@ -1176,7 +1257,7 @@
     <!-- FOOTER -->
     <footer>
         <a href="#" class="footer-logo">
-            <img src="assets/logo.png" alt="Dante Films Logo" class="footer-logo-img">
+            <img loading="lazy" src="assets/logo.png" alt="Dante Films Logo" class="footer-logo-img">
             <div class="footer-logo-text">
                 GABRIEL D. PIMENTEL
                 <span>DANTE FILMS</span>
@@ -1233,7 +1314,7 @@
             const verticalFrame = document.getElementById('verticalVideoFrame');
             const embedUrl = 'https://player.vimeo.com/video/' + verticalVideoId
                 + '?autoplay=0&autopause=0&title=0&byline=0&portrait=0&dnt=1';
-            verticalFrame.innerHTML = '<iframe src="' + embedUrl + '" '
+            verticalFrame.innerHTML = '<iframe loading="lazy" src="' + embedUrl + '" '
                 + 'allow="autoplay; fullscreen; picture-in-picture" '
                 + 'allowfullscreen frameborder="0"></iframe>';
         }
@@ -1283,7 +1364,7 @@
                 + '?autoplay=1&autopause=0&muted=0&title=0&byline=0&portrait=0&dnt=1';
 
             lightboxVideo.innerHTML =
-                '<iframe src="' + embedUrl + '" '
+                '<iframe loading="lazy" src="' + embedUrl + '" '
                 + 'allow="autoplay; fullscreen; picture-in-picture" '
                 + 'allowfullscreen '
                 + 'frameborder="0"></iframe>';
@@ -1322,6 +1403,7 @@
                     if (entry.target.querySelector('.metric-number')) {
                         animateCounters(entry.target);
                     }
+                    revealObserver.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.15 });
@@ -1379,10 +1461,11 @@
             const goal    = document.getElementById('goal').value;
             const message = document.getElementById('message').value.trim();
 
+            let msgType = goal.includes("Web") ? "um projeto de " : "um vídeo para ";
             const text = 'Olá Dante! Me chamo ' + name + '. '
-                + 'Estou interessado em um vídeo para ' + goal + '. '
-                + (message ? 'Mais detalhes: ' + message + ' ' : '')
-                + 'Gostaria de receber o checklist e conversar sobre meu projeto.';
+                + 'Estou buscando ' + msgType + goal + '. '
+                + (message ? '\nMais detalhes: ' + message : '')
+                + '\nPodemos conversar sobre as próximas etapas?';
 
             window.open('https://wa.me/5548998050267?text=' + encodeURIComponent(text), '_blank');
         });
@@ -1417,6 +1500,7 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
                 }
             });
         }, observerOptions);
@@ -1426,6 +1510,63 @@
             el.classList.add('animate-on-scroll');
             observer.observe(el);
         });
+        
+        // Inicializa observador pros elementos novos injetados
+        document.querySelectorAll('.arquitetura-digital .animate-on-scroll').forEach(el => observer.observe(el));
+
+        // 3. Consciência Temporal (Modos Dia/Noite)
+        const currentHour = new Date().getHours();
+        if (currentHour >= 18 || currentHour < 6) {
+            document.body.classList.add('mode-noir');
+        } else {
+            document.body.classList.add('mode-golden');
+        }
+        // 5. Tilt Parallax 3D no Mockup
+        const tiltMockup = document.getElementById('tiltMockup');
+        if (tiltMockup) {
+            document.addEventListener('mousemove', (e) => {
+                const x = (e.clientX / window.innerWidth - 0.5) * 2;
+                const y = (e.clientY / window.innerHeight - 0.5) * 2;
+                // Rotação suave em 3D max +-8 graus
+                tiltMockup.style.transform = `rotateX(${y * -8}deg) rotateY(${x * 8}deg)`;
+            });
+        }
+
+        // 6. Reação de Adrenalina (Mouse Speed Monitoring)
+        let lastTime = Date.now();
+        let lastX = 0, lastY = 0;
+        let adrenalineLevel = 0;
+        let moving = false;
+
+        document.addEventListener('mousemove', (e) => {
+            const now = Date.now();
+            const dt = now - lastTime;
+            if (dt > 0) {
+                const dx = e.clientX - lastX;
+                const dy = e.clientY - lastY;
+                const speed = Math.sqrt(dx * dx + dy * dy) / dt;
+                
+                // Mapeia até limite, de 0.8s (lento) para 0.3s (rápido)
+                adrenalineLevel = Math.min(Math.max(speed / 3, 0), 1); 
+                const animDuration = 0.8 - (adrenalineLevel * 0.5);
+                document.documentElement.style.setProperty('--adren-duration', `${animDuration}s`);
+                moving = true;
+            }
+            lastTime = now;
+            lastX = e.clientX;
+            lastY = e.clientY;
+        });
+
+        // Decaimento de Adrenalina para repouso visual limpo (slow down)
+        setInterval(() => {
+            if (Date.now() - lastTime > 150 && moving) {
+                adrenalineLevel = Math.max(adrenalineLevel - 0.1, 0);
+                const animDuration = 0.8 - (adrenalineLevel * 0.5);
+                document.documentElement.style.setProperty('--adren-duration', `${animDuration}s`);
+                if(adrenalineLevel === 0) moving = false;
+            }
+        }, 50);
+
     });
     </script>
 </body>
