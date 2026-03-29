@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dante - Vídeos Comerciais Premium</title>
+    
+    <!-- DNS Prefetch & Preconnect para aceleração da GPU do Vimeo -->
+    <link rel="preconnect" href="https://player.vimeo.com" crossorigin>
+    <link rel="preconnect" href="https://i.vimeocdn.com" crossorigin>
+    <link rel="preconnect" href="https://f.vimeocdn.com" crossorigin>
+    <link rel="dns-prefetch" href="https://player.vimeo.com">
+    <link rel="dns-prefetch" href="https://i.vimeocdn.com">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
@@ -1568,6 +1576,15 @@
         }, 50);
 
     });
+
+    // 7. Motor de Caching Avançado (Aceleração do Site Repetido)
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('sw.js').catch(err => {
+                // Silencioso caso esteja rodando offline sem servidor HTTPS
+            });
+        });
+    }
     </script>
 </body>
 </html>
