@@ -12,6 +12,1814 @@
     <link rel="dns-prefetch" href="https://player.vimeo.com">
     <link rel="dns-prefetch" href="https://i.vimeocdn.com">
     
+    <!-- Icomoon -->
+    <link rel="stylesheet" href="assets/icon/icomoon/style.css">
+    <link rel="stylesheet" href="assets/css/odometer.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #000000;
+            --surface: #1D1D1F;
+            --glass-bg: rgba(29, 29, 31, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --accent: #FFFFFF;
+            --accent-dim: #86868B;
+            --text-main: #F5F5F7;
+            --text-dim: #A1A1A6;
+            --ease: cubic-bezier(0.4, 0, 0.2, 1);
+            --ease-out: cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: default;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background: #000;
+        }
+
+        body {
+            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text-main);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .display-font {
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+            letter-spacing: -0.02em;
+        }
+
+        /* UTILITIES */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid var(--glass-border);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto 80px;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            line-height: 1.1;
+            margin-bottom: 24px;
+        }
+
+        .section-header p {
+            color: var(--text-dim);
+            font-size: 1.25rem;
+            font-weight: 300;
+        }
+
+        .hero-tag {
+            color: var(--accent-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            display: inline-block;
+        }
+
+        /* HEADER */
+        header {
+            position: fixed;
+            top: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1200px;
+            padding: 14px 32px;
+            z-index: 5000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 100px;
+            transition: all var(--adren-duration, 0.6s) var(--ease);
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+        }
+
+        header.scrolled {
+            top: 16px;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 10px 24px;
+            width: 93%;
+            border-color: rgba(255,255,255,0.12);
+        }
+
+        .logo {
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 5px;
+            color: var(--accent);
+            text-decoration: none;
+            transition: var(--ease);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            line-height: 1.2;
+        }
+
+        .logo-img {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+            transition: transform 0.3s var(--ease);
+        }
+
+        .logo:hover .logo-img {
+            transform: scale(1.1);
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo strong {
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+        }
+
+        .logo span {
+            font-size: 0.6rem;
+            letter-spacing: 7px;
+            color: var(--accent-dim);
+            font-weight: 300;
+        }
+
+        .nav-cta {
+            background: #fff;
+            color: #000;
+            padding: 10px 24px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.8rem;
+            border-radius: 20px;
+            transition: all 0.3s var(--ease-out);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-cta:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255,255,255,0.2);
+        }
+
+        /* HERO */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            padding: 180px 5% 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-bg-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            z-index: -2;
+            object-fit: cover;
+            pointer-events: none;
+        }
+
+        .hero-bg-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .hero-container {
+            max-width: 1300px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .hero-content {
+            z-index: 10;
+        }
+
+        h1 {
+            font-size: clamp(3.2rem, 8vw, 5.5rem);
+            line-height: 1;
+            margin-bottom: 32px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-dim);
+            max-width: 500px;
+            margin-bottom: 48px;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 24px;
+        }
+
+        .btn {
+            padding: 16px 40px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.4s var(--ease);
+            font-size: 1rem;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #000;
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.1);
+            color: var(--accent);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(255,255,255,0.1);
+        }
+
+        /* HERO VISUALS */
+        .hero-visuals {
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero-card {
+            border-radius: 32px;
+            overflow: hidden;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+            transition: transform 0.8s var(--ease-out);
+        }
+
+        .hero-card:hover {
+            transform: scale(1.02) rotateX(2deg) rotateY(-2deg);
+        }
+
+        .featured-video {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #111;
+            cursor: pointer;
+        }
+
+        .featured-video img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+            transition: 1.2s var(--ease-out);
+        }
+
+        .play-btn-huge {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90px;
+            height: 90px;
+            background: rgba(255,255,255,0.25);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.4s var(--ease);
+            pointer-events: none;
+        }
+
+        .play-btn-huge i {
+            font-size: 32px;
+            color: #fff;
+            margin-left: 6px;
+            transition: color 0.4s var(--ease);
+        }
+
+        .featured-video:hover .play-btn-huge {
+            background: #fff;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .featured-video:hover .play-btn-huge i {
+            color: #000;
+        }
+
+        /* METRICS (IMPACT) */
+        .metrics-section {
+            padding: 120px 5%;
+            background: #000;
+        }
+
+        .metrics-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+        }
+
+        .metric-card {
+            padding: 60px 20px;
+            border-radius: 40px;
+            text-align: center;
+            transition: all 0.8s var(--ease-out);
+            border: 1px solid rgba(255,255,255,0.05);
+            position: relative;
+            background: rgba(255,255,255,0.02);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            box-shadow: inset 0 0 20px rgba(255,255,255,0.01);
+        }
+
+        .metric-card:hover {
+            border-color: rgba(255,255,255,0.15);
+            transform: translateY(-12px);
+            background: rgba(255,255,255,0.04);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5), inset 0 0 30px rgba(255,255,255,0.02);
+        }
+
+        .metric-number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            font-family: 'Playfair Display', serif;
+            display: block;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #fff 0%, #888 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 500;
+        }
+
+        /* ABOUT SECTION */
+        .about-section {
+            padding: 200px 5%;
+            background: #000;
+        }
+
+        .about-card {
+            max-width: 1200px;
+            margin: 0 auto;
+            border-radius: 48px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            overflow: hidden;
+        }
+
+        .about-image {
+            position: relative;
+            overflow: hidden;
+            min-height: 500px;
+        }
+
+        .about-image img,
+        .about-image video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1s var(--ease-out);
+        }
+
+        .about-card:hover .about-image img,
+        .about-card:hover .about-image video {
+            transform: scale(1.05);
+        }
+
+        .about-content {
+            padding: 80px 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .about-content h2 {
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            line-height: 1.1;
+            margin-bottom: 24px;
+        }
+
+        .about-content p {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .about-tags {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .about-tag {
+            padding: 8px 20px;
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 100px;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+        }
+
+        /* BENEFITS */
+        .benefits {
+            padding: 120px 5%;
+            background: #000;
+        }
+
+        .benefits-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        /* VERTICAL VIDEO SECTION */
+        .vertical-video-section {
+            padding: 120px 5%;
+            background: linear-gradient(180deg, #000 0%, #1D1D1F 100%);
+        }
+
+        .vertical-video-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 80px;
+        }
+
+        .vertical-video-content {
+            flex: 1;
+            z-index: 10;
+        }
+
+        .vertical-video-content h2 {
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            line-height: 1.1;
+            margin-bottom: 24px;
+        }
+
+        .vertical-video-content p {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 32px;
+            font-weight: 300;
+        }
+
+        .vertical-video-player {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .vertical-video-frame {
+            position: relative;
+            width: 280px;
+            height: 560px;
+            background: #111;
+            border-radius: 32px;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+            transition: all var(--adren-duration, 0.6s) var(--ease-out);
+        }
+
+        .vertical-video-frame:hover {
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-8px);
+            box-shadow: 0 50px 120px rgba(0, 0, 0, 0.8);
+        }
+
+        .vertical-video-frame iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .vertical-play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.4s var(--ease);
+            z-index: 10;
+        }
+
+        .vertical-play-btn:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: translate(-50%, -50%) scale(1.15);
+        }
+
+        .vertical-play-btn svg {
+            width: 28px;
+            fill: #fff;
+            margin-left: 4px;
+        }
+
+        @media (max-width: 968px) {
+            .vertical-video-container {
+                flex-direction: column;
+                gap: 40px;
+                text-align: center;
+            }
+            .vertical-video-content {
+                order: 2;
+            }
+            .vertical-video-player {
+                order: 1;
+            }
+        }
+
+        /* PORTFOLIO */
+        .portfolio {
+            padding: 120px 5%;
+            background: #000;
+        }
+
+        .portfolio-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-auto-rows: 280px;
+            gap: 16px;
+        }
+
+        .portfolio-item {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform var(--adren-duration, 0.6s) var(--ease-out);
+        }
+
+        .portfolio-item.wide {
+            grid-column: span 2;
+        }
+
+        .portfolio-item.tall {
+            grid-row: span 2;
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s var(--ease-out);
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.08);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 60%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 28px;
+            opacity: 0;
+            transition: opacity 0.4s var(--ease);
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .portfolio-overlay p {
+            color: var(--accent-dim);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 6px;
+        }
+
+        .portfolio-overlay h3 {
+            color: #fff;
+            font-size: 1.4rem;
+        }
+
+        /* Play icon overlay on portfolio items */
+        .portfolio-play {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.4s var(--ease);
+            pointer-events: none;
+        }
+
+        .portfolio-play i {
+            font-size: 22px;
+            color: #fff;
+            margin-left: 4px;
+            transition: color 0.4s var(--ease);
+        }
+
+        .portfolio-item:hover .portfolio-play {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        
+        .portfolio-item:hover .portfolio-play i {
+            color: #000;
+        }
+
+        /* FORM SECTION */
+        .form-section {
+            position: relative;
+            padding: 120px 5%;
+            background: #000;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+        }
+
+        .form-bg-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        .form-container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 700px;
+        }
+        
+        .form-container.glass {
+            padding: 60px;
+            background: rgba(29, 29, 31, 0.45) !important;
+            border-radius: 32px;
+            margin: 0 auto;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        @media (max-width: 600px) {
+            .form-container.glass {
+                padding: 40px 24px;
+            }
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-dim);
+            margin-bottom: 10px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 18px 24px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            color: var(--text-main);
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s var(--ease);
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: rgba(255,255,255,0.4);
+        }
+
+        .form-group select option {
+            background: #1D1D1F;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 24px;
+            border-radius: 20px;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        /* LIGHTBOX */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.96);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s var(--ease);
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .lightbox-content {
+            position: relative;
+            width: 90%;
+            max-width: 1000px;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 40px 100px rgba(0,0,0,0.8);
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 */
+            background: #000;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .close-lightbox {
+            position: fixed;
+            top: 24px;
+            right: 32px;
+            font-size: 2.5rem;
+            color: rgba(255,255,255,0.7);
+            cursor: pointer;
+            z-index: 10000;
+            line-height: 1;
+            transition: color 0.3s var(--ease), transform 0.3s var(--ease);
+            user-select: none;
+        }
+
+        .close-lightbox:hover {
+            color: #fff;
+            transform: scale(1.2) rotate(90deg);
+        }
+
+        /* ANIMATIONS */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s var(--ease-out);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 120px 5% 60px;
+            background: #000;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.03);
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 900;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: 4px;
+            margin-bottom: 40px;
+            display: inline-flex;
+            align-items: center;
+            gap: 16px;
+            text-transform: uppercase;
+        }
+
+        .footer-logo-img {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+        }
+
+        .footer-logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-logo span {
+            display: block;
+            font-size: 0.65rem;
+            font-family: 'Outfit';
+            letter-spacing: 8px;
+            color: var(--accent-dim);
+            margin-top: 8px;
+            font-weight: 300;
+        }
+
+        .footer-socials {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-link {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            transition: 0.4s var(--ease);
+            position: relative;
+        }
+
+        .footer-link:after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #fff;
+            transition: 0.4s var(--ease);
+        }
+
+        .footer-link:hover {
+            color: #fff;
+        }
+
+        .footer-link:hover:after {
+            width: 100%;
+        }
+
+        .footer-copy {
+            color: rgba(255,255,255,0.2);
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 968px) {
+            .hero-container { grid-template-columns: 1fr; text-align: center; }
+            .hero-btns { justify-content: center; }
+            .about-card { grid-template-columns: 1fr; }
+            .about-content { padding: 60px 40px; }
+            .about-content h2 { font-size: 3rem; }
+            .metrics-grid { grid-template-columns: 1fr 1fr; }
+            .benefits-grid { grid-template-columns: 1fr; }
+            .portfolio-grid { grid-template-columns: 1fr 1fr; }
+            .portfolio-item.wide { grid-column: span 2; }
+            header { padding: 12px 24px; top: 12px; }
+        }
+
+        @media (max-width: 600px) {
+            .portfolio-grid { grid-template-columns: 1fr; }
+            .portfolio-item.wide { grid-column: span 1; }
+            .portfolio-item.tall { grid-row: span 1; }
+            .metrics-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        /* Glassmorphism Apple Next-Gen (iPhone 16 / MacBook M5) */
+        .glass, .metric-card, .hero-card, .vertical-video-frame, .portfolio-item {
+            background: rgba(29, 29, 31, 0.65) !important;
+            backdrop-filter: blur(40px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(40px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.05) !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.25) !important;
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.4), 
+                inset 0 1px 1px rgba(255, 255, 255, 0.1) !important;
+            border-radius: 24px;
+            overflow: hidden !important; 
+            transform: translateZ(0);
+            transition: all var(--adren-duration, 0.6s) cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        /* Efeito de Hover estilo MacBook */
+        .metric-card:hover, .hero-card:hover {
+            background: rgba(44, 44, 46, 0.8) !important;
+            border-color: rgba(255, 255, 255, 0.15) !important;
+            transform: translateY(-8px) scale(1.01) translateZ(0);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+        }
+        
+        /* Estilos para Animações de Rolagem Globais */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Cursor Magnético Estilo Apple */
+        .custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s ease, height 0.3s ease, background 0.3s ease;
+            backdrop-filter: blur(4px);
+            mix-blend-mode: difference;
+        }
+        
+        .custom-cursor.active {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        @media (pointer: fine) {
+            body, a, button, .metric-card, .btn {
+                cursor: none !important;
+            }
+        }
+
+        /* Consciência Temporal (Modos Dia/Noite) */
+        .mode-noir {
+            --bg: #050505;
+            --surface: #0a0a0c;
+            --glass-bg: rgba(15, 15, 15, 0.8);
+        }
+        .mode-golden {
+            --bg: #0A0908;
+            --surface: #2b2520;
+            --glass-bg: rgba(30, 20, 10, 0.7);
+        }
+        
+        /* Botões do Mockup Mac */
+        .mac-btn {
+            width: 12px; height: 12px; border-radius: 50%; opacity: 0.8; transition: all 0.3s ease; box-shadow: transparent;
+        }
+        .mac-btn:hover {
+            opacity: 1; filter: brightness(1.2); box-shadow: 0 0 8px currentColor;
+        }
+        
+        /* Parallax Container */
+        .browser-mockup-wrapper {
+            perspective: 1200px;
+            transform-style: preserve-3d;
+        }
+        
+        .browser-mockup {
+            transition: transform 0.1s ease-out;
+            transform-style: preserve-3d;
+        }
+
+        /* Scroll Infinito e Conteúdo do Mockup - Removido */
+        
+        /* Ghost Cursor melhorado simulando cliques físicos */
+        @keyframes ghostMove {
+            0% { transform: translate(0, 0) scale(1); opacity: 0.8; }
+            20% { transform: translate(-80px, -120px) scale(1); opacity: 1; }
+            22% { transform: translate(-80px, -120px) scale(0.7); opacity: 1; /* Simula Click */ }
+            24% { transform: translate(-80px, -120px) scale(1); opacity: 1; }
+            50% { transform: translate(120px, -60px) scale(1); opacity: 0.9; }
+            52% { transform: translate(120px, -60px) scale(0.7); opacity: 1; /* Simula Click */ }
+            54% { transform: translate(120px, -60px) scale(1); opacity: 0.9; }
+            80% { transform: translate(30px, 80px) scale(1); opacity: 0.9; }
+            100% { transform: translate(0, 0) scale(1); opacity: 0.8; }
+        }
+        
+        /* Cursor Trail e Ripple Animado */
+        .cursor-trail {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* GSAP & Davies Animation Base Classes */
+        .effectFade { visibility: hidden; opacity: 0; }
+        .fadeUp { transform: translateY(50px); }
+        .fadeDown { transform: translateY(-50px); }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header id="mainHeader">
+        <a href="#" class="logo">
+            <img loading="lazy" src="assets/logo.png" alt="Dante Films Logo" class="logo-img">
+            <div class="logo-text">
+                <strong>GABRIEL D. PIMENTEL</strong>
+                <span>DANTE FILMS</span>
+            </div>
+        </a>
+        <a href="https://wa.me/5548998050267" class="nav-cta">WhatsApp</a>
+    </header>
+
+    <!-- HERO SECTION -->
+    <div id="smooth-wrapper">
+        <div id="smooth-content">
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content reveal">
+                <h1>Transformando <br><span style="color:var(--accent)">Movimento em Arte</span></h1>
+                <p class="hero-subtitle">Adrenalina, técnica de cinema e narrativas de impacto. Cada frame conta a história que sua marca merece.</p>
+                <div class="hero-btns">
+                    <button class="btn btn-primary" style="display:flex; align-items:center; gap:12px;" onclick="document.querySelector('.form-section').scrollIntoView({behavior: 'smooth'})">
+                        Baixar o Blueprint
+                        <i class="icon icon-arrow-long-right"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="hero-visuals reveal">
+                <div class="hero-card">
+                    <div class="featured-video" onclick="openLightbox('1177771656')">
+                        <img loading="lazy" src="assets/1177771656.png" alt="Black Venom Showcase">
+                        <div class="play-btn-huge">
+                            <i class="icon icon-arrow-caret-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- IMPACT METRICS -->
+    <section class="metrics-section">
+        <div class="metrics-grid">
+            <div class="metric-card glass reveal">
+                <span class="metric-number" data-target="1000">0</span>
+                <span class="metric-label">M Visualizações</span>
+            </div>
+            <div class="metric-card glass reveal">
+                <span class="metric-number" data-target="50">0</span>
+                <span class="metric-label">Projetos Premium</span>
+            </div>
+            <div class="metric-card glass reveal">
+                <span class="metric-number" data-target="12">0</span>
+                <span class="metric-label">Países Alcançados</span>
+            </div>
+            <div class="metric-card glass reveal">
+                <span class="metric-number" data-target="100">0</span>
+                <span class="metric-label">% de Satisfação</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY IT WORKS -->
+    <section class="benefits">
+        <div class="section-header reveal">
+            <span class="hero-tag">A Fórmula</span>
+            <h2>Por que nossos vídeos <span style="color:var(--accent); border-bottom: 2px solid var(--accent)">vendem</span></h2>
+            <p>Movimento, luz e emoção. Cada segundo é calculado para converter.</p>
+        </div>
+        <div class="benefits-grid">
+            <div class="metric-card glass reveal" style="text-align: left; padding: 40px; transition-delay: 0.1s;">
+                <span class="icon" style="opacity: 0.08; font-size: 4.5rem; position: absolute; top: -10px; right: 20px;">01</span>
+                <h3 style="font-family: 'Playfair Display'; font-size: 1.8rem; margin-bottom: 15px;">Impacto Visceral</h3>
+                <p style="color: var(--text-dim); line-height: 1.7; font-size: 1rem;">Os primeiros 3 segundos definem tudo. Movimento, luz e som trabalham juntos para prender a atenção.</p>
+            </div>
+            <div class="metric-card glass reveal" style="text-align: left; padding: 40px; transition-delay: 0.3s;">
+                <span class="icon" style="opacity: 0.08; font-size: 4.5rem; position: absolute; top: -10px; right: 20px;">02</span>
+                <h3 style="font-family: 'Playfair Display'; font-size: 1.8rem; margin-bottom: 15px;">Técnica de Cinema</h3>
+                <p style="color: var(--text-dim); line-height: 1.7; font-size: 1rem;">Cada frame é pensado como uma obra de arte. Cores, composição e ritmo elevam sua marca ao patamar de luxo.</p>
+            </div>
+            <div class="metric-card glass reveal" style="text-align: left; padding: 40px; transition-delay: 0.5s;">
+                <span class="icon" style="opacity: 0.08; font-size: 4.5rem; position: absolute; top: -10px; right: 20px;">03</span>
+                <h3 style="font-family: 'Playfair Display'; font-size: 1.8rem; margin-bottom: 15px;">Conversão Garantida</h3>
+                <p style="color: var(--text-dim); line-height: 1.7; font-size: 1rem;">Psicologia visual + storytelling = venda. Cada vídeo é uma máquina de converter espectadores em clientes.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOBRE MIM (BENTO) -->
+    <section class="about-section">
+        <div class="about-card glass reveal">
+            <div class="about-image">
+                <img loading="lazy" src="assets/dante.PNG" alt="Dante - Diretor Criativo">
+            </div>
+             <div class="about-content">
+                <span class="hero-tag">Cineasta de Adrenalina</span>
+                <h2>Quem Cria <br>Esses Vídeos</h2>
+                <p>Especialista em transformar momentos de pura energia em narrativas cinematográficas que vendem. Surf, festas, esportes, lifestyle — cada projeto é uma oportunidade de criar arte que converte.</p>
+                <div class="about-tags" style="display: flex; gap: 8px; flex-wrap: wrap;">
+                    <div class="about-tag">Diretor Criativo</div>
+                    <div class="about-tag">Filmmaker</div>
+                    <div class="about-tag">Editor</div>
+                    <div class="about-tag">Web Designer</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section class="portfolio">
+        <div class="section-header">
+            <span class="hero-tag">Portfólio</span>
+            <h2>Obras <span style="color:var(--accent)">Recentes</span></h2>
+        </div>
+        <div class="portfolio-grid" id="portfolioGrid">
+            <!-- Items injetados via JS -->
+        </div>
+    </section>
+
+    <!-- VERTICAL VIDEO SECTION -->
+    <section class="vertical-video-section">
+        <div class="vertical-video-container">
+            <div class="vertical-video-content reveal">
+                <span class="hero-tag">Social Impact</span>
+                <h2>Energia de <span style="color:var(--accent)">Festa</span></h2>
+                <p>Quando o vídeo é vertical, a energia é horizontal. Veja como transformamos momentos de pura adrenalina em conteúdo que domina as redes sociais e converte em vendas.</p>
+            </div>
+            <div class="vertical-video-player reveal">
+                <div class="vertical-video-frame" id="verticalVideoFrame">
+                    <!-- Iframe injetado via JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NOVA SEÇÃO: ARQUITETURA DIGITAL (Mockup Navegador) -->
+    <section class="arquitetura-digital" style="padding: 120px 5%; background: var(--bg); position: relative; z-index: 10;">
+        <div class="section-header">
+            <span class="hero-tag animate-on-scroll" style="display:inline-block">Arquitetura Digital</span>
+            <h2 class="animate-on-scroll">O Padrão <span style="color:var(--accent)">Premium</span></h2>
+            <p class="animate-on-scroll">Construímos ecossistemas da web com o mesmo rigor cinematográfico.</p>
+        </div>
+        <div class="browser-mockup-wrapper animate-on-scroll" style="max-width: 1000px; margin: 0 auto; height: 550px;">
+            <div id="tiltMockup" class="browser-mockup glass" style="width: 100%; height: 100%; position: relative; border-radius: 24px; box-shadow: 0 40px 100px rgba(0,0,0,0.8); overflow: hidden;">
+                <div class="browser-header" style="height: 48px; background: rgba(255,255,255,0.05); display: flex; align-items: center; padding: 0 20px; border-bottom: 1px solid rgba(255,255,255,0.05); transform: translateZ(30px);">
+                    <div style="display: flex; gap: 8px;">
+                        <div class="mac-btn" style="background: #FF5F56; color: #FF5F56;"></div>
+                        <div class="mac-btn" style="background: #FFBD2E; color: #FFBD2E;"></div>
+                        <div class="mac-btn" style="background: #27C93F; color: #27C93F;"></div>
+                    </div>
+                    <div style="flex: 1; text-align: center; color: var(--text-dim); font-size: 0.8rem; letter-spacing: 1px; font-family: 'Outfit', sans-serif;">www.dantednz.com.br</div>
+                </div>
+                <div class="browser-body" style="padding: 0; height: calc(100% - 48px); position: relative; transform: translateZ(10px); overflow: hidden;">
+                    <!-- Vídeo Davies (Web Designer Flow) -->
+                    <video autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover; position: absolute; top:0; left:0; pointer-events: none;">
+                        <source src="assets/video/nexbot.mp4" type="video/mp4">
+                    </video>
+                    <!-- Cursor Animado Fantasma simulando cliques reais -->
+                    <div class="ghost-cursor" style="position: absolute; bottom: 150px; right: 200px; width: 32px; height: 32px; background: rgba(255,255,255,0.25); border: 2px solid rgba(255,255,255,0.6); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-radius: 50%; pointer-events: none; animation: ghostMove 8s infinite ease-in-out; box-shadow: 0 0 15px rgba(255,255,255,0.3); z-index: 10;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LIGHTBOX Movido para fora do Wrapper GSAP -->
+
+    <!-- MTÉTRICAS DE ARQUITETURA DIGITAL -->
+    <section class="web-dev-section" id="web-design" style="padding: 0 5% 120px; background: var(--bg);">
+        <div class="metrics-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+            <div class="metric-card animate-on-scroll" style="transition-delay: 0.1s;">
+                <h3 class="display-font" style="font-size: 1.5rem; margin-bottom: 15px;">Velocidade Brutal</h3>
+                <p style="color: var(--text-dim); font-size: 0.9rem;">Otimização extrema para que sua marca nunca perca o ritmo digital.</p>
+            </div>
+            <div class="metric-card animate-on-scroll" style="transition-delay: 0.2s;">
+                <h3 class="display-font" style="font-size: 1.5rem; margin-bottom: 15px;">UI/UX Premium</h3>
+                <p style="color: var(--text-dim); font-size: 0.9rem;">Interfaces imersivas que guiam o usuário através de uma jornada visual única.</p>
+            </div>
+            <div class="metric-card animate-on-scroll" style="transition-delay: 0.3s;">
+                <h3 class="display-font" style="font-size: 1.5rem; margin-bottom: 15px;">Foco em Conversão</h3>
+                <p style="color: var(--text-dim); font-size: 0.9rem;">Estratégia digital focada em transformar visitantes em clientes de alto valor.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FORMULÁRIO -->
+    <section class="form-section">
+        <video class="form-bg-video" autoplay loop muted playsinline>
+            <source src="assets/video/wave-bg.mp4" type="video/mp4">
+        </video>
+        <div class="form-container glass">
+            <div class="section-header">
+                <span class="hero-tag">Contato</span>
+                <h2>Inicie seu <span style="color:var(--accent)">Projeto</span></h2>
+            </div>
+            <form id="leadForm">
+                <div class="form-group">
+                    <label>Seu Nome</label>
+                    <input type="text" id="name" placeholder="Como podemos te chamar?" required>
+                </div>
+                <div class="form-group">
+                    <label>WhatsApp</label>
+                    <input type="tel" id="whatsapp" placeholder="(00) 00000-0000" required>
+                </div>
+                <div class="form-group">
+                    <label>Objetivo do Projeto</label>
+                    <select id="goal" required>
+                        <option value="" disabled selected>Selecione um objetivo</option>
+                        <option value="Comercial (Atrair Clientes)">Comercial (Atrair Clientes)</option>
+                        <option value="Institucional (Autoridade da Marca)">Institucional (Autoridade da Marca)</option>
+                        <option value="Cobertura de Evento (Energia & Impacto)">Cobertura de Evento (Energia & Impacto)</option>
+                        <option value="Conteúdo para Redes Sociais">Conteúdo para Redes Sociais</option>
+                        <option value="Desenvolvimento Web / Landing Page">Desenvolvimento Web / Landing Page</option>
+                        <option value="Outro">Outro</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Sobre o Projeto</label>
+                    <textarea id="message" placeholder="Conte-nos brevemente sobre sua ideia..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary form-submit">
+                    ENVIAR PARA O WHATSAPP
+                    <i class="icon icon-arrow-long-right"></i>
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <a href="#" class="footer-logo">
+            <img loading="lazy" src="assets/logo.png" alt="Dante Films Logo" class="footer-logo-img">
+            <div class="footer-logo-text">
+                GABRIEL D. PIMENTEL
+                <span>DANTE FILMS</span>
+            </div>
+        </a>
+        <div class="footer-socials">
+            <a href="https://instagram.com/dantednz" class="footer-link">Instagram</a>
+            <a href="https://wa.me/5548998050267" class="footer-link">WhatsApp</a>
+            <a href="https://vimeo.com/dantednz" class="footer-link">Vimeo</a>
+        </div>
+        <p class="footer-copy">© <span id="year"></span> DANTE. Todos os direitos reservados.</p>
+    </footer>
+
+
+
+        </div> <!-- /smooth-content -->
+    </div> <!-- /smooth-wrapper -->
+
+    <!-- LIGHTBOX PRESENTE FORA DO SMOOTH WRAPPER (Posição Fixed) -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
+        <div class="lightbox-content" onclick="event.stopPropagation()">
+            <div class="video-container" id="lightboxVideo">
+                <!-- Iframe injetado aqui -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Davies JS Globals -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/gsap.min.js"></script>
+    <script src="assets/js/ScrollTrigger.min.js"></script>
+    <script src="assets/js/SplitText.min.js"></script>
+    <script src="assets/js/ScrollSmoother.min.js"></script>
+    <!-- Plugins Extras -->
+    <script src="assets/js/infinityslide.js"></script>
+    <script src="assets/js/odometer.min.js"></script>
+    <!-- Script Customizado do Lab Local -->
+    <script>
+        $(window).on("load", function() {
+            // Inicializar Inércia de Scroll Cinematic
+            if(typeof ScrollSmoother !== 'undefined' && $("#smooth-wrapper").length) {
+                ScrollSmoother.create({
+                    wrapper: '#smooth-wrapper',
+                    content: '#smooth-content',
+                    smooth: 1.5,
+                    effects: true
+                });
+            }
+
+            // Inicializar Marquee Davies
+            if($('.infinity-slide').length) {
+                $('.infinity-slide').infiniteslide({
+                    speed: 50,
+                    direction: 'left'
+                });
+            }
+            
+            // Inicializar Odometer e Animations
+            setTimeout(function(){
+                $('.odometer').each(function(){
+                    let val = $(this).data('count');
+                    $(this).html(val);
+                });
+                
+                // Inicializador Local do GSAP EffectFade
+                gsap.registerPlugin(ScrollTrigger);
+                $(".effectFade").each(function(){
+                    gsap.to(this, {
+                        autoAlpha: 1,
+                        y: 0,
+                        duration: 1.2,
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: this,
+                            start: "top 80%",
+                            toggleActions: "play none none reverse"
+                        }
+                    });
+                });
+            }, 500);
+        });
+    </script>
+
+    <script>
+        // =============================================
+        // PORTFOLIO DATA
+        // Para adicionar/editar vídeos, altere apenas este array.
+        // - vimeoId: ID numérico do vídeo no Vimeo
+        // - thumb: caminho local do thumbnail (ex: "assets/1234567890.png")
+        // - class: "wide" (ocupa 2 colunas) | "tall" (ocupa 2 linhas) | "" (padrão)
+        // =============================================
+        const portfolioData = [
+            {
+                title: "Black Venom - HD Inline",
+                category: "Esportes",
+                vimeoId: "1177779611",
+                thumb: "assets/1177779611.png",
+                class: "wide"
+            },
+            {
+                title: "But Definitely (teaser)",
+                category: "Esportes / Surf film",
+                vimeoId: "1177775878",
+                thumb: "assets/1177775878.png",
+                class: ""
+            },
+            {
+                title: "JOTAPÊ - SURFBOARDS",
+                category: "Manuscraftig",
+                vimeoId: "1177774829",
+                thumb: "assets/1177774829.png",
+                class: ""
+            },
+
+        ];
+
+        // =============================================
+        // VERTICAL VIDEO (FESTA)
+        // Altere o vimeoId abaixo para o ID do seu vídeo de festa
+        // =============================================
+        const verticalVideoId = '1177798436'; // Video de Festa - Social Impact
+
+        if (verticalVideoId) {
+            const verticalFrame = document.getElementById('verticalVideoFrame');
+            const embedUrl = 'https://player.vimeo.com/video/' + verticalVideoId
+                + '?autoplay=0&autopause=0&title=0&byline=0&portrait=0&dnt=1';
+            verticalFrame.innerHTML = '<iframe loading="lazy" src="' + embedUrl + '" '
+                + 'allow="autoplay; fullscreen; picture-in-picture" '
+                + 'allowfullscreen frameborder="0"></iframe>';
+        }
+
+        // =============================================
+        // RENDER PORTFOLIO
+        // =============================================
+        const grid = document.getElementById('portfolioGrid');
+
+        portfolioData.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'portfolio-item' + (item.class ? ' ' + item.class : '');
+
+            div.innerHTML = `
+                <img src="${item.thumb}" alt="${item.title}" loading="lazy">
+                <div class="portfolio-play">
+                    <i class="icon icon-arrow-caret-right"></i>
+                </div>
+                <div class="portfolio-overlay">
+                    <p>${item.category}</p>
+                    <h3>${item.title}</h3>
+                </div>
+            `;
+
+            // Só abre lightbox se tiver vimeoId
+            if (item.vimeoId) {
+                div.style.cursor = 'pointer';
+                div.addEventListener('click', function () {
+                    openLightbox(item.vimeoId);
+                });
+            }
+
+            grid.appendChild(div);
+        });
+
+        // =============================================
+        // LIGHTBOX — Vimeo Player
+        // =============================================
+        const lightbox = document.getElementById('lightbox');
+        const lightboxVideo = document.getElementById('lightboxVideo');
+
+        function openLightbox(vimeoId) {
+            if (!vimeoId) return;
+
+            // Monta URL do player Vimeo com autoplay, muted e dnt
+            const embedUrl = 'https://player.vimeo.com/video/' + vimeoId
+                + '?autoplay=1&autopause=0&muted=0&title=0&byline=0&portrait=0&dnt=1';
+
+            lightboxVideo.innerHTML =
+                '<iframe loading="lazy" src="' + embedUrl + '" '
+                + 'allow="autoplay; fullscreen; picture-in-picture" '
+                + 'allowfullscreen '
+                + 'frameborder="0"></iframe>';
+
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            // Remove o iframe para parar o vídeo completamente
+            lightboxVideo.innerHTML = '';
+            document.body.style.overflow = '';
+        }
+
+        // Fechar com tecla ESC
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') closeLightbox();
+        });
+
+        // =============================================
+        // HEADER SCROLL
+        // =============================================
+        window.addEventListener('scroll', function () {
+            const header = document.getElementById('mainHeader');
+            header.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // =============================================
+        // INTERSECTION OBSERVER (reveal + counters)
+        // =============================================
+        const revealObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    if (entry.target.querySelector('.metric-number')) {
+                        animateCounters(entry.target);
+                    }
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.reveal').forEach(function (el) {
+            revealObserver.observe(el);
+        });
+
+        // =============================================
+        // COUNTER ANIMATION
+        // =============================================
+        function animateCounters(parent) {
+            const counter = parent.querySelector('.metric-number');
+            if (!counter || counter.dataset.animated) return;
+
+            const target = parseInt(counter.dataset.target, 10);
+            const duration = 2000;
+            const startTime = performance.now();
+
+            function update(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const currentCount = Math.floor(progress * target);
+
+                if (target >= 1000) {
+                    counter.textContent = currentCount + 'M+';
+                } else if (target === 100) {
+                    counter.textContent = currentCount + '%';
+                } else if (target === 50) {
+                    counter.textContent = currentCount + '+';
+                } else {
+                    counter.textContent = currentCount;
+                }
+
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                } else {
+                    if (target >= 1000) counter.textContent = '1M+';
+                    else if (target === 100) counter.textContent = '100%';
+                    else if (target === 50) counter.textContent = '50+';
+                    else counter.textContent = target;
+                    counter.dataset.animated = 'true';
+                }
+            }
+            requestAnimationFrame(update);
+        }
+
+        // =============================================
+        // FORM — WhatsApp
+        // =============================================
+        document.getElementById('leadForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const name    = document.getElementById('name').value.trim();
+            const phone   = document.getElementById('whatsapp').value.trim();
+            const goal    = document.getElementById('goal').value;
+            const message = document.getElementById('message').value.trim();
+
+            let msgType = goal.includes("Web") ? "um projeto de " : "um vídeo para ";
+            const text = 'Olá Dante! Me chamo ' + name + '. '
+                + 'Estou buscando ' + msgType + goal + '. '
+                + (message ? '\nMais detalhes: ' + message : '')
+                + '\nPodemos conversar sobre as próximas etapas?';
+
+            window.open('https://wa.me/5548998050267?text=' + encodeURIComponent(text), '_blank');
+        });
+
+        // =============================================
+        // MISC
+        // =============================================
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // 1. Cursor Magnético
+        const cursor = document.createElement('div');
+        cursor.className = 'custom-cursor';
+        document.body.appendChild(cursor);
+    
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+    
+        const interactiveElements = document.querySelectorAll('a, button, .metric-card, .btn, .hero-card');
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('active'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
+        });
+    
+        // 2. Scroll Reveal Global (Intersection Observer)
+        const observerOptions = { threshold: 0.15 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+    
+        // Seleciona todos os elementos de conteúdo para animar
+        document.querySelectorAll('h1, h2, h3, p, .metric-card, .hero-card, .section-header, .hero-tag').forEach(el => {
+            el.classList.add('animate-on-scroll');
+            observer.observe(el);
+        });
+        
+        // Inicializa observador pros elementos novos injetados
+        document.querySelectorAll('.arquitetura-digital .animate-on-scroll').forEach(el => observer.observe(el));
+
+        // 3. Consciência Temporal (Modos Dia/Noite)
+        const currentHour = new Date().getHours();
+        if (currentHour >= 18 || currentHour < 6) {
+            document.body.classList.add('mode-noir');
+        } else {
+            document.body.classList.add('mode-golden');
+        }
+        // 5. Tilt Parallax 3D no Mockup
+        const tiltMockup = document.getElementById('tiltMockup');
+        if (tiltMockup) {
+            document.addEventListener('mousemove', (e) => {
+                const x = (e.clientX / window.innerWidth - 0.5) * 2;
+                const y = (e.clientY / window.innerHeight - 0.5) * 2;
+                // Rotação suave em 3D max +-8 graus
+                tiltMockup.style.transform = `rotateX(${y * -8}deg) rotateY(${x * 8}deg)`;
+            });
+        }
+
+        // 6. Reação de Adrenalina (Mouse Speed Monitoring)
+        let lastTime = Date.now();
+        let lastX = 0, lastY = 0;
+        let adrenalineLevel = 0;
+        let moving = false;
+
+        document.addEventListener('mousemove', (e) => {
+            const now = Date.now();
+            const dt = now - lastTime;
+            if (dt > 0) {
+                const dx = e.clientX - lastX;
+                const dy = e.clientY - lastY;
+                const speed = Math.sqrt(dx * dx + dy * dy) / dt;
+                
+                // Mapeia até limite, de 0.8s (lento) para 0.3s (rápido)
+                adrenalineLevel = Math.min(Math.max(speed / 3, 0), 1); 
+                const animDuration = 0.8 - (adrenalineLevel * 0.5);
+                document.documentElement.style.setProperty('--adren-duration', `${animDuration}s`);
+                moving = true;
+            }
+            lastTime = now;
+            lastX = e.clientX;
+            lastY = e.clientY;
+        });
+
+        // Decaimento de Adrenalina para repouso visual limpo (slow down)
+        setInterval(() => {
+            if (Date.now() - lastTime > 150 && moving) {
+                adrenalineLevel = Math.max(adrenalineLevel - 0.1, 0);
+                const animDuration = 0.8 - (adrenalineLevel * 0.5);
+                document.documentElement.style.setProperty('--adren-duration', `${animDuration}s`);
+                if(adrenalineLevel === 0) moving = false;
+            }
+        }, 50);
+
+    });
+
+    // 7. Motor de Caching Avançado (Aceleração do Site Repetido)
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('sw.js').catch(err => {
+                // Silencioso caso esteja rodando offline sem servidor HTTPS
+            });
+        });
+    }
+    </script>
+
+    <!-- Cursor Trail Interativo -->
+    <canvas class="cursor-trail" id="trail"></canvas>
+    <script>
+        const canvasTrail = document.getElementById("trail");
+        const ctxTrail = canvasTrail.getContext("2d");
+        let wTrail = window.innerWidth;
+        let hTrail = window.innerHeight;
+        canvasTrail.width = wTrail;
+        canvasTrail.height = hTrail;
+        
+        let pointsTrail = [];
+        let ripplesTrail = [];
+        
+        window.addEventListener("resize", () => {
+            wTrail = window.innerWidth;
+            hTrail = window.innerHeight;
+            canvasTrail.width = wTrail;
+            canvasTrail.height = hTrail;
+        });
+        
+        window.addEventListener("mousemove", (e) => {
+            pointsTrail.push({ x: e.clientX, y: e.clientY });
+            if (pointsTrail.length > 10) pointsTrail.shift();
+        });
+        
+        window.addEventListener("click", (e) => {
+            ripplesTrail.push({
+                x: e.clientX,
+                y: e.clientY,
+                radius: 0,
+                alpha: 1,
+            });
+        });
+        
+        function drawTrail() {
+            ctxTrail.clearRect(0, 0, wTrail, hTrail);
+            
+            // Rastro gradiente premium (Cinza para Branco)
+            if (pointsTrail.length > 1) {
+                ctxTrail.beginPath();
+                ctxTrail.moveTo(pointsTrail[0].x, pointsTrail[0].y);
+                for (let i = 1; i < pointsTrail.length; i++) {
+                    ctxTrail.lineTo(pointsTrail[i].x, pointsTrail[i].y);
+                }
+                let last = pointsTrail[pointsTrail.length - 1];
+                let grad = ctxTrail.createLinearGradient(pointsTrail[0].x, pointsTrail[0].y, last.x, last.y);
+                grad.addColorStop(0, "rgba(161, 161, 166, 0)"); // var(--text-dim)
+                grad.addColorStop(1, "rgba(255, 255, 255, 0.5)"); // var(--accent)
+                ctxTrail.strokeStyle = grad;
+                ctxTrail.lineWidth = 3;
+                ctxTrail.lineCap = "round";
+                ctxTrail.stroke();
+            }
+            
+            // Ondas ao clicar (Ripple)
+            ripplesTrail.forEach((r, i) => {
+                ctxTrail.beginPath();
+                ctxTrail.arc(r.x, r.y, r.radius, 0, Math.PI * 2);
+                ctxTrail.strokeStyle = `rgba(255, 255, 255, ${r.alpha})`;
+                ctxTrail.lineWidth = 1.5 + (r.alpha * 2);
+                ctxTrail.stroke();
+                r.radius += 2.5;
+                r.alpha -= 0.035;
+            });
+            ripplesTrail = ripplesTrail.filter((r) => r.alpha > 0);
+            
+            requestAnimationFrame(drawTrail);
+        }
+        
+        // Inicia apenas em telas não-touch (Desktop)
+        if (window.matchMedia("(hover: hover)").matches) {
+            drawTrail();
+        } else {
+            canvasTrail.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dante - Vídeos Comerciais Premium</title>
+    
+    <!-- DNS Prefetch & Preconnect para aceleração da GPU do Vimeo -->
+    <link rel="preconnect" href="https://player.vimeo.com" crossorigin>
+    <link rel="preconnect" href="https://i.vimeocdn.com" crossorigin>
+    <link rel="preconnect" href="https://f.vimeocdn.com" crossorigin>
+    <link rel="dns-prefetch" href="https://player.vimeo.com">
+    <link rel="dns-prefetch" href="https://i.vimeocdn.com">
+    
     <!-- Icomoon (Davies) -->
     <link rel="stylesheet" href="assets/icon/icomoon/style.css">
     <link rel="stylesheet" href="assets/css/odometer.min.css">
@@ -711,17 +2519,14 @@
 
         .form-bg-video {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            transform: translate(-50%, -50%);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
             z-index: 0;
             pointer-events: none;
             opacity: 0.6;
-            object-fit: cover;
         }
 
         .form-container {
