@@ -12,6 +12,9 @@
     <link rel="dns-prefetch" href="https://player.vimeo.com">
     <link rel="dns-prefetch" href="https://i.vimeocdn.com">
     
+    <!-- Icomoon (Davies) -->
+    <link rel="stylesheet" href="assets/icon/icomoon/style.css">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
@@ -191,11 +194,26 @@
             overflow: hidden;
         }
 
-        .hero-bg {
+        .hero-bg-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            z-index: -2;
+            object-fit: cover;
+            pointer-events: none;
+        }
+
+        .hero-bg-overlay {
             position: absolute;
             inset: 0;
-            background: radial-gradient(circle at top right, #1D1D1F 0%, #000000 70%);
+            background: rgba(0,0,0,0.7);
             z-index: -1;
+            pointer-events: none;
         }
 
         .hero-container {
@@ -309,10 +327,11 @@
             pointer-events: none;
         }
 
-        .play-btn-huge svg {
-            width: 32px;
-            fill: #fff;
+        .play-btn-huge i {
+            font-size: 32px;
+            color: #fff;
             margin-left: 6px;
+            transition: color 0.4s var(--ease);
         }
 
         .featured-video:hover .play-btn-huge {
@@ -320,8 +339,8 @@
             transform: translate(-50%, -50%) scale(1.1);
         }
 
-        .featured-video:hover .play-btn-huge svg {
-            fill: #000;
+        .featured-video:hover .play-btn-huge i {
+            color: #000;
         }
 
         /* METRICS (IMPACT) */
@@ -399,14 +418,16 @@
             min-height: 500px;
         }
 
-        .about-image img {
+        .about-image img,
+        .about-image video {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 1s var(--ease-out);
         }
 
-        .about-card:hover .about-image img {
+        .about-card:hover .about-image img,
+        .about-card:hover .about-image video {
             transform: scale(1.05);
         }
 
@@ -661,26 +682,65 @@
             pointer-events: none;
         }
 
-        .portfolio-play svg {
-            width: 22px;
-            fill: #fff;
+        .portfolio-play i {
+            font-size: 22px;
+            color: #fff;
             margin-left: 4px;
+            transition: color 0.4s var(--ease);
         }
 
         .portfolio-item:hover .portfolio-play {
             opacity: 1;
             transform: translate(-50%, -50%) scale(1);
         }
+        
+        .portfolio-item:hover .portfolio-play i {
+            color: #000;
+        }
 
         /* FORM SECTION */
         .form-section {
+            position: relative;
             padding: 120px 5%;
             background: #000;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+        }
+
+        .form-bg-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.6;
+            object-fit: cover;
         }
 
         .form-container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
             max-width: 700px;
+        }
+        
+        .form-container.glass {
+            padding: 60px;
+            background: rgba(29, 29, 31, 0.45) !important;
+            border-radius: 32px;
             margin: 0 auto;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        @media (max-width: 600px) {
+            .form-container.glass {
+                padding: 40px 24px;
+            }
         }
 
         .form-group {
@@ -735,6 +795,10 @@
             letter-spacing: 2px;
             font-weight: 700;
             margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
         }
 
         /* LIGHTBOX */
@@ -1011,18 +1075,7 @@
             transform-style: preserve-3d;
         }
 
-        /* Scroll Infinito e Conteúdo do Mockup */
-        .mockup-content {
-            width: 100%; height: 300%; 
-            background: url('assets/mockup_apple_pro_dante.PNG') top center/cover no-repeat;
-            animation: scrollMockup 20s linear infinite alternate;
-            will-change: transform;
-        }
-
-        @keyframes scrollMockup {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-66.6%); }
-        }
+        /* Scroll Infinito e Conteúdo do Mockup - Removido */
         
         /* Ghost Cursor melhorado simulando cliques físicos */
         @keyframes ghostMove {
@@ -1053,13 +1106,19 @@
 
     <!-- HERO SECTION -->
     <section class="hero">
-        <div class="hero-bg"></div>
+        <video class="hero-bg-video" autoplay loop muted playsinline>
+            <source src="assets/video/corridor.webm" type="video/webm">
+        </video>
+        <div class="hero-bg-overlay"></div>
         <div class="hero-container">
             <div class="hero-content reveal">
                 <h1>Transformando <br><span style="color:var(--accent)">Movimento em Arte</span></h1>
                 <p class="hero-subtitle">Adrenalina, técnica de cinema e narrativas de impacto. Cada frame conta a história que sua marca merece.</p>
                 <div class="hero-btns">
-                    <button class="btn btn-primary" onclick="document.querySelector('.form-section').scrollIntoView({behavior: 'smooth'})">Baixar o Blueprint</button>
+                    <button class="btn btn-primary" style="display:flex; align-items:center; gap:12px;" onclick="document.querySelector('.form-section').scrollIntoView({behavior: 'smooth'})">
+                        Baixar o Blueprint
+                        <i class="icon icon-arrow-long-right"></i>
+                    </button>
                 </div>
             </div>
             <div class="hero-visuals reveal">
@@ -1067,7 +1126,7 @@
                     <div class="featured-video" onclick="openLightbox('1177771656')">
                         <img loading="lazy" src="assets/1177771656.png" alt="Black Venom Showcase">
                         <div class="play-btn-huge">
-                            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            <i class="icon icon-arrow-caret-right"></i>
                         </div>
                     </div>
                 </div>
@@ -1188,8 +1247,10 @@
                     <div style="flex: 1; text-align: center; color: var(--text-dim); font-size: 0.8rem; letter-spacing: 1px; font-family: 'Outfit', sans-serif;">www.dantednz.com.br</div>
                 </div>
                 <div class="browser-body" style="padding: 0; height: calc(100% - 48px); position: relative; transform: translateZ(10px); overflow: hidden;">
-                    <!-- Scroll Animado -->
-                    <div class="mockup-content" loading="lazy"></div>
+                    <!-- Vídeo Davies (Web Designer Flow) -->
+                    <video autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover; position: absolute; top:0; left:0; pointer-events: none;">
+                        <source src="assets/video/nexbot.mp4" type="video/mp4">
+                    </video>
                     <!-- Cursor Animado Fantasma simulando cliques reais -->
                     <div class="ghost-cursor" style="position: absolute; bottom: 150px; right: 200px; width: 32px; height: 32px; background: rgba(255,255,255,0.25); border: 2px solid rgba(255,255,255,0.6); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-radius: 50%; pointer-events: none; animation: ghostMove 8s infinite ease-in-out; box-shadow: 0 0 15px rgba(255,255,255,0.3); z-index: 10;"></div>
                 </div>
@@ -1227,7 +1288,10 @@
 
     <!-- FORMULÁRIO -->
     <section class="form-section">
-        <div class="form-container">
+        <video class="form-bg-video" autoplay loop muted playsinline>
+            <source src="assets/video/wave-bg.mp4" type="video/mp4">
+        </video>
+        <div class="form-container glass">
             <div class="section-header">
                 <span class="hero-tag">Contato</span>
                 <h2>Inicie seu <span style="color:var(--accent)">Projeto</span></h2>
@@ -1257,7 +1321,10 @@
                     <label>Sobre o Projeto</label>
                     <textarea id="message" placeholder="Conte-nos brevemente sobre sua ideia..."></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary form-submit">ENVIAR PARA O WHATSAPP</button>
+                <button type="submit" class="btn btn-primary form-submit">
+                    ENVIAR PARA O WHATSAPP
+                    <i class="icon icon-arrow-long-right"></i>
+                </button>
             </form>
         </div>
     </section>
@@ -1339,7 +1406,7 @@
             div.innerHTML = `
                 <img src="${item.thumb}" alt="${item.title}" loading="lazy">
                 <div class="portfolio-play">
-                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    <i class="icon icon-arrow-caret-right"></i>
                 </div>
                 <div class="portfolio-overlay">
                     <p>${item.category}</p>
