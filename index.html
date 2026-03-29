@@ -14,6 +14,7 @@
     
     <!-- Icomoon (Davies) -->
     <link rel="stylesheet" href="assets/icon/icomoon/style.css">
+    <link rel="stylesheet" href="assets/css/odometer.min.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1089,6 +1090,21 @@
             80% { transform: translate(30px, 80px) scale(1); opacity: 0.9; }
             100% { transform: translate(0, 0) scale(1); opacity: 0.8; }
         }
+        
+        /* Cursor Trail e Ripple Animado */
+        .cursor-trail {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* GSAP & Davies Animation Base Classes */
+        .effectFade { visibility: hidden; opacity: 0; }
+        .fadeUp { transform: translateY(50px); }
+        .fadeDown { transform: translateY(-50px); }
     </style>
 </head>
 <body>
@@ -1105,11 +1121,9 @@
     </header>
 
     <!-- HERO SECTION -->
+    <div id="smooth-wrapper">
+        <div id="smooth-content">
     <section class="hero">
-        <video class="hero-bg-video" autoplay loop muted playsinline>
-            <source src="assets/video/corridor.webm" type="video/webm">
-        </video>
-        <div class="hero-bg-overlay"></div>
         <div class="hero-container">
             <div class="hero-content reveal">
                 <h1>Transformando <br><span style="color:var(--accent)">Movimento em Arte</span></h1>
@@ -1258,15 +1272,7 @@
         </div>
     </section>
 
-    <!-- LIGHTBOX -->
-    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-        <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
-        <div class="lightbox-content" onclick="event.stopPropagation()">
-            <div class="video-container" id="lightboxVideo">
-                <!-- Iframe injetado aqui -->
-            </div>
-        </div>
-    </div>
+    <!-- LIGHTBOX Movido para fora do Wrapper GSAP -->
 
     <!-- MTÉTRICAS DE ARQUITETURA DIGITAL -->
     <section class="web-dev-section" id="web-design" style="padding: 0 5% 120px; background: var(--bg);">
@@ -1345,6 +1351,77 @@
         </div>
         <p class="footer-copy">© <span id="year"></span> DANTE. Todos os direitos reservados.</p>
     </footer>
+
+
+
+        </div> <!-- /smooth-content -->
+    </div> <!-- /smooth-wrapper -->
+
+    <!-- LIGHTBOX PRESENTE FORA DO SMOOTH WRAPPER (Posição Fixed) -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
+        <div class="lightbox-content" onclick="event.stopPropagation()">
+            <div class="video-container" id="lightboxVideo">
+                <!-- Iframe injetado aqui -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Davies JS Globals -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/gsap.min.js"></script>
+    <script src="assets/js/ScrollTrigger.min.js"></script>
+    <script src="assets/js/SplitText.min.js"></script>
+    <script src="assets/js/ScrollSmoother.min.js"></script>
+    <!-- Plugins Extras -->
+    <script src="assets/js/infinityslide.js"></script>
+    <script src="assets/js/odometer.min.js"></script>
+    <!-- Script Customizado do Lab Local -->
+    <script>
+        $(window).on("load", function() {
+            // Inicializar Inércia de Scroll Cinematic
+            if(typeof ScrollSmoother !== 'undefined' && $("#smooth-wrapper").length) {
+                ScrollSmoother.create({
+                    wrapper: '#smooth-wrapper',
+                    content: '#smooth-content',
+                    smooth: 1.5,
+                    effects: true
+                });
+            }
+
+            // Inicializar Marquee Davies
+            if($('.infinity-slide').length) {
+                $('.infinity-slide').infiniteslide({
+                    speed: 50,
+                    direction: 'left'
+                });
+            }
+            
+            // Inicializar Odometer e Animations
+            setTimeout(function(){
+                $('.odometer').each(function(){
+                    let val = $(this).data('count');
+                    $(this).html(val);
+                });
+                
+                // Inicializador Local do GSAP EffectFade
+                gsap.registerPlugin(ScrollTrigger);
+                $(".effectFade").each(function(){
+                    gsap.to(this, {
+                        autoAlpha: 1,
+                        y: 0,
+                        duration: 1.2,
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: this,
+                            start: "top 80%",
+                            toggleActions: "play none none reverse"
+                        }
+                    });
+                });
+            }, 500);
+        });
+    </script>
 
     <script>
         // =============================================
@@ -1652,6 +1729,83 @@
             });
         });
     }
+    </script>
+
+    <!-- Cursor Trail Interativo -->
+    <canvas class="cursor-trail" id="trail"></canvas>
+    <script>
+        const canvasTrail = document.getElementById("trail");
+        const ctxTrail = canvasTrail.getContext("2d");
+        let wTrail = window.innerWidth;
+        let hTrail = window.innerHeight;
+        canvasTrail.width = wTrail;
+        canvasTrail.height = hTrail;
+        
+        let pointsTrail = [];
+        let ripplesTrail = [];
+        
+        window.addEventListener("resize", () => {
+            wTrail = window.innerWidth;
+            hTrail = window.innerHeight;
+            canvasTrail.width = wTrail;
+            canvasTrail.height = hTrail;
+        });
+        
+        window.addEventListener("mousemove", (e) => {
+            pointsTrail.push({ x: e.clientX, y: e.clientY });
+            if (pointsTrail.length > 10) pointsTrail.shift();
+        });
+        
+        window.addEventListener("click", (e) => {
+            ripplesTrail.push({
+                x: e.clientX,
+                y: e.clientY,
+                radius: 0,
+                alpha: 1,
+            });
+        });
+        
+        function drawTrail() {
+            ctxTrail.clearRect(0, 0, wTrail, hTrail);
+            
+            // Rastro gradiente premium (Cinza para Branco)
+            if (pointsTrail.length > 1) {
+                ctxTrail.beginPath();
+                ctxTrail.moveTo(pointsTrail[0].x, pointsTrail[0].y);
+                for (let i = 1; i < pointsTrail.length; i++) {
+                    ctxTrail.lineTo(pointsTrail[i].x, pointsTrail[i].y);
+                }
+                let last = pointsTrail[pointsTrail.length - 1];
+                let grad = ctxTrail.createLinearGradient(pointsTrail[0].x, pointsTrail[0].y, last.x, last.y);
+                grad.addColorStop(0, "rgba(161, 161, 166, 0)"); // var(--text-dim)
+                grad.addColorStop(1, "rgba(255, 255, 255, 0.5)"); // var(--accent)
+                ctxTrail.strokeStyle = grad;
+                ctxTrail.lineWidth = 3;
+                ctxTrail.lineCap = "round";
+                ctxTrail.stroke();
+            }
+            
+            // Ondas ao clicar (Ripple)
+            ripplesTrail.forEach((r, i) => {
+                ctxTrail.beginPath();
+                ctxTrail.arc(r.x, r.y, r.radius, 0, Math.PI * 2);
+                ctxTrail.strokeStyle = `rgba(255, 255, 255, ${r.alpha})`;
+                ctxTrail.lineWidth = 1.5 + (r.alpha * 2);
+                ctxTrail.stroke();
+                r.radius += 2.5;
+                r.alpha -= 0.035;
+            });
+            ripplesTrail = ripplesTrail.filter((r) => r.alpha > 0);
+            
+            requestAnimationFrame(drawTrail);
+        }
+        
+        // Inicia apenas em telas não-touch (Desktop)
+        if (window.matchMedia("(hover: hover)").matches) {
+            drawTrail();
+        } else {
+            canvasTrail.style.display = 'none';
+        }
     </script>
 </body>
 </html>
