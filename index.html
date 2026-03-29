@@ -12,9 +12,9 @@
     <link rel="dns-prefetch" href="https://player.vimeo.com">
     <link rel="dns-prefetch" href="https://i.vimeocdn.com">
     
-    <!-- Icomoon (Davies) -->
+    <!-- Icomoon -->
     <link rel="stylesheet" href="assets/icon/icomoon/style.css">
-    <link rel="stylesheet" href="assets/css/odometer.min.css">
+
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1103,10 +1103,6 @@
             contain-intrinsic-size: 0 600px;
         }
 
-        /* GSAP & Davies Animation Base Classes */
-        .effectFade { visibility: hidden; opacity: 0; }
-        .fadeUp { transform: translateY(50px); }
-        .fadeDown { transform: translateY(-50px); }
     </style>
 </head>
 <body>
@@ -1261,7 +1257,7 @@
                     <div style="flex: 1; text-align: center; color: var(--text-dim); font-size: 0.8rem; letter-spacing: 1px; font-family: 'Outfit', sans-serif;">www.dantednz.com.br</div>
                 </div>
                 <div class="browser-body" style="padding: 0; height: calc(100% - 48px); position: relative; transform: translateZ(10px); overflow: hidden;">
-                    <!-- Vídeo Davies (Web Designer Flow) -->
+                    <!-- Vídeo (Web Designer Flow) -->
                     <video autoplay loop muted playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover; position: absolute; top:0; left:0; pointer-events: none;">
                         <source src="assets/video/nexbot.mp4" type="video/mp4">
                     </video>
@@ -1364,51 +1360,7 @@
         </div>
     </div>
 
-    <!-- Davies JS Globals -->
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/gsap.min.js"></script>
-    <script src="assets/js/ScrollTrigger.min.js"></script>
-    <script src="assets/js/SplitText.min.js"></script>
-    <!-- Plugins Extras -->
-    <script src="assets/js/infinityslide.js"></script>
-    <script src="assets/js/odometer.min.js"></script>
-    <!-- Script Customizado do Lab Local -->
-    <script>
-        $(window).on("load", function() {
 
-            // Inicializar Marquee Davies
-            if($('.infinity-slide').length) {
-                $('.infinity-slide').infiniteslide({
-                    speed: 50,
-                    direction: 'left'
-                });
-            }
-            
-            // Inicializar Odometer e Animations
-            setTimeout(function(){
-                $('.odometer').each(function(){
-                    let val = $(this).data('count');
-                    $(this).html(val);
-                });
-                
-                // Inicializador Local do GSAP EffectFade
-                gsap.registerPlugin(ScrollTrigger);
-                $(".effectFade").each(function(){
-                    gsap.to(this, {
-                        autoAlpha: 1,
-                        y: 0,
-                        duration: 1.2,
-                        ease: "power2.out",
-                        scrollTrigger: {
-                            trigger: this,
-                            start: "top 80%",
-                            toggleActions: "play none none reverse"
-                        }
-                    });
-                });
-            }, 500);
-        });
-    </script>
 
     <script>
         // =============================================
