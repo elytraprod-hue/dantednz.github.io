@@ -707,6 +707,67 @@ footer{background:var(--abyss);border-top:1px solid rgba(43,181,200,.08);padding
 .btn-dnz-wa svg { width: 19px; height: 19px; flex-shrink: 0; }
 .btn-dnz-wa:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(37,211,102,.4); }
 
+/* ══ DNZ FUNNEL ══ */
+.dnz-funnel { margin-bottom: 3px; }
+.dnz-funnel-header { text-align: center; margin-bottom: 2.5rem; }
+.dnz-funnel-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  color: #fff; line-height: 1.1; margin-bottom: .5rem; letter-spacing: -.02em;
+}
+.dnz-funnel-title em { color: var(--aqua); font-style: italic; }
+.dnz-funnel-sub { font-size: .85rem; color: rgba(237,248,250,.3); }
+
+/* Tabs */
+.dnz-tabs {
+  display: flex; flex-wrap: wrap; gap: .5rem;
+  margin-bottom: 2rem; justify-content: center;
+}
+.dnz-tab {
+  background: rgba(43,181,200,.04);
+  border: 1px solid rgba(43,181,200,.14);
+  color: rgba(237,248,250,.4);
+  border-radius: 100px;
+  padding: .55rem 1.3rem;
+  font-family: 'Outfit', sans-serif;
+  font-size: .76rem; letter-spacing: .08em;
+  cursor: none; transition: all .3s;
+}
+.dnz-tab:hover { border-color: rgba(43,181,200,.4); color: var(--aqua); }
+.dnz-tab.active {
+  background: var(--aqua); border-color: var(--aqua);
+  color: var(--deep); font-weight: 600;
+}
+
+/* Hide filtered items */
+.dnz-pitem.hidden { display: none; }
+
+/* Service CTA panel */
+.dnz-service-cta {
+  background: rgba(5,24,37,.9);
+  border: 1px solid rgba(43,181,200,.1);
+  border-radius: 4px;
+  padding: 3rem;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 3px;
+  transition: all .4s cubic-bezier(.16,1,.3,1);
+}
+@media(max-width:700px) {
+  .dnz-service-cta { grid-template-columns: 1fr; text-align: center; justify-items: center; }
+}
+.dnz-sc-icon { font-size: 2.5rem; }
+.dnz-sc-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+  font-weight: 900; color: #fff; line-height: 1.15; margin-bottom: .3rem;
+}
+.dnz-sc-title em { color: var(--aqua); font-style: italic; }
+.dnz-sc-desc { font-size: .82rem; color: rgba(237,248,250,.32); }
+
 /* ══ STICKY BAR ══ */
 .sticky-bar{position:fixed;bottom:0;left:0;right:0;z-index:400;background:rgba(2,13,20,.92);backdrop-filter:blur(20px);border-top:1px solid rgba(43,181,200,.15);padding:.9rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;transform:translateY(110%);transition:transform .5s cubic-bezier(.16,1,.3,1);flex-wrap:wrap;}
 .sticky-bar.visible{transform:translateY(0);}
@@ -894,11 +955,7 @@ footer{background:var(--abyss);border-top:1px solid rgba(43,181,200,.08);padding
     <!-- About split -->
     <div class="dnz-about reveal d1">
       <div class="dnz-about-visual">
-        <!-- Substitua por assets/video/dante-reel.mp4 ou assets/img/dante-about.jpg -->
-        <video autoplay muted loop playsinline poster="assets/img/dante-poster.jpg">
-          <source src="assets/video/dante-reel.mp4" type="video/mp4">
-          <!-- fallback: YouTube muted bg -->
-        </video>
+        <img src="https://raw.githubusercontent.com/dantednz/dantednz.github.io/main/assets/dante.PNG" alt="Dante Nazário — Filmmaker & Drone Pilot">
         <div class="dnz-about-visual-overlay"></div>
         <div class="dnz-about-visual-badge">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
@@ -946,55 +1003,93 @@ footer{background:var(--abyss);border-top:1px solid rgba(43,181,200,.08);padding
       </div>
     </div>
 
-    <!-- Portfolio grid -->
-    <div class="dnz-portfolio-grid">
-      <!-- item 1 — wide -->
-      <div class="dnz-pitem wide reveal d1" onclick="openLightbox('https://player.vimeo.com/video/YOUR_VIMEO_ID_1?autoplay=1')">
-        <img src="assets/img/portfolio-1.jpg" alt="Vídeo Comercial — Produto">
-        <div class="dnz-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        <div class="dnz-pitem-ov">
-          <span class="dnz-pitem-cat">Vídeo Comercial</span>
-          <span class="dnz-pitem-title">Campanha de Produto</span>
+    <!-- ═══════════════════════════════════════
+         DNZ SERVICE FUNNEL
+    ════════════════════════════════════════ -->
+    <div class="dnz-funnel reveal">
+      <div class="dnz-funnel-header">
+        <div class="chip">Qual projeto você tem em mente?</div>
+        <h3 class="dnz-funnel-title">Escolha o <em>tipo de serviço</em></h3>
+        <p class="dnz-funnel-sub">Selecione abaixo para ver os trabalhos e iniciar um orçamento direto.</p>
+      </div>
+
+      <!-- Filter tabs -->
+      <div class="dnz-tabs" id="dnzTabs">
+        <button class="dnz-tab active" data-filter="todos">Todos os trabalhos</button>
+        <button class="dnz-tab" data-filter="comercial">🎬 Vídeo Comercial</button>
+        <button class="dnz-tab" data-filter="drone">🚁 Drone Aéreo 4K</button>
+        <button class="dnz-tab" data-filter="social">📱 Reels &amp; Social</button>
+        <button class="dnz-tab" data-filter="surf">🌊 Surf &amp; Esportes</button>
+      </div>
+
+      <!-- Portfolio grid — real Vimeo IDs from GitHub assets -->
+      <div class="dnz-portfolio-grid" id="dnzGrid">
+        <!-- item 1 — wide — comercial/surf -->
+        <div class="dnz-pitem wide" data-cats="todos surf comercial" onclick="openDnzLightbox('1177779611')">
+          <img src="https://raw.githubusercontent.com/dantednz/dantednz.github.io/main/assets/1177779611.png"
+               alt="Black Venom HD Inline"
+               onerror="this.style.background='#0a1520';this.removeAttribute('src')">
+          <div class="dnz-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <div class="dnz-pitem-ov">
+            <span class="dnz-pitem-cat">Esportes · Surf film</span>
+            <span class="dnz-pitem-title">Black Venom — HD Inline</span>
+          </div>
+        </div>
+        <!-- item 2 — surf -->
+        <div class="dnz-pitem" data-cats="todos surf" onclick="openDnzLightbox('1177775878')">
+          <img src="https://raw.githubusercontent.com/dantednz/dantednz.github.io/main/assets/1177775878.png"
+               alt="But Definitely Teaser"
+               onerror="this.style.background='#0a1520';this.removeAttribute('src')">
+          <div class="dnz-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <div class="dnz-pitem-ov">
+            <span class="dnz-pitem-cat">Esportes · Surf film</span>
+            <span class="dnz-pitem-title">But Definitely (teaser)</span>
+          </div>
+        </div>
+        <!-- item 3 — comercial -->
+        <div class="dnz-pitem" data-cats="todos comercial" onclick="openDnzLightbox('1177774829')">
+          <img src="https://raw.githubusercontent.com/dantednz/dantednz.github.io/main/assets/1177774829.png"
+               alt="Jotapê Surfboards"
+               onerror="this.style.background='#0a1520';this.removeAttribute('src')">
+          <div class="dnz-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <div class="dnz-pitem-ov">
+            <span class="dnz-pitem-cat">Manuscrafting · Produto</span>
+            <span class="dnz-pitem-title">JOTAPÊ — SURFBOARDS</span>
+          </div>
+        </div>
+        <!-- item 4 — wide — social -->
+        <div class="dnz-pitem wide" data-cats="todos social drone" onclick="openDnzLightbox('1177798436')">
+          <img src="https://raw.githubusercontent.com/dantednz/dantednz.github.io/main/assets/1177771656.png"
+               alt="Social Impact Festa"
+               onerror="this.style.background='#0a1520';this.removeAttribute('src')">
+          <div class="dnz-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <div class="dnz-pitem-ov">
+            <span class="dnz-pitem-cat">Social Media · Vertical</span>
+            <span class="dnz-pitem-title">Energia de Festa — Reels</span>
+          </div>
         </div>
       </div>
-      <!-- item 2 -->
-      <div class="dnz-pitem reveal d2" onclick="openLightbox('https://player.vimeo.com/video/YOUR_VIMEO_ID_2?autoplay=1')">
-        <img src="assets/img/portfolio-2.jpg" alt="Drone Aéreo">
-        <div class="dnz-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        <div class="dnz-pitem-ov">
-          <span class="dnz-pitem-cat">Aéreo 4K</span>
-          <span class="dnz-pitem-title">Cobertura Drone</span>
+
+      <!-- Service CTA panel — changes with filter -->
+      <div class="dnz-service-cta" id="dnzServiceCta">
+        <div class="dnz-sc-icon" id="dnzScIcon">🎬</div>
+        <div>
+          <h4 class="dnz-sc-title" id="dnzScTitle">Precisa de um vídeo que <em>vende de verdade?</em></h4>
+          <p class="dnz-sc-desc" id="dnzScDesc">Orçamento sem compromisso — resposta em até 2h.</p>
         </div>
-      </div>
-      <!-- item 3 -->
-      <div class="dnz-pitem reveal d1" onclick="openLightbox('https://player.vimeo.com/video/YOUR_VIMEO_ID_3?autoplay=1')">
-        <img src="assets/img/portfolio-3.jpg" alt="Reels Social Media">
-        <div class="dnz-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        <div class="dnz-pitem-ov">
-          <span class="dnz-pitem-cat">Social Media</span>
-          <span class="dnz-pitem-title">Reels &amp; Shorts</span>
-        </div>
-      </div>
-      <!-- item 4 — wide -->
-      <div class="dnz-pitem wide reveal d2" onclick="openLightbox('https://player.vimeo.com/video/YOUR_VIMEO_ID_4?autoplay=1')">
-        <img src="assets/img/portfolio-4.jpg" alt="Evento Corporativo">
-        <div class="dnz-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        <div class="dnz-pitem-ov">
-          <span class="dnz-pitem-cat">Evento</span>
-          <span class="dnz-pitem-title">Cobertura Corporativa</span>
-        </div>
+        <a class="btn-dnz-wa" id="dnzScBtn" href="https://wa.me/5548998050267?text=Olá%20Dante!%20Vi%20seu%20portfólio%20no%20site%20Cine%20%26%20Praya%20e%20gostaria%20de%20orçar%20um%20vídeo%20comercial." target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.168 1.62 5.943L.057 23.743a.5.5 0 00.61.637l5.98-1.557A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.9 0-3.74-.5-5.35-1.44l-.38-.22-3.95 1.03 1.06-3.84-.25-.4A10 10 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+          Pedir orçamento no WhatsApp
+        </a>
       </div>
     </div>
 
-    <!-- CTA -->
-    <div class="dnz-cta reveal">
-      <div>
-        <h4>Precisa de um vídeo<br>que <em>vende de verdade?</em></h4>
-        <p>Orçamento sem compromisso — resposta em até 2h pelo WhatsApp.</p>
-      </div>
-      <a href="https://wa.me/5548998050267?text=Olá%20Dante!%20Vi%20seu%20portfólio%20no%20site%20e%20gostaria%20de%20orçar%20um%20vídeo%20comercial." target="_blank" class="btn-dnz-wa">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.168 1.62 5.943L.057 23.743a.5.5 0 00.61.637l5.98-1.557A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.9 0-3.74-.5-5.35-1.44l-.38-.22-3.95 1.03 1.06-3.84-.25-.4A10 10 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-        Pedir orçamento no WhatsApp
+
+    <!-- Instagram link -->
+    <div style="text-align:center;margin-top:3px;">
+      <a href="https://instagram.com/dantednz" target="_blank" style="display:inline-flex;align-items:center;gap:.5rem;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:var(--aqua);text-decoration:none;cursor:none;opacity:.6;transition:opacity .3s;" onmouseenter="this.style.opacity=1" onmouseleave="this.style.opacity='.6'">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+        Ver mais em @dantednz
       </a>
     </div>
 
@@ -1370,6 +1465,63 @@ function resetF(){
   ['n1','n2','n3','n4','n5'].forEach(id=>document.getElementById(id).disabled=true);
   go(1);
 }
+/* ══ DANTE DNZ LIGHTBOX ══ */
+function openDnzLightbox(vimeoId){
+  const lb=document.getElementById('dnzLightbox');
+  const iframe=document.getElementById('dnzLbIframe');
+  const url='https://player.vimeo.com/video/'+vimeoId+'?autoplay=1&autopause=0&title=0&byline=0&portrait=0&dnt=1';
+  iframe.src=url;
+  lb.classList.add('active');
+  document.body.style.overflow='hidden';
+}
+function closeLightbox(){
+  const lb=document.getElementById('dnzLightbox');
+  if(lb){lb.classList.remove('active');document.getElementById('dnzLbIframe').src='';}
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();});
+
+/* ══ DNZ TAB FILTER ══ */
+const dnzServiceMeta = {
+  todos:     { icon:'🎬', title:'Precisa de um vídeo que <em>vende de verdade?</em>', desc:'Orçamento sem compromisso — resposta em até 2h.', wa:'Olá%20Dante!%20Vi%20seu%20portfólio%20no%20site%20Cine%20%26%20Praya%20e%20gostaria%20de%20orçar%20um%20projeto.' },
+  comercial: { icon:'🎬', title:'Vídeo Comercial que <em>converte clientes</em>', desc:'Produto, marca ou serviço — do roteiro à entrega final.', wa:'Olá%20Dante!%20Quero%20orçar%20um%20Vídeo%20Comercial.' },
+  drone:     { icon:'🚁', title:'Cobertura aérea <em>4K de impacto</em>', desc:'DJI 4K, planos exclusivos de Florianópolis e arredores.', wa:'Olá%20Dante!%20Quero%20orçar%20um%20Drone%20Aéreo%204K.' },
+  social:    { icon:'📱', title:'Reels & Shorts que <em>explodem no alcance</em>', desc:'Conteúdo vertical otimizado para Instagram, TikTok e YouTube Shorts.', wa:'Olá%20Dante!%20Quero%20orçar%20conteúdo%20para%20Reels%20e%20Social%20Media.' },
+  surf:      { icon:'🌊', title:'Surf film com <em>alma cinematográfica</em>', desc:'Slow motion, color grade oceânico e storytelling de adrenalina.', wa:'Olá%20Dante!%20Quero%20orçar%20um%20Surf%20Film%20ou%20cobertura%20de%20esportes.' },
+};
+
+document.querySelectorAll('.dnz-tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.dnz-tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    const filter=tab.dataset.filter;
+    // Filter portfolio items
+    document.querySelectorAll('#dnzGrid .dnz-pitem').forEach(item=>{
+      const cats=(item.dataset.cats||'').split(' ');
+      item.classList.toggle('hidden', !cats.includes(filter));
+    });
+    // Update CTA panel
+    const meta=dnzServiceMeta[filter]||dnzServiceMeta.todos;
+    document.getElementById('dnzScIcon').textContent=meta.icon;
+    document.getElementById('dnzScTitle').innerHTML=meta.title;
+    document.getElementById('dnzScDesc').textContent=meta.desc;
+    document.getElementById('dnzScBtn').href='https://wa.me/5548998050267?text='+meta.wa;
+    // Animate in
+    const cta=document.getElementById('dnzServiceCta');
+    cta.style.opacity='0';cta.style.transform='translateY(12px)';
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{
+      cta.style.transition='all .4s cubic-bezier(.16,1,.3,1)';
+      cta.style.opacity='1';cta.style.transform='none';
+    }));
+  });
+});
+
+/* Add cursor:none to dnz tabs + portfolio items */
+document.querySelectorAll('.dnz-tab,.dnz-pitem').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{if(cur){cur.style.width='18px';cur.style.height='18px';ring.style.width='52px';ring.style.height='52px';}});
+  el.addEventListener('mouseleave',()=>{if(cur){cur.style.width='8px';cur.style.height='8px';ring.style.width='32px';ring.style.height='32px';}});
+});
+
 init();
 </script>
 </body>
