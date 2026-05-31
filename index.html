@@ -350,7 +350,7 @@ select option{background:#1a1a1a;color:#fff}
 const { useState, useEffect, useCallback, useRef } = React;
 
 // ── STORAGE ────────────────────────────────────────────────────────────
-const SK = "dcc_v5";
+const SK = "nexo_v5";
 const SUPABASE_URL = "https://uiddfmhjhgjiwygzewnb.supabase.co";
 const SUPABASE_KEY = "sb_publishable_JBbndMaUPy2dsXpYSnY7tA_IADwpY6z";
 const SUPABASE_STATE_TABLE = "app_state";
@@ -432,7 +432,7 @@ const hydrate = () => { try { const r = localStorage.getItem(SK); return r ? JSO
 const getSupabase = () => window.supabase?.createClient ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
 const normalizeBusiness = b => {
   const next={...DEFAULT_BUSINESS,...(b||{})};
-  if(String(next.brandName||"").toLowerCase()==="centralis")next.brandName=APP_NAME;
+  if(String(next.brandName||"").toLowerCase()==="nexo")next.brandName=APP_NAME;
   return next;
 };
 
@@ -884,8 +884,8 @@ const getUserName = session=>{
   return clean?clean.charAt(0).toUpperCase()+clean.slice(1):"";
 };
 const isAdminSession = session=>!!session?.user?.email&&ADMIN_EMAILS.map(e=>e.toLowerCase()).includes(session.user.email.toLowerCase());
-const trialKey = session=>`centralis_trial_${session?.user?.id||"guest"}`;
-const onboardingKey = session=>`centralis_onboarding_${session?.user?.id||"guest"}`;
+const trialKey = session=>`nexo_trial_${session?.user?.id||"guest"}`;
+const onboardingKey = session=>`nexo_onboarding_${session?.user?.id||"guest"}`;
 const formatTimer = ms=>{
   const total=Math.max(0,Math.ceil(ms/1000)),m=String(Math.floor(total/60)).padStart(2,"0"),s=String(total%60).padStart(2,"0");
   return `${m}:${s}`;
@@ -909,7 +909,7 @@ const encryptBackupPayload = async (payload,password)=>{
   const key=await deriveBackupKey(password,salt);
   const data=await wc.subtle.encrypt({name:"AES-GCM",iv},key,new TextEncoder().encode(JSON.stringify(payload)));
   return {
-    _centralisEncryptedBackup:true,
+    _nexoEncryptedBackup:true,
     version:1,
     app:APP_NAME,
     alg:"AES-GCM-256",
@@ -922,7 +922,7 @@ const encryptBackupPayload = async (payload,password)=>{
   };
 };
 const decryptBackupPayload = async (backup,password)=>{
-  if(!backup?._centralisEncryptedBackup)throw new Error("not-encrypted");
+  if(!backup?._nexoEncryptedBackup)throw new Error("not-encrypted");
   const salt=base64ToBytes(backup.salt),iv=base64ToBytes(backup.iv),data=base64ToBytes(backup.data);
   const key=await deriveBackupKey(password,salt);
   const plain=await getWebCrypto().subtle.decrypt({name:"AES-GCM",iv},key,data);
@@ -1258,7 +1258,7 @@ const GlobalSearch = ({open,onClose,state,setTab,dispatch})=>{
 // ── NOTIFICATIONS BANNER ───────────────────────────────────────────────
 const NotificationsBanner = ({state,setTab})=>{
   const today=todayStr(), now=new Date();
-  const storageKey=`centralis_notifications_${today}`;
+  const storageKey=`nexo_notifications_${today}`;
   const [dismissed,setDismissed]=useState(()=>{try{return JSON.parse(localStorage.getItem(storageKey)||"[]");}catch{return[];}});
   const msgs=[];
   const habitsMissing=state.habits.filter(h=>!h.completedDates?.includes(today));
@@ -1316,7 +1316,7 @@ const ContextAlert = ({tab,state,setTab,notify})=>{
     export: {txt:"Antes do deploy ou de mudanças grandes, gere um backup JSON atualizado.",go:null,cta:"Entendi"},
   };
   const item=map[tab];
-  const alertKey=`centralis_context_alert_${todayStr()}_${tab}_${item?String(item.txt).slice(0,28):"none"}`;
+  const alertKey=`nexo_context_alert_${todayStr()}_${tab}_${item?String(item.txt).slice(0,28):"none"}`;
   const [dismissed,setDismissed]=useState(()=>localStorage.getItem(alertKey)==="1");
   useEffect(()=>setDismissed(localStorage.getItem(alertKey)==="1"),[alertKey]);
   useEffect(()=>{
@@ -3387,7 +3387,7 @@ const TabExport = ({state,dispatch})=>{
       const url=URL.createObjectURL(blob);
       const a=document.createElement("a");
       a.href=url;
-      a.download=`centralis-backup-criptografado-${year}-${String(month+1).padStart(2,"0")}.json`;
+      a.download=`nexo-backup-criptografado-${year}-${String(month+1).padStart(2,"0")}.json`;
       a.click();
       URL.revokeObjectURL(url);
       const now=new Date().toISOString();
@@ -3412,7 +3412,7 @@ const TabExport = ({state,dispatch})=>{
       try{
         const data=JSON.parse(reader.result);
         if(!data||typeof data!=="object")throw new Error("invalid");
-        if(data._centralisEncryptedBackup){
+        if(data._nexoEncryptedBackup){
           const password=window.prompt("Digite a senha deste backup criptografado:");
           if(!password)throw new Error("Senha obrigatória para backup criptografado.");
           const decrypted=await decryptBackupPayload(data,password);
@@ -4239,15 +4239,15 @@ function App(){
   const [compactMode,setCompactMode]=useState(()=>localStorage.getItem("dcc_compact")==="1");
   const [soundEnabled,setSoundEnabled]=useState(()=>localStorage.getItem("dcc_sound")!=="0");
   const [lockEnabled,setLockEnabled]=useState(()=>localStorage.getItem("dcc_lock")!=="0");
-  const [sidebarCollapsed,setSidebarCollapsed]=useState(()=>localStorage.getItem("centralis_sidebar_collapsed")==="1");
-  const [dockOpen,setDockOpen]=useState(()=>localStorage.getItem("centralis_dock_open")==="1");
+  const [sidebarCollapsed,setSidebarCollapsed]=useState(()=>localStorage.getItem("nexo_sidebar_collapsed")==="1");
+  const [dockOpen,setDockOpen]=useState(()=>localStorage.getItem("nexo_dock_open")==="1");
   const [locked,setLocked]=useState(false);
   const [accountOpen,setAccountOpen]=useState(false);
   const [securityOpen,setSecurityOpen]=useState(false);
   const [searchOpen,setSearchOpen]=useState(false);
   const [navOpen,setNavOpen]=useState(false);
   const [toast,setToast]=useState(null);
-  const [salesDismissed,setSalesDismissed]=useState(()=>localStorage.getItem("centralis_sales_dismissed")==="1");
+  const [salesDismissed,setSalesDismissed]=useState(()=>localStorage.getItem("nexo_sales_dismissed")==="1");
   const [trialRemaining,setTrialRemaining]=useState(TRIAL_MS);
   const [onboardingDismissed,setOnboardingDismissed]=useState(false);
   const [businessOnboardingOpen,setBusinessOnboardingOpen]=useState(false);
@@ -4345,7 +4345,7 @@ function App(){
     const t=setInterval(tick,1000);
     return()=>clearInterval(t);
   },[session,hasFullAccess]);
-  useEffect(()=>localStorage.setItem("centralis_sales_dismissed",salesDismissed?"1":"0"),[salesDismissed]);
+  useEffect(()=>localStorage.setItem("nexo_sales_dismissed",salesDismissed?"1":"0"),[salesDismissed]);
   useEffect(()=>{const t=setInterval(()=>setQuoteIdx(i=>(i+1)%QUOTES.length),9000);return()=>clearInterval(t);},[]);
   useEffect(()=>{if("scrollRestoration" in history)history.scrollRestoration="manual";},[]);
   useEffect(()=>localStorage.setItem("dcc_last_tab",tab),[tab]);
@@ -4353,8 +4353,8 @@ function App(){
   useEffect(()=>localStorage.setItem("dcc_compact",compactMode?"1":"0"),[compactMode]);
   useEffect(()=>localStorage.setItem("dcc_sound",soundEnabled?"1":"0"),[soundEnabled]);
   useEffect(()=>localStorage.setItem("dcc_lock",lockEnabled?"1":"0"),[lockEnabled]);
-  useEffect(()=>localStorage.setItem("centralis_sidebar_collapsed",sidebarCollapsed?"1":"0"),[sidebarCollapsed]);
-  useEffect(()=>localStorage.setItem("centralis_dock_open",dockOpen?"1":"0"),[dockOpen]);
+  useEffect(()=>localStorage.setItem("nexo_sidebar_collapsed",sidebarCollapsed?"1":"0"),[sidebarCollapsed]);
+  useEffect(()=>localStorage.setItem("nexo_dock_open",dockOpen?"1":"0"),[dockOpen]);
   useEffect(()=>{
     const reset=()=>{
       clearTimeout(lockTimer.current);
