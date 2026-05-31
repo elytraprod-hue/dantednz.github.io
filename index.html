@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="DNZ Films é uma produtora audiovisual para marcas, eventos e projetos com direção, captação e edição profissional.">
+    <title>DNZ Films | Produtora Audiovisual</title>
+    <link rel="preconnect" href="https://player.vimeo.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #050505;
+            --ink: #f5f0e8;
+            --muted: #aaa199;
+            --muted-2: #736b64;
+            --line: rgba(245, 240, 232, 0.13);
+            --line-strong: rgba(245, 240, 232, 0.25);
+            --orange: #f47a20;
+            --orange-soft: rgba(244, 122, 32, 0.18);
+            --panel: rgba(255, 255, 255, 0.045);
+            --max: 1240px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background: var(--bg);
+            overflow-x: hidden;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            color: var(--ink);
+            background:
+                radial-gradient(circle at 80% 0%, rgba(244, 122, 32, 0.16), transparent 32rem),
+                linear-gradient(180deg, #050505 0%, #0a0806 42%, #050505 100%);
+            font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.26;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+            background-size: 120px 120px;
+            mask-image: linear-gradient(#000, transparent 72%);
+        }
+
+        a {
+            color: inherit;
+        }
+
+        img,
+        iframe {
+            display: block;
+            max-width: 100%;
+        }
+
+        button,
+        input,
+        select,
+        textarea {
+            font: inherit;
+        }
+
+        button {
+            color: inherit;
+        }
+
+        .container {
+            width: min(var(--max), calc(100% - 44px));
+            margin: 0 auto;
+        }
+
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            border-bottom: 1px solid rgba(245, 240, 232, 0.08);
+            background: rgba(5, 5, 5, 0.72);
+            backdrop-filter: blur(18px);
+        }
+
+        .header-inner {
+            height: 64px;
+            display: grid;
+            grid-template-columns: 140px 1fr auto;
+            align-items: center;
+            gap: 22px;
+        }
+
+        .brand {
+            width: 118px;
+            display: block;
+            text-decoration: none;
+        }
+
+        .brand img {
+            width: 118px;
+            height: 44px;
+            object-fit: contain;
+            object-position: left center;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+        }
+
+        .nav a,
+        .text-link {
+            color: var(--muted);
+            font-size: 0.76rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: color 180ms ease;
+        }
+
+        .nav a:hover,
+        .text-link:hover {
+            color: var(--ink);
+        }
+
+        .btn {
+            display: inline-flex;
+            min-height: 40px;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border: 1px solid var(--line-strong);
+            border-radius: 999px;
+            padding: 10px 16px;
+            background: transparent;
+            color: var(--ink);
+            font-size: 0.76rem;
+            font-weight: 800;
+            letter-spacing: 0.09em;
+            text-decoration: none;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, color 180ms ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            border-color: var(--orange);
+            background: rgba(244, 122, 32, 0.08);
+        }
+
+        .btn-primary {
+            border-color: var(--orange);
+            background: var(--orange);
+            color: #080502;
+        }
+
+        .icon {
+            width: 17px;
+            height: 17px;
+            flex: 0 0 17px;
+        }
+
+        .hero {
+            min-height: auto;
+            padding: 108px 0 42px;
+            display: grid;
+            align-items: end;
+        }
+
+        .hero-top {
+            display: grid;
+            grid-template-columns: minmax(0, 0.95fr) minmax(320px, 0.42fr);
+            gap: 44px;
+            align-items: end;
+            margin-bottom: 32px;
+        }
+
+        .hero-top > *,
+        .section-head > *,
+        .studio-grid > *,
+        .contact-box > * {
+            min-width: 0;
+        }
+
+        .kicker {
+            display: block;
+            color: var(--orange);
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: Archivo, Inter, sans-serif;
+            letter-spacing: 0;
+        }
+
+        h1 {
+            max-width: 820px;
+            margin: 18px 0 0;
+            font-size: clamp(3rem, 6vw, 5.8rem);
+            line-height: 0.9;
+            text-transform: uppercase;
+            overflow-wrap: normal;
+        }
+
+        .hero-copy {
+            display: grid;
+            gap: 22px;
+        }
+
+        .hero-copy p {
+            max-width: 430px;
+            margin: 0;
+            color: var(--muted);
+            font-size: 1.02rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .hero-reel {
+            position: relative;
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+            overflow: hidden;
+            background: #090909;
+        }
+
+        .hero-reel button {
+            width: 100%;
+            min-height: clamp(280px, 36vw, 460px);
+            display: block;
+            border: 0;
+            padding: 0;
+            background: #050505;
+            cursor: pointer;
+        }
+
+        .hero-reel img {
+            width: 100%;
+            height: 100%;
+            min-height: inherit;
+            object-fit: cover;
+            opacity: 0.82;
+            filter: saturate(0.92) contrast(1.08);
+            transform: scale(1.01);
+            transition: opacity 220ms ease, transform 700ms ease;
+        }
+
+        .hero-reel:hover img {
+            opacity: 0.9;
+            transform: scale(1.035);
+        }
+
+        .reel-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 24px;
+            padding: 28px;
+            pointer-events: none;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.62));
+        }
+
+        .reel-title {
+            display: grid;
+            gap: 8px;
+        }
+
+        .reel-title strong {
+            font-family: Archivo, Inter, sans-serif;
+            font-size: clamp(1.35rem, 2.8vw, 2.8rem);
+            line-height: 0.96;
+            text-transform: uppercase;
+        }
+
+        .reel-title span,
+        .section-copy,
+        .meta {
+            color: var(--muted);
+        }
+
+        .play {
+            width: 76px;
+            height: 76px;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(245, 240, 232, 0.5);
+            border-radius: 50%;
+            color: var(--ink);
+            background: rgba(0, 0, 0, 0.36);
+            backdrop-filter: blur(12px);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .stat {
+            padding: 18px 22px;
+            border-right: 1px solid var(--line);
+        }
+
+        .stat:last-child {
+            border-right: 0;
+        }
+
+        .stat strong {
+            display: block;
+            font-family: Archivo, Inter, sans-serif;
+            font-size: clamp(1.6rem, 2.8vw, 2.8rem);
+            line-height: 1;
+        }
+
+        .stat span {
+            display: block;
+            margin-top: 8px;
+            color: var(--muted);
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        section {
+            padding: 76px 0;
+            scroll-margin-top: 86px;
+        }
+
+        .section-head {
+            display: grid;
+            grid-template-columns: minmax(0, 0.82fr) minmax(300px, 0.46fr);
+            gap: 52px;
+            align-items: end;
+            margin-bottom: 28px;
+        }
+
+        h2 {
+            margin: 14px 0 0;
+            font-size: clamp(2rem, 3.8vw, 4rem);
+            line-height: 0.94;
+            text-transform: uppercase;
+        }
+
+        .section-copy {
+            margin: 0;
+            font-size: 1.04rem;
+        }
+
+        .service-list {
+            border-top: 1px solid var(--line);
+        }
+
+        .service-row {
+            display: grid;
+            grid-template-columns: 150px minmax(0, 0.7fr) minmax(280px, 0.5fr);
+            gap: 30px;
+            align-items: start;
+            padding: 22px 0;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .service-row h3 {
+            margin: 0;
+            font-size: clamp(1.35rem, 2.2vw, 2.35rem);
+            line-height: 1;
+            text-transform: uppercase;
+        }
+
+        .service-row p {
+            margin: 0;
+            color: var(--muted);
+        }
+
+        .index {
+            color: var(--orange);
+            font-size: 0.78rem;
+            font-weight: 900;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+        }
+
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .work-card {
+            position: relative;
+            min-height: 0;
+            aspect-ratio: 16 / 10;
+            display: grid;
+            grid-template-rows: minmax(0, 1fr) auto;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            background: #090909;
+            cursor: pointer;
+            padding: 0;
+            text-align: left;
+        }
+
+        .work-card.featured {
+            min-height: 0;
+            grid-row: auto;
+        }
+
+        .work-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.88;
+            filter: saturate(0.92) contrast(1.02);
+            transition: opacity 200ms ease, transform 700ms ease;
+        }
+
+        .work-card:hover img {
+            opacity: 0.92;
+            transform: scale(1.04);
+        }
+
+        .work-meta {
+            position: static;
+            min-height: 74px;
+            padding: 13px 16px 15px;
+            border-top: 1px solid var(--line);
+            background: #070707;
+        }
+
+        .work-meta span {
+            color: var(--orange);
+            font-size: 0.68rem;
+            font-weight: 900;
+            letter-spacing: 0.13em;
+            text-transform: uppercase;
+        }
+
+        .work-meta h3 {
+            margin: 5px 0 0;
+            color: var(--ink);
+            font-size: clamp(1rem, 1.45vw, 1.35rem);
+            line-height: 1.05;
+            text-transform: uppercase;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .studio {
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.025);
+        }
+
+        .studio-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 0.65fr) minmax(340px, 0.52fr);
+            gap: 54px;
+            align-items: stretch;
+        }
+
+        .studio-copy {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 42px;
+        }
+
+        .studio-copy p {
+            max-width: 620px;
+            margin: 24px 0 0;
+            color: var(--muted);
+            font-size: 1.1rem;
+        }
+
+        .capabilities {
+            display: grid;
+            gap: 0;
+            border-top: 1px solid var(--line);
+        }
+
+        .capabilities div {
+            display: flex;
+            justify-content: space-between;
+            gap: 18px;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--line);
+            color: var(--muted);
+        }
+
+        .capabilities strong {
+            color: var(--ink);
+        }
+
+        .portrait {
+            min-height: 620px;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            background: #111;
+        }
+
+        .portrait img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 18%;
+            filter: saturate(0.9) contrast(1.05);
+        }
+
+        .process {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border-top: 1px solid var(--line);
+            border-left: 1px solid var(--line);
+        }
+
+        .step {
+            min-height: 250px;
+            padding: 24px;
+            border-right: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.025);
+        }
+
+        .step h3 {
+            margin: 46px 0 0;
+            font-size: 1.35rem;
+            text-transform: uppercase;
+        }
+
+        .step p {
+            margin: 14px 0 0;
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        .contact {
+            padding-bottom: 60px;
+        }
+
+        .contact-box {
+            display: grid;
+            grid-template-columns: minmax(0, 0.8fr) minmax(320px, 0.48fr);
+            gap: 48px;
+            padding: 42px 0 0;
+            border-top: 1px solid var(--line);
+        }
+
+        .contact-box h2 {
+            max-width: 780px;
+        }
+
+        .lead-form {
+            display: grid;
+            gap: 12px;
+        }
+
+        .field {
+            display: grid;
+            gap: 7px;
+        }
+
+        .field label {
+            color: var(--muted);
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .field input,
+        .field select,
+        .field textarea {
+            width: 100%;
+            border: 1px solid var(--line);
+            border-radius: 0;
+            padding: 14px 0;
+            outline: none;
+            color: var(--ink);
+            background: transparent;
+        }
+
+        .field textarea {
+            min-height: 110px;
+            resize: vertical;
+        }
+
+        .field input:focus,
+        .field select:focus,
+        .field textarea:focus {
+            border-color: var(--orange);
+        }
+
+        .field select option {
+            color: #111;
+        }
+
+        footer {
+            padding: 30px 0 42px;
+            color: var(--muted);
+            font-size: 0.88rem;
+        }
+
+        .footer-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            padding-top: 22px;
+            border-top: 1px solid var(--line);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 18px;
+        }
+
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 22px;
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-dialog {
+            position: relative;
+            width: min(1080px, 100%);
+            border: 1px solid var(--line-strong);
+            background: #000;
+        }
+
+        .lightbox-video {
+            aspect-ratio: 16 / 9;
+        }
+
+        .lightbox-video iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .close-btn {
+            position: absolute;
+            right: 0;
+            bottom: calc(100% + 12px);
+            width: 42px;
+            height: 42px;
+            border: 1px solid var(--line-strong);
+            border-radius: 50%;
+            background: #050505;
+            color: var(--ink);
+            cursor: pointer;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 560ms ease, transform 560ms ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                transition: none !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        @media (max-width: 980px) {
+            .header-inner {
+                grid-template-columns: auto 1fr;
+            }
+
+            .nav {
+                display: none;
+            }
+
+            .hero-top,
+            .section-head,
+            .studio-grid,
+            .contact-box {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: clamp(3rem, 10vw, 5rem);
+            }
+
+            .work-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .work-card,
+            .work-card.featured {
+                min-height: 0;
+                grid-row: auto;
+            }
+
+            .service-row {
+                grid-template-columns: 90px 1fr;
+            }
+
+            .service-row p {
+                grid-column: 2;
+            }
+
+            .process {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 620px) {
+            .container {
+                width: min(var(--max), calc(100% - 28px));
+            }
+
+            .header-inner {
+                height: 58px;
+                gap: 12px;
+            }
+
+            .brand,
+            .brand img {
+                width: 96px;
+                height: 36px;
+            }
+
+            .site-header .btn {
+                min-height: 38px;
+                padding: 9px 12px;
+                font-size: 0.72rem;
+            }
+
+            .hero {
+                min-height: auto;
+                padding: 86px 0 34px;
+            }
+
+            h1 {
+                font-size: clamp(2.18rem, 10.8vw, 2.75rem);
+                line-height: 0.96;
+                overflow-wrap: anywhere;
+            }
+
+            h2 {
+                font-size: clamp(2rem, 9.4vw, 2.8rem);
+            }
+
+            .hero-top {
+                gap: 28px;
+                margin-bottom: 30px;
+            }
+
+            .hero-copy p {
+                font-size: 0.98rem;
+            }
+
+            .hero-actions,
+            .contact .btn {
+                width: 100%;
+            }
+
+            .hero-actions .btn,
+            .lead-form .btn {
+                width: 100%;
+            }
+
+            .hero-reel button {
+                min-height: 250px;
+            }
+
+            .reel-overlay {
+                padding: 18px;
+            }
+
+            .play {
+                width: 58px;
+                height: 58px;
+            }
+
+            .stats,
+            .process {
+                grid-template-columns: 1fr;
+            }
+
+            .stat {
+                border-right: 0;
+                border-bottom: 1px solid var(--line);
+            }
+
+            section {
+                padding: 58px 0;
+                scroll-margin-top: 72px;
+            }
+
+            .service-row {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+
+            .service-row p {
+                grid-column: auto;
+            }
+
+            .work-card,
+            .work-card.featured {
+                min-height: 0;
+                aspect-ratio: 4 / 3;
+            }
+
+            .work-meta {
+                min-height: 66px;
+                padding: 11px 13px 13px;
+            }
+
+            .work-meta h3 {
+                font-size: 1rem;
+            }
+
+            .portrait {
+                min-height: 500px;
+            }
+
+            .footer-row,
+            .footer-links {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a class="brand" href="#top" aria-label="DNZ Films">
+                <img src="assets/dnz-films-logo-transparent.png" alt="DNZ Films">
+            </a>
+            <nav class="nav" aria-label="Navegação principal">
+                <a href="#showreel">Showreel</a>
+                <a href="#producao">Produção</a>
+                <a href="#portfolio">Portfólio</a>
+                <a href="#contato">Contato</a>
+            </nav>
+            <a class="btn btn-primary" href="#contato">
+                Orçamento
+                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m0 0-6-6m6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <main id="top">
+        <section class="hero" id="showreel">
+            <div class="container">
+                <div class="hero-top">
+                    <div class="reveal">
+                        <span class="kicker">DNZ Films / Produtora Audiovisual</span>
+                        <h1>Filmes para marcas, eventos e experiências.</h1>
+                    </div>
+                    <div class="hero-copy reveal">
+                        <p>Direção, captação e edição para transformar ideias em vídeos com presença, ritmo e acabamento profissional.</p>
+                        <div class="hero-actions">
+                            <a class="btn btn-primary" href="#contato">Pedir orçamento</a>
+                            <a class="btn" href="#portfolio">Ver portfólio</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-reel reveal">
+                    <button type="button" data-video="1177771656" aria-label="Assistir showreel DNZ Films">
+                        <img src="assets/1177771656.png" alt="Showreel DNZ Films">
+                    </button>
+                    <div class="reel-overlay">
+                        <div class="reel-title">
+                            <span class="kicker">Showreel</span>
+                            <strong>Assista ao trabalho.</strong>
+                            <span>Direção / captação / edição</span>
+                        </div>
+                        <div class="play" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M9 6v12l10-6L9 6Z" fill="currentColor"/></svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stats reveal">
+                    <div class="stat">
+                        <strong>50+</strong>
+                        <span>Projetos entregues</span>
+                    </div>
+                    <div class="stat">
+                        <strong>1M+</strong>
+                        <span>Visualizações</span>
+                    </div>
+                    <div class="stat">
+                        <strong>3</strong>
+                        <span>Formatos principais</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="producao">
+            <div class="container">
+                <div class="section-head reveal">
+                    <div>
+                        <span class="kicker">Produção</span>
+                        <h2>O que fazemos.</h2>
+                    </div>
+                    <p class="section-copy">Estrutura simples, entrega séria. Cada projeto nasce com objetivo, linguagem e formato definidos antes da gravação.</p>
+                </div>
+
+                <div class="service-list">
+                    <article class="service-row reveal">
+                        <span class="index">01</span>
+                        <h3>Vídeos comerciais</h3>
+                        <p>Filmes para marcas, produtos, negócios locais e lançamentos com foco em percepção de valor.</p>
+                    </article>
+                    <article class="service-row reveal">
+                        <span class="index">02</span>
+                        <h3>Conteúdo vertical</h3>
+                        <p>Reels, teasers e cortes para redes sociais, anúncios e presença constante de marca.</p>
+                    </article>
+                    <article class="service-row reveal">
+                        <span class="index">03</span>
+                        <h3>Eventos e lifestyle</h3>
+                        <p>Cobertura audiovisual para festas, surf, esporte, experiências e ativações de marca.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio">
+            <div class="container">
+                <div class="section-head reveal">
+                    <div>
+                        <span class="kicker">Portfólio</span>
+                        <h2>Trabalhos selecionados.</h2>
+                    </div>
+                    <p class="section-copy">Clique em um projeto para abrir o vídeo. A prioridade aqui é deixar o trabalho aparecer.</p>
+                </div>
+                <div class="work-grid" id="workGrid"></div>
+            </div>
+        </section>
+
+        <section class="studio">
+            <div class="container studio-grid">
+                <div class="studio-copy reveal">
+                    <div>
+                        <span class="kicker">Direção</span>
+                        <h2>Olhar de produtora, energia de rua.</h2>
+                        <p>A DNZ combina estética cinematográfica com agilidade de conteúdo. O vídeo precisa ter beleza, mas também precisa funcionar no mundo real: redes sociais, campanhas, eventos e apresentação de marca.</p>
+                    </div>
+                    <div class="capabilities">
+                        <div><strong>Pré-produção</strong><span>Briefing, referências e plano de gravação</span></div>
+                        <div><strong>Produção</strong><span>Captação, luz, movimento e áudio</span></div>
+                        <div><strong>Pós-produção</strong><span>Edição, cor, som e formatos finais</span></div>
+                    </div>
+                </div>
+                <div class="portrait reveal">
+                    <img src="assets/dante.PNG" alt="Diretor criativo da DNZ Films">
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <div class="section-head reveal">
+                    <div>
+                        <span class="kicker">Método</span>
+                        <h2>Como o projeto avança.</h2>
+                    </div>
+                    <p class="section-copy">Um processo direto ajuda o cliente a entender o caminho até o vídeo final.</p>
+                </div>
+                <div class="process">
+                    <article class="step reveal">
+                        <span class="index">01</span>
+                        <h3>Briefing</h3>
+                        <p>Objetivo, público, prazo, referências e canais de publicação.</p>
+                    </article>
+                    <article class="step reveal">
+                        <span class="index">02</span>
+                        <h3>Conceito</h3>
+                        <p>Linguagem visual, cenas-chave, ritmo e plano de gravação.</p>
+                    </article>
+                    <article class="step reveal">
+                        <span class="index">03</span>
+                        <h3>Produção</h3>
+                        <p>Captação com atenção a composição, movimento, luz e som.</p>
+                    </article>
+                    <article class="step reveal">
+                        <span class="index">04</span>
+                        <h3>Entrega</h3>
+                        <p>Edição final, cor, áudio e arquivos prontos para cada plataforma.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact" id="contato">
+            <div class="container contact-box">
+                <div class="reveal">
+                    <span class="kicker">Contato</span>
+                    <h2>Vamos produzir seu próximo vídeo?</h2>
+                    <p class="section-copy" style="margin-top: 22px; max-width: 560px;">Envie o básico do projeto. A mensagem abre no WhatsApp com um briefing organizado para começarmos a conversa.</p>
+                </div>
+                <form class="lead-form reveal" id="leadForm">
+                    <div class="field">
+                        <label for="name">Nome</label>
+                        <input id="name" name="name" type="text" placeholder="Seu nome" autocomplete="name" required>
+                    </div>
+                    <div class="field">
+                        <label for="whatsapp">WhatsApp</label>
+                        <input id="whatsapp" name="whatsapp" type="tel" placeholder="(00) 00000-0000" autocomplete="tel" required>
+                    </div>
+                    <div class="field">
+                        <label for="goal">Projeto</label>
+                        <select id="goal" name="goal" required>
+                            <option value="" disabled selected>Selecione</option>
+                            <option>Vídeo comercial</option>
+                            <option>Conteúdo vertical / Reels</option>
+                            <option>Cobertura de evento</option>
+                            <option>Filme de surf / esporte</option>
+                            <option>Pacote mensal de conteúdo</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label for="timeline">Prazo</label>
+                        <select id="timeline" name="timeline" required>
+                            <option value="" disabled selected>Selecione</option>
+                            <option>Urgente</option>
+                            <option>2 a 4 semanas</option>
+                            <option>1 a 2 meses</option>
+                            <option>Ainda estou planejando</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label for="message">Contexto</label>
+                        <textarea id="message" name="message" placeholder="Marca, objetivo, local, referência e onde o vídeo será publicado."></textarea>
+                    </div>
+                    <button class="btn btn-primary" type="submit">Enviar briefing</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-row">
+            <span>© <span id="year"></span> DNZ Films. Todos os direitos reservados.</span>
+            <div class="footer-links">
+                <a class="text-link" href="https://instagram.com/dantednz" target="_blank" rel="noreferrer">Instagram</a>
+                <a class="text-link" href="https://wa.me/5548998050267" target="_blank" rel="noreferrer">WhatsApp</a>
+                <a class="text-link" href="https://vimeo.com/dantednz" target="_blank" rel="noreferrer">Vimeo</a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Player de vídeo">
+        <div class="lightbox-dialog">
+            <button class="close-btn" type="button" id="closeLightbox" aria-label="Fechar vídeo">×</button>
+            <div class="lightbox-video" id="lightboxVideo"></div>
+        </div>
+    </div>
+
+    <script>
+        const portfolioItems = [
+            {
+                title: "Black Venom",
+                category: "Esporte",
+                vimeoId: "1177779611",
+                thumb: "assets/1177779611.png",
+                featured: true
+            },
+            {
+                title: "But Definitely",
+                category: "Surf film",
+                vimeoId: "1177775878",
+                thumb: "assets/1177775878.png"
+            },
+            {
+                title: "JOTAPÊ Surfboards",
+                category: "Marca",
+                vimeoId: "1177774829",
+                thumb: "assets/1177774829.png"
+            },
+            {
+                title: "Social Impact",
+                category: "Evento",
+                vimeoId: "1177798436",
+                thumb: "assets/1177771656.png"
+            }
+        ];
+
+        const workGrid = document.getElementById("workGrid");
+        const lightbox = document.getElementById("lightbox");
+        const lightboxVideo = document.getElementById("lightboxVideo");
+        const closeLightboxButton = document.getElementById("closeLightbox");
+
+        function renderPortfolio() {
+            workGrid.innerHTML = portfolioItems.map((item) => `
+                <button class="work-card ${item.featured ? "featured" : ""}" type="button" data-video="${item.vimeoId}" aria-label="Assistir ${item.title}">
+                    <img src="${item.thumb}" alt="Frame do projeto ${item.title}" loading="lazy">
+                    <span class="work-meta">
+                        <span>${item.category}</span>
+                        <h3>${item.title}</h3>
+                    </span>
+                </button>
+            `).join("");
+        }
+
+        function openVideo(vimeoId) {
+            lightboxVideo.innerHTML = `
+                <iframe
+                    src="https://player.vimeo.com/video/${vimeoId}?autoplay=1&autopause=0&title=0&byline=0&portrait=0&dnt=1"
+                    allow="autoplay; fullscreen; picture-in-picture"
+                    allowfullscreen
+                    title="Vídeo DNZ Films"></iframe>
+            `;
+            lightbox.classList.add("active");
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeVideo() {
+            lightbox.classList.remove("active");
+            lightboxVideo.innerHTML = "";
+            document.body.style.overflow = "";
+        }
+
+        renderPortfolio();
+
+        document.addEventListener("click", (event) => {
+            const videoTrigger = event.target.closest("[data-video]");
+            if (videoTrigger) openVideo(videoTrigger.dataset.video);
+        });
+
+        closeLightboxButton.addEventListener("click", closeVideo);
+        lightbox.addEventListener("click", (event) => {
+            if (event.target === lightbox) closeVideo();
+        });
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape") closeVideo();
+        });
+
+        document.getElementById("leadForm").addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            const name = document.getElementById("name").value.trim();
+            const phone = document.getElementById("whatsapp").value.trim();
+            const goal = document.getElementById("goal").value;
+            const timeline = document.getElementById("timeline").value;
+            const message = document.getElementById("message").value.trim();
+
+            const text = [
+                `Olá DNZ! Me chamo ${name}.`,
+                `Meu WhatsApp é ${phone}.`,
+                `Projeto: ${goal}.`,
+                `Prazo: ${timeline}.`,
+                message ? `Contexto: ${message}` : "",
+                "Podemos conversar sobre orçamento e próximos passos?"
+            ].filter(Boolean).join("\n");
+
+            window.open(`https://wa.me/5548998050267?text=${encodeURIComponent(text)}`, "_blank", "noopener,noreferrer");
+        });
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.14 });
+
+        document.querySelectorAll(".reveal").forEach((element) => revealObserver.observe(element));
+        document.getElementById("year").textContent = new Date().getFullYear();
+
+        if ("serviceWorker" in navigator && location.protocol !== "file:") {
+            window.addEventListener("load", () => {
+                navigator.serviceWorker.register("sw.js").catch(() => {});
+            });
+        }
+    </script>
+</body>
+</html>
