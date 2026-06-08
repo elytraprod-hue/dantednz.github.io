@@ -1,4 +1,4 @@
-const CACHE_NAME = 'dnz-films-cache-v6';
+const CACHE_NAME = 'dnz-films-cache-v7';
 
 // Recursos de alta criticidade e interface que não mudam
 const PRECACHE_ASSETS = [

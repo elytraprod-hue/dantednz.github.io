@@ -151,7 +151,7 @@ section[id]{scroll-margin-top:88px}
 #problema{padding:120px 48px;display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center}
 .prob-left .label{font-family:var(--M);font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--red);margin-bottom:32px;display:flex;align-items:center;gap:12px}
 .prob-left .label::after{content:'';flex:1;max-width:40px;height:1px;background:var(--gray3)}
-.prob-title{font-family:var(--D);font-size:clamp(48px,6vw,88px);line-height:.92;margin-bottom:0}
+.prob-title{font-family:var(--D);font-size:clamp(48px,6vw,88px);line-height:.92;margin:0;font-weight:normal}
 .prob-title .dim{-webkit-text-stroke:1px rgba(242,242,242,.15);color:transparent}
 .prob-right p{font-size:15px;line-height:1.9;color:rgba(242,242,242,.5);margin-bottom:20px}
 .prob-right p strong{color:var(--white);font-weight:500}
@@ -172,7 +172,7 @@ section[id]{scroll-margin-top:88px}
 .sec-head{margin-bottom:72px}
 .sec-label{font-family:var(--M);font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--red);margin-bottom:20px;display:flex;align-items:center;gap:12px}
 .sec-label::after{content:'';flex:1;max-width:40px;height:1px;background:var(--gray3)}
-.sec-title{font-family:var(--D);font-size:clamp(52px,7vw,96px);line-height:.9}
+.sec-title{font-family:var(--D);font-size:clamp(52px,7vw,96px);line-height:.9;margin:0;font-weight:normal}
 .sec-sub{font-size:14px;line-height:1.8;color:rgba(242,242,242,.4);margin-top:16px;max-width:480px}
 .prob-right .arrow-down{display:inline-flex;align-items:center;gap:12px;font-family:var(--M);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-top:12px;text-decoration:none;transition:opacity .2s}
 .prob-right .arrow-down:hover{opacity:.75}
@@ -360,7 +360,7 @@ footer{background:var(--black);border-top:1px solid var(--gray3);padding:48px;di
 <!-- NAV -->
 <nav>
   <a href="#hero" class="nav-logo" aria-label="DNZ Films — início">
-    <img src="assets/dnz-films-logo-transparent.png" alt="DNZ Films">
+    <img src="assets/dnz-films-logo-transparent.webp" alt="DNZ Films">
   </a>
   <div class="nav-r">
     <ul class="nav-links">
@@ -404,7 +404,7 @@ footer{background:var(--black);border-top:1px solid var(--gray3);padding:48px;di
   </div>
   <div class="hero-reel">
     <button type="button" class="reel-btn" data-video="1177771656" aria-label="Assistir showreel DNZ Films">
-      <img src="assets/1177771656.png" alt="Showreel DNZ Films" loading="eager">
+      <img src="assets/1177771656.webp" alt="Showreel DNZ Films" loading="eager">
       <div class="reel-overlay">
         <div>
           <div class="reel-label">Showreel</div>
@@ -440,12 +440,12 @@ footer{background:var(--black);border-top:1px solid var(--gray3);padding:48px;di
 <section id="problema" class="fu">
   <div class="prob-left">
     <div class="label">O problema</div>
-    <div class="prob-title">
+    <h2 class="prob-title">
       SEU<br>
       PROJETO<br>
       <span class="dim">MERECE</span><br>
       MAIS.
-    </div>
+    </h2>
   </div>
   <div class="prob-right">
     <p>Você tem uma sessão incrível filmada. Uma prancha que levou semanas pra shape. Uma marca que representa algo de verdade.</p>
@@ -481,7 +481,7 @@ footer{background:var(--black);border-top:1px solid var(--gray3);padding:48px;di
 <!-- COBERTURA DE EVENTO -->
 <section id="eventos" class="fu">
   <div class="sec-label">Cobertura de evento</div>
-  <div class="sec-title">ENERGIA DE<br>FESTA.</div>
+  <h2 class="sec-title">ENERGIA DE<br>FESTA.</h2>
   <div class="eventos-grid">
     <div class="eventos-copy">
       <p>Festa, show, lançamento ou ativação de marca — a DNZ captura a <strong>energia do momento</strong> e entrega em formato vertical pronto pra redes.</p>
@@ -498,7 +498,7 @@ footer{background:var(--black);border-top:1px solid var(--gray3);padding:48px;di
       <div>
         <div class="phone-shell">
           <button type="button" class="phone-btn" data-video="1177798436" data-vertical="true" aria-label="Assistir vídeo Social Impact — cobertura de festa">
-            <img src="assets/social-impact.png" alt="Social Impact — cobertura de festa" loading="lazy">
+            <img src="assets/social-impact.webp" alt="Social Impact — cobertura de festa" loading="lazy">
             <div class="phone-overlay"></div>
             <span class="phone-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="white"><path d="M9 6v12l10-6L9 6Z"/></svg></span>
           </button>
@@ -513,7 +513,7 @@ footer{background:var(--black);border-top:1px solid var(--gray3);padding:48px;di
 <section id="trabalhos" class="fu">
   <div class="sec-head">
     <div class="sec-label">Portfólio</div>
-    <div class="sec-title">TRABALHOS<br>SELECIONADOS.</div>
+    <h2 class="sec-title">TRABALHOS<br>SELECIONADOS.</h2>
   </div>
   <div class="work-grid" id="workGrid"></div>
 </section>
@@ -522,7 +522,7 @@ footer{background:var(--black);border-top:1px solid var(--gray3);padding:48px;di
 <section id="cases" class="fu">
   <div class="sec-head">
     <div class="sec-label">Cases reais</div>
-    <div class="sec-title">PROVA<br>REAL.</div>
+    <h2 class="sec-title">PROVA<br>REAL.</h2>
   </div>
   <div class="cases-list">
     <div class="case-item">
@@ -574,7 +574,7 @@ footer{background:var(--black);border-top:1px solid var(--gray3);padding:48px;di
 <!-- SOBRE -->
 <section id="sobre" class="fu">
   <div class="sec-label">Direção</div>
-  <div class="sec-title">QUEM ESTÁ<br>POR TRÁS.</div>
+  <h2 class="sec-title">QUEM ESTÁ<br>POR TRÁS.</h2>
   <div class="sobre-grid">
     <div class="sobre-copy">
       <p><strong>Gabriel d. Pimentel</strong> — diretor, editor e fundador da DNZ Films em Florianópolis. Does Not Zero não é só nome: é a ideia de que movimento, entrega e sensibilidade precisam aparecer em cada frame.</p>
@@ -586,7 +586,7 @@ footer{background:var(--black);border-top:1px solid var(--gray3);padding:48px;di
       </div>
     </div>
     <div class="sobre-photo">
-      <img src="assets/dante.PNG" alt="Gabriel d. Pimentel — diretor da DNZ Films" loading="lazy">
+      <img src="assets/dante.webp" alt="Gabriel d. Pimentel — diretor da DNZ Films" loading="lazy">
     </div>
   </div>
 </section>
@@ -596,7 +596,7 @@ footer{background:var(--black);border-top:1px solid var(--gray3);padding:48px;di
   <div class="pac-head">
     <div>
       <div class="sec-label">Pacotes</div>
-      <div class="sec-title">ESCOLHA<br>SEU FORMATO.</div>
+      <h2 class="sec-title">ESCOLHA<br>SEU FORMATO.</h2>
     </div>
     <p class="pac-note">Três formatos, sem complicação. Não sabe qual escolher? O briefing em 4 passos te ajuda a definir.</p>
   </div>
@@ -649,7 +649,7 @@ footer{background:var(--black);border-top:1px solid var(--gray3);padding:48px;di
 <!-- PROCESSO -->
 <section id="processo" class="fu">
   <div class="sec-label">Como funciona</div>
-  <div class="sec-title">4 PASSOS.<br>SEM ENROLAÇÃO.</div>
+  <h2 class="sec-title">4 PASSOS.<br>SEM ENROLAÇÃO.</h2>
   <div class="proc-grid">
     <div class="proc-step">
       <div class="proc-bg">01</div>
@@ -687,7 +687,7 @@ footer{background:var(--black);border-top:1px solid var(--gray3);padding:48px;di
   <div class="form-wrap">
     <div class="form-intro fu">
       <div class="sec-label">Briefing</div>
-      <div class="sec-title">4 PERGUNTAS.<br>PROPOSTA EM 24H.</div>
+      <h2 class="sec-title">4 PERGUNTAS.<br>PROPOSTA EM 24H.</h2>
       <p>Sem call desnecessária. Responda abaixo e receba uma proposta personalizada no WhatsApp em até 24h.</p>
     </div>
 
@@ -820,7 +820,7 @@ footer{background:var(--black);border-top:1px solid var(--gray3);padding:48px;di
 <footer>
   <div>
     <a href="#hero" class="f-logo" aria-label="DNZ Films">
-      <img src="assets/dnz-films-logo-transparent.png" alt="DNZ Films">
+      <img src="assets/dnz-films-logo-transparent.webp" alt="DNZ Films">
     </a>
     <div class="f-tag">DOES NOT ZERO — FLORIANÓPOLIS, BR</div>
   </div>
@@ -866,9 +866,9 @@ footer{background:var(--black);border-top:1px solid var(--gray3);padding:48px;di
 <script>
 // PORTFÓLIO + VÍDEO (mesmos dados do index.html)
 const portfolioItems = [
-  { title: "Black Venom", category: "Esporte", vimeoId: "1177779611", thumb: "assets/1177779611.png", featured: true },
-  { title: "But Definitely", category: "Surf film", vimeoId: "1177775878", thumb: "assets/1177775878.png" },
-  { title: "JP Surfboards", category: "Marca · Shaper", vimeoId: "1177774829", thumb: "assets/1177774829.png" }
+  { title: "Black Venom", category: "Esporte", vimeoId: "1177779611", thumb: "assets/1177779611.webp", featured: true },
+  { title: "But Definitely", category: "Surf film", vimeoId: "1177775878", thumb: "assets/1177775878.webp" },
+  { title: "JP Surfboards", category: "Marca · Shaper", vimeoId: "1177774829", thumb: "assets/1177774829.webp" }
 ];
 
 const eventVideo = {
@@ -973,9 +973,15 @@ if (canUseCustomCursor) {
     curR.style.transform = `translate(${rx}px, ${ry}px)`;
     requestAnimationFrame(animR);
   })();
-  document.querySelectorAll('a,button,.form-opt,.pac-card,.case-item,.case-link,.proc-step,.work-card,.reel-btn,.phone-btn,.close-btn,.wpp-fixed,.ig-fixed').forEach(el => {
-    el.addEventListener('mouseenter', () => curR.classList.add('big'));
-    el.addEventListener('mouseleave', () => curR.classList.remove('big'));
+  document.addEventListener('mouseover', e => {
+    if (e.target.closest('a,button,.form-opt,.pac-card,.case-item,.case-link,.proc-step,.work-card,.reel-btn,.phone-btn,.close-btn,.wpp-fixed,.ig-fixed')) {
+      curR.classList.add('big');
+    }
+  });
+  document.addEventListener('mouseout', e => {
+    if (e.target.closest('a,button,.form-opt,.pac-card,.case-item,.case-link,.proc-step,.work-card,.reel-btn,.phone-btn,.close-btn,.wpp-fixed,.ig-fixed')) {
+      curR.classList.remove('big');
+    }
   });
 }
 
