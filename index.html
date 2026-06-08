@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="DNZ Films — Does Not Zero. Produção audiovisual em Florianópolis para surf, atletas e marcas. Direção, captação e edição cinematográfica.">
+<title>DNZ Films — Does Not Zero</title>
+<link rel="preconnect" href="https://player.vimeo.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #0A0A0A;
+  --white: #F2F2F2;
+  --red: #FF2400;
+  --gray: #141414;
+  --gray2: #1E1E1E;
+  --gray3: #2A2A2A;
+  --muted: #555;
+  --D: 'Bebas Neue', sans-serif;
+  --M: 'Space Mono', monospace;
+  --B: 'DM Sans', sans-serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--black);scroll-padding-top:88px}
+body{background:var(--black);color:var(--white);font-family:var(--B);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img,iframe{display:block;max-width:100%}
+button{color:inherit;font:inherit}
+a:focus-visible,button:focus-visible,.form-opt:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+
+/* CURSOR — só desktop com mouse */
+.cur,.cur-r{display:none}
+@media(hover:hover) and (pointer:fine){
+  body{cursor:none}
+  .cur,.cur-r{display:block}
+  .cur{width:10px;height:10px;background:var(--red);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;mix-blend-mode:difference;transition:transform .08s}
+  .cur-r{width:36px;height:36px;border:1px solid rgba(242,242,242,.3);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transition:transform .14s}
+  .cur-r.big{width:56px;height:56px;border-color:var(--red)}
+}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(to bottom,rgba(10,10,10,.92),rgba(10,10,10,.4),transparent)}
+.nav-logo{display:block;text-decoration:none;line-height:0}
+.nav-logo img{height:38px;width:auto;display:block;filter:hue-rotate(338deg) saturate(1.35) brightness(1.02)}
+.nav-r{display:flex;align-items:center;gap:40px}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{font-family:var(--M);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--white);text-decoration:none;opacity:.5;transition:opacity .2s}
+.nav-links a:hover{opacity:1}
+.nav-cta{font-family:var(--M);font-size:10px;letter-spacing:3px;text-transform:uppercase;background:var(--red);color:var(--white);padding:12px 24px;text-decoration:none;transition:opacity .2s}
+.nav-cta:hover{opacity:.85}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:108px 48px 80px;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0;pointer-events:none}
+.hero-noise{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");opacity:.25}
+.hero-grad{position:absolute;inset:0;background:radial-gradient(ellipse at 85% 8%,rgba(255,36,0,.08) 0%,transparent 42%),radial-gradient(ellipse at 10% 90%,rgba(255,36,0,.04) 0%,transparent 48%)}
+.hero-lines{position:absolute;inset:0;background-image:linear-gradient(rgba(242,242,242,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(242,242,242,.02) 1px,transparent 1px);background-size:64px 64px;mask-image:linear-gradient(180deg,transparent 0%,#000 18%,#000 62%,transparent 100%);opacity:.55}
+.hero-inner{position:relative;z-index:2}
+.hero-tag{font-family:var(--M);font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--red);margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.hero-tag::before{content:'';width:32px;height:1px;background:var(--red)}
+.hero-h{font-family:var(--D);font-size:clamp(72px,13vw,190px);line-height:.88;letter-spacing:-1px;margin-bottom:4px}
+.hero-h .cross{position:relative;display:inline-block;color:var(--red)}
+.hero-h .cross::after{content:'';position:absolute;left:-4px;right:-4px;top:50%;height:4px;background:var(--white);transform:translateY(-50%) rotate(-1.5deg)}
+.hero-sub{font-family:var(--D);font-size:clamp(16px,2vw,28px);letter-spacing:12px;color:rgba(242,242,242,.35);margin-bottom:48px}
+.hero-bottom{display:flex;align-items:flex-end;justify-content:space-between;gap:40px}
+.hero-desc{font-size:14px;line-height:1.9;color:rgba(242,242,242,.45);max-width:360px}
+.hero-desc strong{color:var(--white);font-weight:500}
+.hero-actions{display:flex;flex-direction:column;align-items:flex-end;gap:12px}
+.btn-red{display:inline-flex;align-items:center;gap:14px;background:var(--red);color:var(--white);font-family:var(--M);font-size:11px;letter-spacing:3px;text-transform:uppercase;padding:18px 36px;text-decoration:none;transition:all .25s;position:relative;overflow:hidden}
+.btn-red::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,0);transition:background .25s}
+.btn-red:hover::after{background:rgba(255,255,255,.08)}
+.btn-ghost{font-family:var(--M);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(242,242,242,.4);text-decoration:none;transition:color .2s}
+.btn-ghost:hover{color:var(--white)}
+.hero-scroll{position:absolute;left:48px;bottom:0;z-index:1;width:1px;height:80px;background:linear-gradient(transparent,var(--red));animation:pulse 2.5s ease-in-out infinite;pointer-events:none}
+@keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
+
+/* SHOWREEL */
+.hero-reel{position:relative;z-index:2;margin-top:56px;border:1px solid var(--gray3);overflow:hidden;background:var(--gray)}
+.reel-btn{width:100%;min-height:clamp(220px,32vw,420px);display:block;border:0;padding:0;background:var(--black);cursor:pointer;position:relative}
+.reel-btn img{width:100%;height:100%;min-height:inherit;object-fit:cover;opacity:.75;filter:saturate(.9) contrast(1.08);transition:opacity .25s,transform .7s}
+.reel-btn:hover img{opacity:.88;transform:scale(1.03)}
+.reel-overlay{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:space-between;gap:24px;padding:28px 32px;pointer-events:none;background:linear-gradient(180deg,transparent,rgba(10,10,10,.85))}
+.reel-label{font-family:var(--M);font-size:10px;letter-spacing:4px;text-transform:uppercase;color:rgba(242,242,242,.5)}
+.reel-title{font-family:var(--D);font-size:clamp(28px,4vw,52px);letter-spacing:3px;line-height:.95;margin-top:6px}
+.reel-play{width:64px;height:64px;border:1px solid rgba(242,242,242,.35);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--white);background:rgba(10,10,10,.5);backdrop-filter:blur(8px);flex-shrink:0;transition:transform .25s,border-color .25s}
+.reel-btn:hover .reel-play{transform:scale(1.08);border-color:var(--red)}
+.reel-play svg{width:22px;height:22px;margin-left:3px}
+
+/* PORTFÓLIO / VÍDEOS */
+#trabalhos{padding:120px 48px}
+.work-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:56px}
+.work-card{position:relative;aspect-ratio:16/10;overflow:hidden;border:0;padding:0;background:#000;cursor:pointer;text-align:left;transition:transform .35s ease,box-shadow .35s ease}
+.work-card:hover{transform:translateY(-3px);box-shadow:0 20px 48px rgba(0,0,0,.45)}
+.work-card.featured{grid-column:span 2;aspect-ratio:21/9}
+.work-card img{width:100%;height:100%;object-fit:cover;opacity:.78;filter:saturate(.92) contrast(1.06);transition:opacity .35s,transform .8s ease}
+.work-card:hover img{opacity:.92;transform:scale(1.04)}
+.work-card::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,10,.08) 0%,rgba(10,10,10,.15) 42%,rgba(10,10,10,.88) 100%);pointer-events:none;transition:opacity .3s}
+.work-play{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%) scale(.9);width:52px;height:52px;border:1px solid rgba(242,242,242,.35);border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(10,10,10,.45);opacity:0;transition:opacity .3s,transform .3s;pointer-events:none;z-index:2}
+.work-play svg{width:16px;height:16px;margin-left:2px}
+.work-card:hover .work-play{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.work-caption{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:28px 28px 24px;pointer-events:none}
+.work-caption .cat{font-family:var(--M);font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--red);display:block;margin-bottom:8px}
+.work-caption .title{font-family:var(--D);font-size:clamp(28px,3.2vw,44px);letter-spacing:2px;line-height:.95;color:var(--white);font-weight:400}
+
+/* LIGHTBOX */
+.lightbox{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(10,10,10,.94);backdrop-filter:blur(12px)}
+.lightbox.active{display:flex}
+.lightbox-dialog{position:relative;width:min(1080px,100%);border:1px solid var(--gray3);background:#000}
+.lightbox-head{padding:14px 18px;border-bottom:1px solid var(--gray3);display:flex;align-items:center;justify-content:space-between;gap:16px}
+.lightbox-title{font-family:var(--D);font-size:22px;letter-spacing:2px}
+.lightbox-cat{font-family:var(--M);font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--red)}
+.lightbox-video{aspect-ratio:16/9;background:#000}
+.lightbox-video iframe{width:100%;height:100%;border:0}
+.close-btn{position:absolute;right:0;bottom:calc(100% + 12px);width:44px;height:44px;border:1px solid var(--gray3);background:var(--black);color:var(--white);font-size:22px;cursor:pointer;font-family:var(--M);transition:border-color .2s}
+.close-btn:hover{border-color:var(--red)}
+.lightbox.vertical .lightbox-dialog{width:auto;max-width:min(460px,94vw)}
+.lightbox.vertical .lightbox-video{aspect-ratio:9/16;width:min(380px,78vw);max-height:min(82vh,680px);margin:0 auto}
+
+/* EVENTOS / VÍDEO VERTICAL */
+#eventos{padding:120px 48px;background:var(--gray)}
+.eventos-grid{display:grid;grid-template-columns:minmax(0,.95fr) minmax(260px,.75fr);gap:80px;align-items:center;margin-top:72px}
+.eventos-copy p{font-size:15px;line-height:1.9;color:rgba(242,242,242,.5);margin-bottom:20px}
+.eventos-copy p strong{color:var(--white);font-weight:500}
+.eventos-list{list-style:none;margin:32px 0 40px}
+.eventos-list li{font-family:var(--M);font-size:10px;letter-spacing:1px;color:rgba(242,242,242,.45);padding:12px 0;border-bottom:1px solid var(--gray3);display:flex;align-items:flex-start;gap:12px;line-height:1.6}
+.eventos-list li::before{content:'→';color:var(--red);flex-shrink:0}
+.eventos-phone-wrap{display:flex;justify-content:center;align-items:center}
+.phone-shell{width:min(290px,74vw);padding:14px;border:2px solid var(--gray3);border-radius:38px;background:linear-gradient(180deg,#1a1a1a,#0a0a0a);box-shadow:0 24px 80px rgba(0,0,0,.45),inset 0 0 0 1px rgba(242,242,242,.04);position:relative}
+.phone-shell::before{content:'';position:absolute;top:10px;left:50%;transform:translateX(-50%);width:84px;height:22px;background:var(--black);border-radius:0 0 14px 14px;border:1px solid var(--gray3);border-top:0;z-index:2}
+.phone-btn{width:100%;aspect-ratio:9/16;border:0;padding:0;border-radius:26px;overflow:hidden;position:relative;cursor:pointer;background:#000;display:block}
+.phone-btn img{width:100%;height:100%;object-fit:cover;opacity:.88;transition:opacity .25s,transform .7s}
+.phone-btn:hover img{opacity:.96;transform:scale(1.04)}
+.phone-overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(10,10,10,.82));pointer-events:none}
+.phone-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:58px;height:58px;border:1px solid rgba(242,242,242,.35);border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(10,10,10,.55);backdrop-filter:blur(8px);transition:transform .25s,border-color .25s}
+.phone-btn:hover .phone-play{transform:translate(-50%,-50%) scale(1.08);border-color:var(--red)}
+.phone-play svg{width:20px;height:20px;margin-left:2px}
+.phone-cap{margin-top:16px;text-align:center;font-family:var(--M);font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--muted)}
+.phone-cap em{color:var(--red);font-style:normal}
+
+/* TICKER */
+.ticker{border-top:1px solid var(--gray3);border-bottom:1px solid var(--gray3);padding:14px 0;overflow:hidden}
+.ticker-t{display:flex;gap:48px;animation:tick 18s linear infinite;white-space:nowrap}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ticker-i{font-family:var(--D);font-size:13px;letter-spacing:5px;color:rgba(242,242,242,.15);display:flex;align-items:center;gap:48px;flex-shrink:0}
+.ticker-i .r{width:5px;height:5px;background:var(--red);border-radius:50%}
+
+section[id]{scroll-margin-top:88px}
+
+/* PROBLEMA */
+#problema{padding:120px 48px;display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center}
+.prob-left .label{font-family:var(--M);font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--red);margin-bottom:32px;display:flex;align-items:center;gap:12px}
+.prob-left .label::after{content:'';flex:1;max-width:40px;height:1px;background:var(--gray3)}
+.prob-title{font-family:var(--D);font-size:clamp(48px,6vw,88px);line-height:.92;margin-bottom:0}
+.prob-title .dim{-webkit-text-stroke:1px rgba(242,242,242,.15);color:transparent}
+.prob-right p{font-size:15px;line-height:1.9;color:rgba(242,242,242,.5);margin-bottom:20px}
+.prob-right p strong{color:var(--white);font-weight:500}
+/* SOLUCAO */
+#solucao{padding:0 48px 120px}
+.sol-bar{height:1px;background:linear-gradient(to right,var(--red),transparent);margin-bottom:80px}
+.sol-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.sol-card{background:var(--gray);padding:48px 36px;position:relative;overflow:hidden;transition:background .3s}
+.sol-card:hover{background:var(--gray2)}
+.sol-card::before{content:attr(data-n);position:absolute;top:-16px;right:16px;font-family:var(--D);font-size:120px;color:rgba(242,242,242,.03);line-height:1}
+.sol-icon{width:44px;height:44px;border:1px solid var(--gray3);display:flex;align-items:center;justify-content:center;margin-bottom:28px;font-size:18px}
+.sol-name{font-family:var(--D);font-size:30px;letter-spacing:2px;margin-bottom:16px}
+.sol-text{font-size:13px;line-height:1.8;color:rgba(242,242,242,.4)}
+.sol-text strong{color:rgba(242,242,242,.7);font-weight:500}
+
+/* CASES */
+#cases{padding:120px 48px;background:var(--gray)}
+.sec-head{margin-bottom:72px}
+.sec-label{font-family:var(--M);font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--red);margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.sec-label::after{content:'';flex:1;max-width:40px;height:1px;background:var(--gray3)}
+.sec-title{font-family:var(--D);font-size:clamp(52px,7vw,96px);line-height:.9}
+.sec-sub{font-size:14px;line-height:1.8;color:rgba(242,242,242,.4);margin-top:16px;max-width:480px}
+.prob-right .arrow-down{display:inline-flex;align-items:center;gap:12px;font-family:var(--M);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-top:12px;text-decoration:none;transition:opacity .2s}
+.prob-right .arrow-down:hover{opacity:.75}
+.cases-list{display:flex;flex-direction:column;gap:2px}
+.case-item{background:var(--black);padding:48px 40px;display:grid;grid-template-columns:80px 1fr 1fr auto;gap:40px;align-items:center;transition:background .3s;cursor:default}
+.case-item.case-link{cursor:pointer}
+.case-item:hover{background:var(--gray2)}
+.case-item.case-link:focus-visible{outline:2px solid var(--red);outline-offset:4px}
+.case-n{font-family:var(--M);font-size:10px;letter-spacing:4px;color:var(--red)}
+.case-name{font-family:var(--D);font-size:40px;letter-spacing:2px}
+.case-type{font-family:var(--M);font-size:10px;letter-spacing:2px;color:var(--muted);margin-top:4px}
+.case-quote{font-size:13px;line-height:1.8;color:rgba(242,242,242,.45);font-style:italic;border-left:2px solid var(--red);padding-left:20px;max-width:360px}
+.case-quote cite{display:block;font-style:normal;font-family:var(--M);font-size:9px;letter-spacing:2px;color:var(--muted);margin-top:10px}
+.case-stat .val{font-family:var(--D);font-size:52px;line-height:1;color:var(--white)}
+.case-stat .val em{color:var(--red);font-style:normal}
+.case-stat .lbl{font-family:var(--M);font-size:9px;letter-spacing:3px;color:var(--muted)}
+
+/* PACOTES */
+#pacotes{padding:120px 48px}
+.pac-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:72px;gap:40px}
+.pac-note{font-size:13px;line-height:1.8;color:var(--muted);max-width:280px;text-align:right}
+.pac-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.pac-card{background:var(--gray);padding:44px 36px;display:flex;flex-direction:column;position:relative;transition:background .3s}
+.pac-card:hover{background:var(--gray2)}
+.pac-card.hot{background:var(--red)}
+.pac-card.hot:hover{background:#e02000}
+.pac-n{font-family:var(--M);font-size:9px;letter-spacing:4px;color:rgba(242,242,242,.3);margin-bottom:36px}
+.hot .pac-n{color:rgba(242,242,242,.5)}
+.pac-name{font-family:var(--D);font-size:52px;letter-spacing:4px;margin-bottom:4px}
+.pac-tag{font-family:var(--M);font-size:11px;line-height:1.6;color:rgba(242,242,242,.4);margin-bottom:36px;letter-spacing:.5px}
+.hot .pac-tag{color:rgba(242,242,242,.65)}
+.pac-list{list-style:none;margin-bottom:auto;padding-bottom:36px}
+.pac-list li{font-family:var(--M);font-size:10px;letter-spacing:1px;color:rgba(242,242,242,.45);padding:10px 0;border-bottom:1px solid rgba(242,242,242,.05);display:flex;align-items:flex-start;gap:10px;line-height:1.5}
+.hot .pac-list li{color:rgba(242,242,242,.7);border-bottom-color:rgba(242,242,242,.15)}
+.pac-list li::before{content:'→';color:var(--red);flex-shrink:0;font-size:11px}
+.hot .pac-list li::before{color:var(--white)}
+.pac-btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--M);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--white);text-decoration:none;padding-top:24px;border-top:1px solid rgba(242,242,242,.08);transition:gap .2s;margin-top:24px}
+.pac-btn:hover{gap:18px}
+.hot .pac-btn{border-top-color:rgba(242,242,242,.2)}
+
+/* PROCESSO */
+#processo{padding:120px 48px;background:var(--gray)}
+.proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:72px}
+.proc-step{background:var(--black);padding:44px 32px;position:relative;overflow:hidden;transition:background .3s}
+.proc-step:hover{background:var(--gray2)}
+.proc-bg{position:absolute;top:-20px;right:8px;font-family:var(--D);font-size:130px;color:rgba(242,242,242,.03);line-height:1;pointer-events:none}
+.proc-line{position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .4s}
+.proc-step:hover .proc-line{transform:scaleX(1)}
+.proc-icon{width:44px;height:44px;border:1px solid var(--gray3);display:flex;align-items:center;justify-content:center;margin-bottom:28px;font-size:18px}
+.proc-t{font-family:var(--D);font-size:28px;letter-spacing:2px;margin-bottom:14px}
+.proc-d{font-size:12px;line-height:1.8;color:rgba(242,242,242,.35)}
+
+/* SOBRE */
+#sobre{padding:120px 48px;background:var(--black);border-top:1px solid var(--gray3);border-bottom:1px solid var(--gray3)}
+.sobre-grid{display:grid;grid-template-columns:minmax(0,.58fr) minmax(300px,.42fr);gap:80px;align-items:center;margin-top:72px}
+.sobre-copy p{font-size:15px;line-height:1.9;color:rgba(242,242,242,.5);margin-bottom:20px}
+.sobre-copy p strong{color:var(--white);font-weight:500}
+.sobre-caps{display:grid;margin-top:40px;border-top:1px solid var(--gray3)}
+.sobre-cap{display:flex;justify-content:space-between;gap:20px;padding:16px 0;border-bottom:1px solid var(--gray3);font-size:13px;color:rgba(242,242,242,.45)}
+.sobre-cap strong{font-family:var(--M);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--white)}
+.sobre-photo{border:1px solid var(--gray3);overflow:hidden;background:var(--gray);aspect-ratio:4/5;max-height:620px}
+.sobre-photo img{width:100%;height:100%;object-fit:cover;object-position:center 18%;filter:saturate(.9) contrast(1.05)}
+
+/* FORMULARIO */
+#form-section{padding:120px 48px;background:var(--black)}
+.form-wrap{max-width:720px;margin:0 auto}
+.form-intro{margin-bottom:64px}
+.form-intro .sec-title{margin-bottom:20px}
+.form-intro p{font-size:15px;line-height:1.8;color:rgba(242,242,242,.45)}
+.form-steps{display:flex;gap:4px;margin-bottom:64px}
+.form-step-ind{flex:1;height:3px;background:var(--gray3);position:relative;overflow:hidden}
+.form-step-ind.active::after,.form-step-ind.done::after{content:'';position:absolute;inset:0;background:var(--red);transform:scaleX(1)}
+.form-step-ind.active::after{animation:fillBar .3s ease forwards}
+.form-step-ind.done::after{transform:scaleX(1)}
+@keyframes fillBar{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.form-block{display:none}
+.form-block.active{display:block;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.form-q{font-family:var(--D);font-size:clamp(32px,4vw,52px);line-height:1;margin-bottom:8px}
+.form-q em{color:var(--red);font-style:normal}
+.form-hint{font-family:var(--M);font-size:10px;letter-spacing:3px;color:var(--muted);margin-bottom:40px}
+.form-opts{display:flex;flex-direction:column;gap:8px;margin-bottom:40px}
+.form-opt{display:flex;align-items:center;gap:16px;background:var(--gray);border:1px solid var(--gray3);padding:18px 24px;cursor:pointer;transition:all .2s;font-size:14px;color:rgba(242,242,242,.6);user-select:none}
+.form-opt:hover,.form-opt.sel{background:var(--gray2);border-color:var(--red);color:var(--white)}
+.form-opt .opt-mark{width:18px;height:18px;border:1px solid var(--gray3);border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.form-opt.sel .opt-mark{background:var(--red);border-color:var(--red)}
+.form-opt.sel .opt-mark::after{content:'';width:6px;height:6px;background:white;border-radius:50%}
+.form-input-wrap{margin-bottom:40px;position:relative}
+.form-input-wrap input,.form-input-wrap textarea{width:100%;background:var(--gray);border:1px solid var(--gray3);color:var(--white);font-family:var(--B);font-size:16px;padding:20px 24px;outline:none;transition:border-color .2s;resize:none}
+.form-input-wrap input:focus,.form-input-wrap textarea:focus{border-color:var(--red)}
+.form-input-wrap input::placeholder,.form-input-wrap textarea::placeholder{color:var(--muted)}
+.form-input-wrap label{font-family:var(--M);font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:8px}
+.form-nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.btn-next{display:inline-flex;align-items:center;gap:12px;background:var(--red);color:var(--white);font-family:var(--M);font-size:11px;letter-spacing:3px;text-transform:uppercase;padding:18px 36px;border:none;cursor:pointer;transition:opacity .2s}
+.btn-next:hover{opacity:.85}
+.btn-next:disabled{opacity:.3;cursor:not-allowed}
+.btn-back{font-family:var(--M);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);background:none;border:none;cursor:pointer;transition:color .2s}
+.btn-back:hover{color:var(--white)}
+.form-counter{font-family:var(--M);font-size:10px;letter-spacing:3px;color:var(--muted)}
+/* SUCCESS */
+.form-steps.hidden{display:none}
+.form-success{display:none;text-align:center;padding:60px 0;animation:fadeIn .4s ease}
+.form-success.show{display:block}
+.success-icon{font-size:48px;margin-bottom:24px}
+.success-title{font-family:var(--D);font-size:52px;letter-spacing:2px;margin-bottom:16px}
+.success-text{font-size:14px;line-height:1.8;color:rgba(242,242,242,.45);margin-bottom:40px}
+.btn-wpp{display:inline-flex;align-items:center;gap:14px;background:#25D366;color:white;font-family:var(--M);font-size:11px;letter-spacing:3px;text-transform:uppercase;padding:18px 36px;text-decoration:none;transition:opacity .2s}
+.btn-wpp:hover{opacity:.85}
+
+/* CTA FINAL */
+#cta-final{background:var(--red);padding:120px 48px;text-align:center;position:relative;overflow:hidden}
+#cta-final::before{content:'∅';position:absolute;font-family:var(--D);font-size:60vw;color:rgba(0,0,0,.06);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;line-height:1}
+.cta-inner{position:relative;z-index:2}
+.cta-over{font-family:var(--M);font-size:10px;letter-spacing:5px;text-transform:uppercase;color:rgba(242,242,242,.5);margin-bottom:28px}
+.cta-t{font-family:var(--D);font-size:clamp(64px,11vw,150px);line-height:.88;margin-bottom:48px}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-white{display:inline-flex;align-items:center;gap:12px;background:var(--white);color:var(--black);font-family:var(--M);font-size:11px;letter-spacing:3px;text-transform:uppercase;padding:18px 36px;text-decoration:none;transition:all .25s}
+.btn-white:hover{background:var(--black);color:var(--white)}
+.btn-out-w{display:inline-flex;align-items:center;gap:12px;border:1px solid rgba(242,242,242,.3);color:var(--white);font-family:var(--M);font-size:11px;letter-spacing:3px;text-transform:uppercase;padding:18px 36px;text-decoration:none;transition:all .25s}
+.btn-out-w:hover{background:rgba(242,242,242,.1)}
+
+/* FOOTER */
+footer{background:var(--black);border-top:1px solid var(--gray3);padding:48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px}
+.f-logo{display:block;line-height:0}
+.f-logo img{height:32px;width:auto;filter:hue-rotate(338deg) saturate(1.35) brightness(1.02);opacity:.85}
+.f-tag{font-family:var(--M);font-size:9px;letter-spacing:4px;color:var(--muted);margin-top:4px}
+.f-links{display:flex;gap:28px;list-style:none}
+.f-links a{font-family:var(--M);font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
+.f-links a:hover{color:var(--white)}
+.f-copy{font-family:var(--M);font-size:9px;letter-spacing:2px;color:var(--gray3)}
+
+/* BOTÕES FLUTUANTES */
+.float-actions{position:fixed;bottom:28px;right:28px;z-index:200;display:flex;flex-direction:column;gap:12px;align-items:flex-end}
+.wpp-fixed,.ig-fixed{width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:all .3s;position:relative}
+.wpp-fixed{background:#25D366;box-shadow:0 4px 24px rgba(37,211,102,.35)}
+.wpp-fixed:hover{transform:scale(1.08) translateY(-2px);box-shadow:0 8px 32px rgba(37,211,102,.45)}
+.ig-fixed{background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);box-shadow:0 4px 24px rgba(253,29,29,.3)}
+.ig-fixed:hover{transform:scale(1.08) translateY(-2px);box-shadow:0 8px 32px rgba(253,29,29,.4)}
+.float-tip{position:absolute;right:64px;background:var(--black);color:var(--white);font-family:var(--M);font-size:9px;letter-spacing:3px;white-space:nowrap;padding:8px 14px;border:1px solid var(--gray3);opacity:0;transition:opacity .2s;pointer-events:none}
+.wpp-fixed:hover .float-tip,.ig-fixed:hover .float-tip{opacity:1}
+
+/* FADE UP */
+.fu{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}
+.fu.vis{opacity:1;transform:translateY(0)}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .ticker-t{animation:none}
+  .fu{opacity:1;transform:none;transition:none}
+  .form-block.active{animation:none}
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:16px 24px}
+  .nav-links{display:none}
+  #hero{padding:96px 24px 60px}
+  .nav-logo img{height:30px}
+  .hero-bottom{flex-direction:column;align-items:flex-start}
+  section,#problema,#solucao,#eventos,#trabalhos,#cases,#pacotes,#processo,#sobre,#form-section,#cta-final{padding:80px 24px}
+  .eventos-grid{grid-template-columns:1fr;gap:48px}
+  .eventos-phone-wrap{order:-1}
+  .sobre-grid{grid-template-columns:1fr;gap:40px;margin-top:48px}
+  .sobre-photo{max-height:480px}
+  .work-grid{grid-template-columns:1fr}
+  .work-card.featured{grid-column:span 1;aspect-ratio:16/10}
+  .reel-overlay{padding:18px 20px}
+  .reel-play{width:52px;height:52px;font-size:14px}
+  #problema{grid-template-columns:1fr;gap:48px}
+  .sol-grid,.pac-grid{grid-template-columns:1fr}
+  .proc-grid{grid-template-columns:repeat(2,1fr)}
+  .case-item{grid-template-columns:1fr;gap:20px}
+  .pac-head{flex-direction:column;align-items:flex-start}
+  .pac-note{text-align:left}
+  footer{padding:32px 24px}
+  .f-links{flex-wrap:wrap}
+}
+</style>
+</head>
+<body>
+
+<div class="cur" id="cur"></div>
+<div class="cur-r" id="curR"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo" aria-label="DNZ Films — início">
+    <img src="assets/dnz-films-logo-transparent.png" alt="DNZ Films">
+  </a>
+  <div class="nav-r">
+    <ul class="nav-links">
+      <li><a href="#eventos">Eventos</a></li>
+      <li><a href="#trabalhos">Trabalhos</a></li>
+      <li><a href="#cases">Cases</a></li>
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#pacotes">Pacotes</a></li>
+      <li><a href="#processo">Processo</a></li>
+    </ul>
+    <a href="#form-section" class="nav-cta">Começar →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg">
+    <div class="hero-noise"></div>
+    <div class="hero-grad"></div>
+    <div class="hero-lines"></div>
+  </div>
+  <div class="hero-scroll"></div>
+  <div class="hero-inner">
+    <div class="hero-tag">Florianópolis, BR — Does Not Zero</div>
+    <div class="hero-h">
+      DOES<br>
+      NOT<br>
+      <span class="cross">ZERO</span>
+    </div>
+    <div class="hero-sub">DNZ FILMS</div>
+    <div class="hero-bottom">
+      <p class="hero-desc">
+        <strong>Surf. Atletas. Marcas.</strong><br>
+        Produção audiovisual com direção, captação e edição — feita pra quem não para.
+      </p>
+      <div class="hero-actions">
+        <a href="#form-section" class="btn-red">Começar projeto →</a>
+        <a href="#trabalhos" class="btn-ghost">Ver portfólio ↓</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-reel">
+    <button type="button" class="reel-btn" data-video="1177771656" aria-label="Assistir showreel DNZ Films">
+      <img src="assets/1177771656.png" alt="Showreel DNZ Films" loading="eager">
+      <div class="reel-overlay">
+        <div>
+          <div class="reel-label">Showreel</div>
+          <div class="reel-title">ASSISTA AO TRABALHO.</div>
+        </div>
+        <div class="reel-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="white"><path d="M9 6v12l10-6L9 6Z"/></svg></div>
+      </div>
+    </button>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-t">
+    <div class="ticker-i">SURF <span class="r"></span></div>
+    <div class="ticker-i">DOES NOT ZERO <span class="r"></span></div>
+    <div class="ticker-i">ATLETAS <span class="r"></span></div>
+    <div class="ticker-i">MOTION NEVER STOPS <span class="r"></span></div>
+    <div class="ticker-i">SHAPERS <span class="r"></span></div>
+    <div class="ticker-i">DNZ FILMS <span class="r"></span></div>
+    <div class="ticker-i">FLORIANÓPOLIS <span class="r"></span></div>
+    <div class="ticker-i">SURF <span class="r"></span></div>
+    <div class="ticker-i">DOES NOT ZERO <span class="r"></span></div>
+    <div class="ticker-i">ATLETAS <span class="r"></span></div>
+    <div class="ticker-i">MOTION NEVER STOPS <span class="r"></span></div>
+    <div class="ticker-i">SHAPERS <span class="r"></span></div>
+    <div class="ticker-i">DNZ FILMS <span class="r"></span></div>
+    <div class="ticker-i">FLORIANÓPOLIS <span class="r"></span></div>
+  </div>
+</div>
+
+<!-- PROBLEMA -->
+<section id="problema" class="fu">
+  <div class="prob-left">
+    <div class="label">O problema</div>
+    <div class="prob-title">
+      SEU<br>
+      PROJETO<br>
+      <span class="dim">MERECE</span><br>
+      MAIS.
+    </div>
+  </div>
+  <div class="prob-right">
+    <p>Você tem uma sessão incrível filmada. Uma prancha que levou semanas pra shape. Uma marca que representa algo de verdade.</p>
+    <p><strong>Mas o vídeo não entrega o que foi vivido.</strong></p>
+    <p>Câmera lenta genérica. Música aleatória. Cortes sem intenção. O resultado chega e a sensação do momento ficou pra trás.</p>
+    <p>A DNZ existe pra resolver isso: cada frame com propósito, cada corte com intenção. Vídeo que faz quem assiste <strong>sentir o que você viveu.</strong></p>
+    <a href="#solucao" class="arrow-down">Ver como trabalhamos ↓</a>
+  </div>
+</section>
+
+<!-- SOLUÇÃO -->
+<section id="solucao" class="fu">
+  <div class="sol-bar"></div>
+  <div class="sol-grid">
+    <div class="sol-card" data-n="01">
+      <div class="sol-icon">🌊</div>
+      <div class="sol-name">SURF</div>
+      <p class="sol-text">Sessões, atletas, shapers, fábricas de prancha. <strong>Cinema na água.</strong> Do drop ao shape, a gente registra com a mesma entrega de quem tá na água.</p>
+    </div>
+    <div class="sol-card" data-n="02">
+      <div class="sol-icon">🏃</div>
+      <div class="sol-name">ATLETAS</div>
+      <p class="sol-text">Jornadas humanas que merecem ser contadas. <strong>Material pra sponsor. Documentário de temporada.</strong> Conteúdo que mostra o que você fez antes de dizer.</p>
+    </div>
+    <div class="sol-card" data-n="03">
+      <div class="sol-icon">◎</div>
+      <div class="sol-name">MARCAS</div>
+      <p class="sol-text">Marcas que representam algo de verdade. <strong>Não propaganda. Narrativa.</strong> Vídeo que faz o cliente entender o valor antes do preço.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COBERTURA DE EVENTO -->
+<section id="eventos" class="fu">
+  <div class="sec-label">Cobertura de evento</div>
+  <div class="sec-title">ENERGIA DE<br>FESTA.</div>
+  <div class="eventos-grid">
+    <div class="eventos-copy">
+      <p>Festa, show, lançamento ou ativação de marca — a DNZ captura a <strong>energia do momento</strong> e entrega em formato vertical pronto pra redes.</p>
+      <p>Do público ao palco, dos bastidores ao aftermovie: vídeo com ritmo, cor e intenção. Não é só registrar. É fazer quem não estava lá <strong>sentir que estava.</strong></p>
+      <ul class="eventos-list">
+        <li>Reels e stories 9:16 para Instagram e TikTok</li>
+        <li>Aftermovie e cortes rápidos pós-evento</li>
+        <li>Cobertura de palco, público e bastidores</li>
+        <li>Entrega otimizada para redes sociais</li>
+      </ul>
+      <a href="#form-section" class="btn-red" data-preset="Cobertura de evento" data-package="MOTION — projeto fechado">Pedir cobertura →</a>
+    </div>
+    <div class="eventos-phone-wrap">
+      <div>
+        <div class="phone-shell">
+          <button type="button" class="phone-btn" data-video="1177798436" data-vertical="true" aria-label="Assistir vídeo Social Impact — cobertura de festa">
+            <img src="assets/social-impact.png" alt="Social Impact — cobertura de festa" loading="lazy">
+            <div class="phone-overlay"></div>
+            <span class="phone-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="white"><path d="M9 6v12l10-6L9 6Z"/></svg></span>
+          </button>
+        </div>
+        <div class="phone-cap"><em>9:16</em> · SOCIAL IMPACT · REELS</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRABALHOS / PORTFÓLIO -->
+<section id="trabalhos" class="fu">
+  <div class="sec-head">
+    <div class="sec-label">Portfólio</div>
+    <div class="sec-title">TRABALHOS<br>SELECIONADOS.</div>
+  </div>
+  <div class="work-grid" id="workGrid"></div>
+</section>
+
+<!-- CASES -->
+<section id="cases" class="fu">
+  <div class="sec-head">
+    <div class="sec-label">Cases reais</div>
+    <div class="sec-title">PROVA<br>REAL.</div>
+  </div>
+  <div class="cases-list">
+    <div class="case-item">
+      <div class="case-n">01</div>
+      <div>
+        <div class="case-name">LA MISSION</div>
+        <div class="case-type">Documentário · Gabriel Duran · Triatleta Extremo</div>
+      </div>
+      <div class="case-quote">
+        "Gostei muito da forma como você registrou a La Mission. Não só pela imagem, mas pela sensibilidade. Dá pra sentir alma no que você faz."
+        <cite>— Gabriel Duran, Triatleta Extremo & Ultrarunner</cite>
+      </div>
+      <div class="case-stat">
+        <div class="val">∅</div>
+        <div class="lbl">Does Not Zero</div>
+      </div>
+    </div>
+    <div class="case-item case-link" role="button" tabindex="0" data-video="1177774829" aria-label="Assistir JP Surfboards">
+      <div class="case-n">02</div>
+      <div>
+        <div class="case-name">JP SURFBOARDS</div>
+        <div class="case-type">Johnny · Shaper · Fábrica de pranchas · Florianópolis</div>
+      </div>
+      <div class="case-quote">
+        "Sem reajustes. Sem nada. Ficou animal. Animal demais. Parabéns, irmão."
+        <cite>— Johnny, JP Surfboards</cite>
+      </div>
+      <div class="case-stat">
+        <div class="val">∅</div>
+        <div class="lbl">Sem reajustes</div>
+      </div>
+    </div>
+    <div class="case-item">
+      <div class="case-n">03</div>
+      <div>
+        <div class="case-name">SEU PROJETO</div>
+        <div class="case-type">Em aberto · Surf / Atleta / Marca</div>
+      </div>
+      <div class="case-quote">
+        A câmera não para. Seu projeto pode ser o próximo.
+      </div>
+      <div class="case-stat">
+        <a href="#form-section" class="btn-red" style="font-size:10px;padding:14px 24px">Começar →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section id="sobre" class="fu">
+  <div class="sec-label">Direção</div>
+  <div class="sec-title">QUEM ESTÁ<br>POR TRÁS.</div>
+  <div class="sobre-grid">
+    <div class="sobre-copy">
+      <p><strong>Gabriel d. Pimentel</strong> — diretor, editor e fundador da DNZ Films em Florianópolis. Does Not Zero não é só nome: é a ideia de que movimento, entrega e sensibilidade precisam aparecer em cada frame.</p>
+      <p>Da sessão de surf ao processo de uma fábrica de pranchas, do atleta local à marca que quer narrativa de verdade — a DNZ combina <strong>olhar cinematográfico</strong> com agilidade de quem vive o audiovisual na prática.</p>
+      <div class="sobre-caps">
+        <div class="sobre-cap"><strong>Direção</strong><span>Conceito, ritmo e narrativa visual</span></div>
+        <div class="sobre-cap"><strong>Captação</strong><span>Surf, esporte, lifestyle e marca</span></div>
+        <div class="sobre-cap"><strong>Pós</strong><span>Edição, cor, som e formatos finais</span></div>
+      </div>
+    </div>
+    <div class="sobre-photo">
+      <img src="assets/dante.PNG" alt="Gabriel d. Pimentel — diretor da DNZ Films" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- PACOTES -->
+<section id="pacotes" class="fu">
+  <div class="pac-head">
+    <div>
+      <div class="sec-label">Pacotes</div>
+      <div class="sec-title">ESCOLHA<br>SEU FORMATO.</div>
+    </div>
+    <p class="pac-note">Três formatos, sem complicação. Não sabe qual escolher? O briefing em 4 passos te ajuda a definir.</p>
+  </div>
+  <div class="pac-grid">
+    <div class="pac-card">
+      <div class="pac-n">01 / MENSAL</div>
+      <div class="pac-name">LOOP</div>
+      <div class="pac-tag">Formato recorrente · presença constante nas redes</div>
+      <ul class="pac-list">
+        <li>4 reels editados por mês</li>
+        <li>Color grading DNZ</li>
+        <li>Trilha licenciada</li>
+        <li>Entrega em até 7 dias</li>
+        <li>Revisão inclusa</li>
+        <li>Ideal pra: Atletas, surfistas, shapers</li>
+      </ul>
+      <a href="#form-section" class="pac-btn" data-preset="Conteúdo mensal para redes" data-package="LOOP — conteúdo mensal">Quero o LOOP →</a>
+    </div>
+    <div class="pac-card hot">
+      <div class="pac-n">02 / PROJETO</div>
+      <div class="pac-name">MOTION</div>
+      <div class="pac-tag">Projeto fechado · vídeo principal + cortes</div>
+      <ul class="pac-list">
+        <li>1 vídeo principal (até 3 min)</li>
+        <li>3 cortes para redes sociais</li>
+        <li>Filmagem + Edição completa</li>
+        <li>Color grading cinematográfico</li>
+        <li>Entrega em até 15 dias</li>
+        <li>Ideal pra: Marcas, atletas, lançamentos</li>
+      </ul>
+      <a href="#form-section" class="pac-btn" data-preset="Vídeo para marca / negócio" data-package="MOTION — projeto fechado">Quero o MOTION →</a>
+    </div>
+    <div class="pac-card">
+      <div class="pac-n">03 / PREMIUM</div>
+      <div class="pac-name">ZERO</div>
+      <div class="pac-tag">Produção sob medida · escopo personalizado</div>
+      <ul class="pac-list">
+        <li>Projeto completo sob medida</li>
+        <li>Documentário ou campanha</li>
+        <li>Direção criativa inclusa</li>
+        <li>Múltiplos formatos e vídeos</li>
+        <li>Prazo definido em briefing</li>
+        <li>Ideal pra: Projetos grandes e marcas premium</li>
+      </ul>
+      <a href="#form-section" class="pac-btn" data-preset="Documentário" data-package="ZERO — sob medida">Falar sobre ZERO →</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESSO -->
+<section id="processo" class="fu">
+  <div class="sec-label">Como funciona</div>
+  <div class="sec-title">4 PASSOS.<br>SEM ENROLAÇÃO.</div>
+  <div class="proc-grid">
+    <div class="proc-step">
+      <div class="proc-bg">01</div>
+      <div class="proc-line"></div>
+      <div class="proc-icon">💬</div>
+      <div class="proc-t">BRIEFING</div>
+      <div class="proc-d">Você preenche o formulário abaixo. A gente entende o projeto, o prazo e o que você precisa. Sem reunião desnecessária.</div>
+    </div>
+    <div class="proc-step">
+      <div class="proc-bg">02</div>
+      <div class="proc-line"></div>
+      <div class="proc-icon">📋</div>
+      <div class="proc-t">PROPOSTA</div>
+      <div class="proc-d">Em até 24h você recebe uma proposta clara com escopo, prazo e próximos passos. Sem surpresa depois.</div>
+    </div>
+    <div class="proc-step">
+      <div class="proc-bg">03</div>
+      <div class="proc-line"></div>
+      <div class="proc-icon">🎬</div>
+      <div class="proc-t">PRODUÇÃO</div>
+      <div class="proc-d">Você filma ou a gente filma junto. O material entra em edição. Color grading, cortes, trilha. Cada frame com propósito.</div>
+    </div>
+    <div class="proc-step">
+      <div class="proc-bg">04</div>
+      <div class="proc-line"></div>
+      <div class="proc-icon">✅</div>
+      <div class="proc-t">ENTREGA</div>
+      <div class="proc-d">Vídeo entregue no prazo combinado. Revisão inclusa. Pronto pra postar, apresentar ou publicar. Simples assim.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMULARIO -->
+<section id="form-section">
+  <div class="form-wrap">
+    <div class="form-intro fu">
+      <div class="sec-label">Briefing</div>
+      <div class="sec-title">4 PERGUNTAS.<br>PROPOSTA EM 24H.</div>
+      <p>Sem call desnecessária. Responda abaixo e receba uma proposta personalizada no WhatsApp em até 24h.</p>
+    </div>
+
+    <!-- PROGRESS -->
+    <div class="form-steps" id="formSteps">
+      <div class="form-step-ind active" id="si1"></div>
+      <div class="form-step-ind" id="si2"></div>
+      <div class="form-step-ind" id="si3"></div>
+      <div class="form-step-ind" id="si4"></div>
+    </div>
+
+    <!-- STEP 1 -->
+    <div class="form-block active" id="s1">
+      <div class="form-q">Qual é o seu <em>projeto?</em></div>
+      <div class="form-hint">ESCOLHA A OPÇÃO QUE MAIS SE ENCAIXA</div>
+      <div class="form-opts">
+        <div class="form-opt" role="button" tabindex="0" data-val="Sessão de surf / edição" aria-pressed="false"><div class="opt-mark"></div>Sessão de surf — edição cinematográfica</div>
+        <div class="form-opt" role="button" tabindex="0" data-val="Conteúdo mensal para redes" aria-pressed="false"><div class="opt-mark"></div>Conteúdo mensal para redes sociais</div>
+        <div class="form-opt" role="button" tabindex="0" data-val="Projeto de atleta / documentário" aria-pressed="false"><div class="opt-mark"></div>Projeto de atleta — documentário ou sponsor</div>
+        <div class="form-opt" role="button" tabindex="0" data-val="Shaper / fábrica de prancha" aria-pressed="false"><div class="opt-mark"></div>Shaper ou fábrica — processo e bastidores</div>
+        <div class="form-opt" role="button" tabindex="0" data-val="Vídeo para marca / negócio" aria-pressed="false"><div class="opt-mark"></div>Vídeo para marca ou negócio</div>
+        <div class="form-opt" role="button" tabindex="0" data-val="Cobertura de evento" aria-pressed="false"><div class="opt-mark"></div>Cobertura de evento ou ativação</div>
+        <div class="form-opt" role="button" tabindex="0" data-val="Reel ou vídeo único" aria-pressed="false"><div class="opt-mark"></div>Reel ou vídeo único para redes</div>
+        <div class="form-opt" role="button" tabindex="0" data-val="Campanha / lançamento" aria-pressed="false"><div class="opt-mark"></div>Campanha ou lançamento de produto</div>
+        <div class="form-opt" role="button" tabindex="0" data-val="Documentário" aria-pressed="false"><div class="opt-mark"></div>Documentário ou projeto longo</div>
+        <div class="form-opt" role="button" tabindex="0" data-val="Outro projeto" aria-pressed="false"><div class="opt-mark"></div>Outro — explico melhor no WhatsApp</div>
+      </div>
+      <div class="form-nav">
+        <div class="form-counter">1 / 4</div>
+        <button class="btn-next" id="n1" disabled>Próximo →</button>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="form-block" id="s2">
+      <div class="form-q">O que você <em>precisa?</em></div>
+      <div class="form-hint">SERVIÇO E FORMATO DE INTERESSE</div>
+      <div class="form-opts" id="serviceOpts">
+        <div class="form-opt" role="button" tabindex="0" data-val="Só edição — já tenho material" aria-pressed="false"><div class="opt-mark"></div>Só edição — já tenho material filmado</div>
+        <div class="form-opt" role="button" tabindex="0" data-val="Só filmagem" aria-pressed="false"><div class="opt-mark"></div>Só filmagem / captação</div>
+        <div class="form-opt" role="button" tabindex="0" data-val="Filmagem + edição completa" aria-pressed="false"><div class="opt-mark"></div>Filmagem + edição completa</div>
+        <div class="form-opt" role="button" tabindex="0" data-val="Direção criativa + produção" aria-pressed="false"><div class="opt-mark"></div>Direção criativa + produção</div>
+        <div class="form-opt" role="button" tabindex="0" data-val="Ainda não sei — preciso de orientação" aria-pressed="false"><div class="opt-mark"></div>Ainda não sei — preciso de orientação</div>
+      </div>
+      <div class="form-hint" style="margin-top:32px;margin-bottom:24px">PACOTE DE INTERESSE (OPCIONAL)</div>
+      <div class="form-opts" id="packageOpts">
+        <div class="form-opt" role="button" tabindex="0" data-val="LOOP — conteúdo mensal" aria-pressed="false"><div class="opt-mark"></div>LOOP — conteúdo mensal</div>
+        <div class="form-opt" role="button" tabindex="0" data-val="MOTION — projeto fechado" aria-pressed="false"><div class="opt-mark"></div>MOTION — projeto fechado</div>
+        <div class="form-opt" role="button" tabindex="0" data-val="ZERO — sob medida" aria-pressed="false"><div class="opt-mark"></div>ZERO — produção sob medida</div>
+        <div class="form-opt" role="button" tabindex="0" data-val="Ainda não sei o formato" aria-pressed="false"><div class="opt-mark"></div>Ainda não sei o formato</div>
+      </div>
+      <div class="form-nav">
+        <button class="btn-back" id="b2">← Voltar</button>
+        <div class="form-counter">2 / 4</div>
+        <button class="btn-next" id="n2" disabled>Próximo →</button>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="form-block" id="s3">
+      <div class="form-q">Qual é o seu <em>prazo?</em></div>
+      <div class="form-hint">QUANDO VOCÊ PRECISA DO VÍDEO</div>
+      <div class="form-opts">
+        <div class="form-opt" role="button" tabindex="0" data-val="Urgente (menos de 1 semana)" aria-pressed="false"><div class="opt-mark"></div>Urgente — menos de 1 semana</div>
+        <div class="form-opt" role="button" tabindex="0" data-val="Próximas 2 semanas" aria-pressed="false"><div class="opt-mark"></div>Próximas 2 semanas</div>
+        <div class="form-opt" role="button" tabindex="0" data-val="Este mês" aria-pressed="false"><div class="opt-mark"></div>Este mês</div>
+        <div class="form-opt" role="button" tabindex="0" data-val="1 a 2 meses" aria-pressed="false"><div class="opt-mark"></div>De 1 a 2 meses</div>
+        <div class="form-opt" role="button" tabindex="0" data-val="Sem prazo definido" aria-pressed="false"><div class="opt-mark"></div>Sem prazo — quero planejar com calma</div>
+      </div>
+      <div class="form-nav">
+        <button class="btn-back" id="b3">← Voltar</button>
+        <div class="form-counter">3 / 4</div>
+        <button class="btn-next" id="n3" disabled>Próximo →</button>
+      </div>
+    </div>
+
+    <!-- STEP 4 -->
+    <div class="form-block" id="s4">
+      <div class="form-q">Seu <em>contato.</em></div>
+      <div class="form-hint">A GENTE RESPONDE EM ATÉ 24H</div>
+      <div class="form-input-wrap">
+        <label>Seu nome</label>
+        <input type="text" id="inp-nome" placeholder="Como você se chama?" autocomplete="name" required>
+      </div>
+      <div class="form-input-wrap">
+        <label>WhatsApp</label>
+        <input type="tel" id="inp-wpp" placeholder="(48) 99999-9999" autocomplete="tel" inputmode="tel" required>
+      </div>
+      <div class="form-input-wrap">
+        <label>Instagram (opcional)</label>
+        <input type="text" id="inp-ig" placeholder="@seuinstagram" />
+      </div>
+      <div class="form-input-wrap">
+        <label>Contexto extra (opcional)</label>
+        <textarea id="inp-msg" rows="3" placeholder="Marca, referência, local, onde o vídeo vai ser publicado..."></textarea>
+      </div>
+      <div class="form-nav">
+        <button class="btn-back" id="b4">← Voltar</button>
+        <div class="form-counter">4 / 4</div>
+        <button class="btn-next" id="n4" disabled>Enviar via WhatsApp →</button>
+      </div>
+    </div>
+
+    <!-- SUCCESS -->
+    <div class="form-success" id="success">
+      <div class="success-icon">⚡</div>
+      <div class="success-title">PRONTO.</div>
+      <p class="success-text">Sua mensagem foi montada com suas respostas.<br>Se o WhatsApp não abriu, use o botão abaixo.</p>
+      <a href="#" class="btn-wpp" id="wpp-link" target="_blank" rel="noopener noreferrer">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Abrir WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section id="cta-final">
+  <div class="cta-inner">
+    <div class="cta-over">Pronto pra não parar?</div>
+    <div class="cta-t">MOTION<br>NEVER<br>STOPS.</div>
+    <div class="cta-btns">
+      <a href="#form-section" class="btn-white">Começar projeto →</a>
+      <a href="https://instagram.com/dnzfilms" class="btn-out-w" target="_blank" rel="noopener noreferrer">@dnzfilms no Instagram</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <a href="#hero" class="f-logo" aria-label="DNZ Films">
+      <img src="assets/dnz-films-logo-transparent.png" alt="DNZ Films">
+    </a>
+    <div class="f-tag">DOES NOT ZERO — FLORIANÓPOLIS, BR</div>
+  </div>
+  <ul class="f-links">
+    <li><a href="https://instagram.com/dnzfilms" target="_blank" rel="noopener noreferrer">@dnzfilms</a></li>
+    <li><a href="https://wa.me/5548998050267" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
+    <li><a href="#eventos">Eventos</a></li>
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#cases">Cases</a></li>
+    <li><a href="#trabalhos">Trabalhos</a></li>
+    <li><a href="#pacotes">Pacotes</a></li>
+    <li><a href="#form-section">Briefing</a></li>
+  </ul>
+  <div class="f-copy">© <span id="year"></span> DNZ Films · Gabriel d. Pimentel</div>
+</footer>
+
+<!-- LIGHTBOX VÍDEO -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Player de vídeo">
+  <div class="lightbox-dialog">
+    <button class="close-btn" type="button" id="closeLightbox" aria-label="Fechar vídeo">×</button>
+    <div class="lightbox-head" id="lightboxHead">
+      <div>
+        <div class="lightbox-cat" id="lightboxCat"></div>
+        <div class="lightbox-title" id="lightboxTitle"></div>
+      </div>
+    </div>
+    <div class="lightbox-video" id="lightboxVideo"></div>
+  </div>
+</div>
+
+<!-- BOTÕES FLUTUANTES -->
+<div class="float-actions">
+  <a href="https://wa.me/5548998050267?text=Ol%C3%A1%2C%20DNZ!%20Vim%20pelo%20site%20e%20quero%20saber%20mais%20sobre%20um%20projeto." class="wpp-fixed" target="_blank" rel="noopener noreferrer" aria-label="Falar no WhatsApp">
+    <span class="float-tip">WHATSAPP</span>
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+  <a href="https://instagram.com/dnzfilms" class="ig-fixed" target="_blank" rel="noopener noreferrer" aria-label="Instagram @dnzfilms">
+    <span class="float-tip">@DNZFILMS</span>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+  </a>
+</div>
+
+<script>
+// PORTFÓLIO + VÍDEO (mesmos dados do index.html)
+const portfolioItems = [
+  { title: "Black Venom", category: "Esporte", vimeoId: "1177779611", thumb: "assets/1177779611.png", featured: true },
+  { title: "But Definitely", category: "Surf film", vimeoId: "1177775878", thumb: "assets/1177775878.png" },
+  { title: "JP Surfboards", category: "Marca · Shaper", vimeoId: "1177774829", thumb: "assets/1177774829.png" }
+];
+
+const eventVideo = {
+  title: "Social Impact",
+  category: "Cobertura de evento · Reels 9:16",
+  vimeoId: "1177798436",
+  vertical: true
+};
+
+const PLAY_SVG = '<svg viewBox="0 0 24 24" fill="white"><path d="M9 6v12l10-6L9 6Z"/></svg>';
+const workGrid = document.getElementById("workGrid");
+const lightbox = document.getElementById("lightbox");
+const lightboxVideo = document.getElementById("lightboxVideo");
+const lightboxTitle = document.getElementById("lightboxTitle");
+const lightboxCat = document.getElementById("lightboxCat");
+const closeLightboxButton = document.getElementById("closeLightbox");
+const videoMap = Object.fromEntries(portfolioItems.map(i => [i.vimeoId, i]));
+videoMap["1177771656"] = { title: "Showreel DNZ Films", category: "Portfólio" };
+videoMap[eventVideo.vimeoId] = eventVideo;
+
+function renderPortfolio() {
+  workGrid.innerHTML = portfolioItems.map(item => `
+    <button class="work-card ${item.featured ? "featured" : ""}" type="button" data-video="${item.vimeoId}" aria-label="Assistir ${item.title}">
+      <img src="${item.thumb}" alt="${item.title}" loading="lazy">
+      <span class="work-play" aria-hidden="true">${PLAY_SVG}</span>
+      <span class="work-caption">
+        <span class="cat">${item.category}</span>
+        <span class="title">${item.title}</span>
+      </span>
+    </button>
+  `).join("");
+}
+
+let lastFocus = null;
+
+function openVideo(vimeoId, isVertical = false) {
+  lastFocus = document.activeElement;
+  const meta = videoMap[vimeoId] || { title: "Vídeo DNZ Films", category: "Portfólio" };
+  const vertical = isVertical || meta.vertical === true;
+  lightboxTitle.textContent = meta.title;
+  lightboxCat.textContent = meta.category;
+  lightboxVideo.innerHTML = `
+    <iframe
+      src="https://player.vimeo.com/video/${vimeoId}?autoplay=1&autopause=0&title=0&byline=0&portrait=0&dnt=1"
+      allow="autoplay; fullscreen; picture-in-picture"
+      allowfullscreen
+      title="Vídeo DNZ Films"></iframe>
+  `;
+  lightbox.classList.toggle("vertical", vertical);
+  lightbox.classList.add("active");
+  document.body.style.overflow = "hidden";
+  closeLightboxButton.focus();
+}
+
+function closeVideo() {
+  if (!lightbox.classList.contains("active")) return;
+  lightbox.classList.remove("active", "vertical");
+  lightboxVideo.innerHTML = "";
+  document.body.style.overflow = "";
+  if (lastFocus && typeof lastFocus.focus === "function") lastFocus.focus();
+}
+
+renderPortfolio();
+
+document.addEventListener("click", e => {
+  const trigger = e.target.closest("[data-video]");
+  if (trigger) openVideo(trigger.dataset.video, trigger.dataset.vertical === "true");
+});
+document.querySelectorAll(".case-link[data-video]").forEach(el => {
+  el.addEventListener("keydown", e => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      openVideo(el.dataset.video);
+    }
+  });
+});
+closeLightboxButton.addEventListener("click", closeVideo);
+lightbox.addEventListener("click", e => { if (e.target === lightbox) closeVideo(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeVideo(); });
+
+document.getElementById("year").textContent = new Date().getFullYear();
+
+if ("serviceWorker" in navigator && location.protocol !== "file:") {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("sw.js").catch(() => {});
+  });
+}
+
+// CURSOR — só desktop
+const canUseCustomCursor = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+if (canUseCustomCursor) {
+  const cur = document.getElementById('cur');
+  const curR = document.getElementById('curR');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cur.style.transform = `translate(${mx - 5}px, ${my - 5}px)`;
+  });
+  (function animR() {
+    rx += (mx - rx - 18) * .14;
+    ry += (my - ry - 18) * .14;
+    curR.style.transform = `translate(${rx}px, ${ry}px)`;
+    requestAnimationFrame(animR);
+  })();
+  document.querySelectorAll('a,button,.form-opt,.pac-card,.case-item,.case-link,.proc-step,.work-card,.reel-btn,.phone-btn,.close-btn,.wpp-fixed,.ig-fixed').forEach(el => {
+    el.addEventListener('mouseenter', () => curR.classList.add('big'));
+    el.addEventListener('mouseleave', () => curR.classList.remove('big'));
+  });
+}
+
+// SCROLL FADE — sem .fu aninhado (evita cards invisíveis)
+const fadeObs = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('vis');
+      fadeObs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('section.fu, .form-intro.fu').forEach(el => fadeObs.observe(el));
+
+// FORM LOGIC
+const WHATSAPP = '5548998050267';
+const TOTAL_STEPS = 4;
+let answers = { project: '', service: '', package: '', deadline: '', nome: '', wpp: '', ig: '', msg: '' };
+let step = 1;
+
+function goTo(n) {
+  document.querySelectorAll('.form-block').forEach(b => b.classList.remove('active'));
+  document.getElementById('s' + n).classList.add('active');
+  for (let i = 1; i <= TOTAL_STEPS; i++) {
+    const el = document.getElementById('si' + i);
+    el.classList.remove('active', 'done');
+    if (i < n) el.classList.add('done');
+    if (i === n) el.classList.add('active');
+  }
+  step = n;
+  document.getElementById('form-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function checkS2() {
+  document.getElementById('n2').disabled = !answers.service;
+}
+
+function selectOpt(stepId, opt) {
+  document.querySelectorAll(`#${stepId} .form-opt`).forEach(o => {
+    o.classList.remove('sel');
+    o.setAttribute('aria-pressed', 'false');
+  });
+  opt.classList.add('sel');
+  opt.setAttribute('aria-pressed', 'true');
+  return opt.dataset.val;
+}
+
+function bindOpts(stepId, key, btnId) {
+  document.querySelectorAll(`#${stepId} .form-opt`).forEach(opt => {
+    const pick = () => {
+      answers[key] = selectOpt(stepId, opt);
+      document.getElementById(btnId).disabled = false;
+    };
+    opt.addEventListener('click', pick);
+    opt.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        pick();
+      }
+    });
+  });
+}
+
+bindOpts('s1', 'project', 'n1');
+document.querySelectorAll('#serviceOpts .form-opt').forEach(opt => {
+  const pick = () => {
+    document.querySelectorAll('#serviceOpts .form-opt').forEach(o => {
+      o.classList.remove('sel');
+      o.setAttribute('aria-pressed', 'false');
+    });
+    opt.classList.add('sel');
+    opt.setAttribute('aria-pressed', 'true');
+    answers.service = opt.dataset.val;
+    checkS2();
+  };
+  opt.addEventListener('click', pick);
+  opt.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(); }
+  });
+});
+document.querySelectorAll('#packageOpts .form-opt').forEach(opt => {
+  const pick = () => {
+    document.querySelectorAll('#packageOpts .form-opt').forEach(o => {
+      o.classList.remove('sel');
+      o.setAttribute('aria-pressed', 'false');
+    });
+    opt.classList.add('sel');
+    opt.setAttribute('aria-pressed', 'true');
+    answers.package = opt.dataset.val;
+  };
+  opt.addEventListener('click', pick);
+  opt.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(); }
+  });
+});
+bindOpts('s3', 'deadline', 'n3');
+document.getElementById('n1').addEventListener('click', () => goTo(2));
+document.getElementById('n2').addEventListener('click', () => goTo(3));
+document.getElementById('n3').addEventListener('click', () => goTo(4));
+document.getElementById('b2').addEventListener('click', () => goTo(1));
+document.getElementById('b3').addEventListener('click', () => goTo(2));
+document.getElementById('b4').addEventListener('click', () => goTo(3));
+
+function formatPhone(value) {
+  const digits = value.replace(/\D/g, '').slice(0, 11);
+  if (digits.length <= 2) return digits ? `(${digits}` : '';
+  if (digits.length <= 6) return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
+  if (digits.length <= 10) return `(${digits.slice(0, 2)}) ${digits.slice(2, 6)}-${digits.slice(6)}`;
+  return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
+}
+
+function checkS4() {
+  const n = document.getElementById('inp-nome').value.trim();
+  const digits = document.getElementById('inp-wpp').value.replace(/\D/g, '');
+  document.getElementById('n4').disabled = !(n.length >= 2 && digits.length >= 10);
+}
+
+document.getElementById('inp-nome').addEventListener('input', () => {
+  answers.nome = document.getElementById('inp-nome').value;
+  checkS4();
+});
+document.getElementById('inp-wpp').addEventListener('input', e => {
+  e.target.value = formatPhone(e.target.value);
+  answers.wpp = e.target.value;
+  checkS4();
+});
+document.getElementById('inp-ig').addEventListener('input', () => {
+  answers.ig = document.getElementById('inp-ig').value.trim();
+});
+document.getElementById('inp-msg').addEventListener('input', () => {
+  answers.msg = document.getElementById('inp-msg').value.trim();
+});
+
+function buildWhatsAppUrl() {
+  const ig = answers.ig ? `\nInstagram: ${answers.ig}` : '';
+  const pkg = answers.package ? `\nFormato: ${answers.package}` : '';
+  const extra = answers.msg ? `\nContexto: ${answers.msg}` : '';
+  const text = [
+    `Olá, DNZ! Me chamo ${answers.nome.trim()}.`,
+    `Vim pelo site e quero um orçamento.`,
+    ``,
+    `Projeto: ${answers.project}`,
+    `Serviço: ${answers.service}${pkg}`,
+    `Prazo: ${answers.deadline}`,
+    `WhatsApp: ${answers.wpp}${ig}${extra}`,
+    ``,
+    `Podemos conversar sobre os próximos passos?`
+  ].join('\n');
+  return `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`;
+}
+
+function showFormSuccess(url) {
+  document.querySelectorAll('.form-block').forEach(b => b.classList.remove('active'));
+  document.getElementById('formSteps').classList.add('hidden');
+  for (let i = 1; i <= TOTAL_STEPS; i++) document.getElementById('si' + i).classList.add('done');
+  document.getElementById('wpp-link').href = url;
+  document.getElementById('success').classList.add('show');
+  document.getElementById('success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+document.getElementById('n4').addEventListener('click', () => {
+  const url = buildWhatsAppUrl();
+  window.open(url, '_blank', 'noopener,noreferrer');
+  showFormSuccess(url);
+});
+
+function presetPackage(val) {
+  const match = [...document.querySelectorAll('#packageOpts .form-opt')].find(o => o.dataset.val === val);
+  if (!match) return;
+  document.querySelectorAll('#packageOpts .form-opt').forEach(o => {
+    o.classList.remove('sel');
+    o.setAttribute('aria-pressed', 'false');
+  });
+  match.classList.add('sel');
+  match.setAttribute('aria-pressed', 'true');
+  answers.package = val;
+}
+
+function presetProject(val) {
+  const match = [...document.querySelectorAll('#s1 .form-opt')].find(o => o.dataset.val === val);
+  if (!match) return;
+  answers.project = selectOpt('s1', match);
+  document.getElementById('n1').disabled = false;
+}
+
+// Pacotes / CTAs → pré-seleciona projeto e formato no formulário
+document.querySelectorAll('[data-preset]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    if (btn.dataset.preset) presetProject(btn.dataset.preset);
+    if (btn.dataset.package) presetPackage(btn.dataset.package);
+  });
+});
+
+// SMOOTH SCROLL
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const id = a.getAttribute('href');
+    if (!id || id === '#') return;
+    const t = document.querySelector(id);
+    if (t) {
+      e.preventDefault();
+      t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+</body>
+</html>
